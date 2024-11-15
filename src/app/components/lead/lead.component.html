@@ -35,7 +35,7 @@
         </mat-tab>
         <mat-tab label="Audits">
           <ng-template matTabContent>
-            <!-- <fs-audits [loadAudits]="loadAudits"></fs-audits> -->
+            <fs-audits [apiPath]="['crm/leads', crmLead.id, 'audits']"></fs-audits>
           </ng-template>
         </mat-tab>
       </mat-tab-group>

@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
+import { FsActivityObjectTypeComponent } from '@firestitch/activity';
 import { FsDateModule } from '@firestitch/date';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
@@ -37,6 +38,8 @@ import { NoteComponent } from '../note';
     FsListModule,
     FsDateModule,
     FsHtmlRendererModule,
+
+    FsActivityObjectTypeComponent,
   ],
 })
 export class CrmNotesComponent implements OnInit, OnDestroy {

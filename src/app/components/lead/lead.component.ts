@@ -21,10 +21,6 @@ import { FsSkeletonModule } from '@firestitch/skeleton';
 import { of, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
-// import { AuditData } from '@common/data/audit.data';
-
-// import { TasksComponent } from '@libs/tasks/modules/tasks';
-
 import { LeadData } from '../../data/lead.data';
 import { CrmLead } from '../../interfaces/crm-lead';
 import { CrmDocsComponent } from '../docs/docs.component';
@@ -49,7 +45,6 @@ import { SummaryComponent } from './summary/summary.component';
     FsDialogModule,
     FsAuditsModule,
 
-    //TasksComponent,
     CrmNotesComponent,
     CrmFilesComponent,
     ProfileComponent,
@@ -79,11 +74,6 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
     this._destroy$.next();
     this._destroy$.complete();
   }
-
-  public loadAudits = (query) => {
-    return this._leadData
-      .getAudits(this.crmLead.id, query, { key: null });
-  };
 
   public close(value?): void {
     inject(MatDialogRef).close(value);
