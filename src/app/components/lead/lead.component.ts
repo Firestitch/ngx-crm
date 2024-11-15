@@ -57,7 +57,7 @@ import { SummaryComponent } from './summary/summary.component';
     CrmDocsComponent, 
   ],
 })
-export class LeadComponent implements OnInit, OnDestroy {
+export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
   @ViewChild(FsHtmlEditorComponent)
   public htmlEditor: FsHtmlEditorComponent; 

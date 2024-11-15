@@ -12,7 +12,7 @@ import { FsMessageModule } from '@firestitch/message';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { LeadsComponent as PackageLeadsComponent } from '../../src/app/components/leads/leads.component';
+import { FsCrmLeadsComponent } from '../../src/app/components/leads/leads.component';
 
 import { AppComponent } from './app.component';
 import {
@@ -39,7 +39,7 @@ const routes: Routes = [
     FsHtmlEditorModule.forRoot({
       activationKey: '2J1B10dD7F6F5A3F3I3cWHNGGDTCWHId1Eb1Oc1Yh1b2Ld1POkE3D3F3C9A4E5A3G3B2G2==',
     }),
-    PackageLeadsComponent,
+    FsCrmLeadsComponent,
   ],
   declarations: [
     AppComponent,

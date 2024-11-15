@@ -23,7 +23,7 @@ import { Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
-import { LeadComponent } from '../lead/lead.component';
+import { FsCrmLeadComponent } from '../lead/lead.component';
 
 import { SettingsComponent } from './settings/settings.component';
 
@@ -45,7 +45,7 @@ import { SettingsComponent } from './settings/settings.component';
     //CrmNotesComponent,
   ],
 })
-export class LeadsComponent implements OnInit, OnDestroy {
+export class FsCrmLeadsComponent implements OnInit, OnDestroy {
 
   @ViewChild(FsListComponent)
   public list: FsListComponent;
@@ -78,7 +78,7 @@ export class LeadsComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(crmLead: any): void {
-    this._dialog.open(LeadComponent, {
+    this._dialog.open(FsCrmLeadComponent, {
       data: {
         crmLead,
       },
@@ -98,7 +98,7 @@ export class LeadsComponent implements OnInit, OnDestroy {
   }
 
   private _initDialog(): void {
-    this._fsDialog.dialogRef$(LeadComponent)
+    this._fsDialog.dialogRef$(FsCrmLeadComponent)
       .pipe(
         switchMap((dialogRef) => dialogRef.afterClosed()),
         takeUntil(this._destroy$),
