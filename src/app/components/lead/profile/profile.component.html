@@ -50,28 +50,13 @@
           </div>
         </div>
         <!-- <fs-field-renderer [config]="fieldConfig"></fs-field-renderer> -->
-        <div class="fs-row.gap-xs buttons">
-          <button
-              mat-flat-button
-              color="primary"
-              type="submit">
-            Save
-          </button>
-          <a
-              mat-icon-button
-              (click)="customizeLeadField()">
-            <mat-icon>
-              settings
-            </mat-icon>
-          </a>
-        </div>
       </div>
       <div class="fs-row full-width">
         <div class="fs-column full-width">
           <h2>
             Lead details
           </h2>
-          <!-- <app-lead-status
+          <app-lead-status
             [(ngModel)]="crmLead.statusAttribute"
             (ngModelChange)="crmLead.statusAttributeId = $event.id"
             name="statusAttribute">
@@ -85,7 +70,7 @@
             [(ngModel)]="crmLead.sourceAttribute"
             (ngModelChange)="crmLead.sourceAttributeId = $event.id"
             name="sourceAttribute">
-          </app-lead-source> -->
+          </app-lead-source>
           <mat-form-field>
             <mat-label>
               Value
@@ -97,6 +82,21 @@
           </mat-form-field>
         </div>
       </div>
+    </div>
+    <div class="fs-row.gap-xs buttons">
+      <button
+          mat-flat-button
+          color="primary"
+          type="submit">
+        Save
+      </button>
+      <a
+          mat-icon-button
+          (click)="customizeLeadField()">
+        <mat-icon>
+          settings
+        </mat-icon>
+      </a>
     </div>
   </form>
 </ng-container>

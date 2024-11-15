@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
+import { FsActivitiesComponent, FsActivityPreviewDirective } from '@firestitch/activity';
+import { FsChipModule } from '@firestitch/chip';
 import { FsFile } from '@firestitch/file';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsMessage } from '@firestitch/message';
@@ -51,9 +53,13 @@ import { TasksComponent } from './tasks';
     
     FsSkeletonModule,
     FsHtmlRendererModule,
+    FsActivitiesComponent, 
+    FsActivityPreviewDirective,
+    FsChipModule,
 
     SummaryProfileComponent,
-    //ActivitiesModule,
+    
+    
     CrmNotesComponent,
     TasksComponent,
   ],

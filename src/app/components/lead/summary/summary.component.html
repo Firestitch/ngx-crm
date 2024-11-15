@@ -5,12 +5,19 @@
     </div>
     <div class="fs-row.align-start.gap-lg full-width">
       <div class="activities">
-        <!-- <app-activities
-          [heading]="'Activity'"
-          [load]="loadActivities"
-          [menuActions]="menuActions"
-          [subjectObjectId]="crmLead.id">
-        </app-activities> -->
+        <fs-activities [apiPath]="'crm/lead/' + crmLead.id + '/activities'">
+          <ng-template
+              fsActivityPreview
+              [activityType]="'crmLeadStatus'"
+              let-data="data"
+              let-activity="activity">
+            <fs-chip
+                [size]="'small'"
+                [color]="data.color">
+              {{ data.name }}
+            </fs-chip>
+          </ng-template>
+        </fs-activities>
       </div>
       <div class="notes">
         <h2>

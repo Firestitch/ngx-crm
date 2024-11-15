@@ -43,6 +43,7 @@
     "@angular/router": "^18.2.7",
     "@firestitch/address": "^18.0.2",
     "@firestitch/api": "^18.0.1",
+    "@firestitch/activity": "^18.0.5",
     "@firestitch/attribute": "^18.0.15",
     "@firestitch/audit": "^18.0.0",
     "@firestitch/autocomplete": "^18.0.2",
