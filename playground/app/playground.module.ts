@@ -48,14 +48,13 @@ const routes: Routes = [
   ],
   providers: [
     {
+      provide: FS_ATTRIBUTE_CONFIG,
+      useFactory: attributeConfigFactory,
+    },
+    {
       provide: FS_API_REQUEST_INTERCEPTOR,
       useFactory: ApiInterceptorFactory,
       deps: [Injector],
-    },
-    
-    {
-      provide: FS_ATTRIBUTE_CONFIG,
-      useFactory: attributeConfigFactory,
     },
   ],
 })

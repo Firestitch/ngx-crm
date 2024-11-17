@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { FsSkeletonModule } from '@firestitch/skeleton';
+import { FsTasksSummaryComponent } from '@firestitch/task';
 
 import { CrmLead } from '../../../interfaces/crm-lead';
 import { CrmNotesComponent } from '../../notes/notes.component';
@@ -28,6 +29,7 @@ import { TasksComponent } from './tasks';
     MatButtonModule,
     
     FsSkeletonModule,
+    FsTasksSummaryComponent,
 
     SummaryProfileComponent,
     ActivityComponent,    

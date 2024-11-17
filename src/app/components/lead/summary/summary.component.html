@@ -11,19 +11,19 @@
         <h2>
           <div class="fs-row.justify-between">
             Tasks
-            <!-- <a
+            <a
                 mat-icon-button
                 (click)="summaryTasks.openTask({})">
               <mat-icon>
                 add_circle_outline
               </mat-icon>
-            </a> -->
+            </a>
           </div>
         </h2>
-        <!-- <app-tasks
+        <fs-tasks-summary
           #summaryTasks
-          [crmLead]="crmLead">
-        </app-tasks> -->
+          [subjectObjectId]="crmLead.id">
+        </fs-tasks-summary>
         <br>
         <br>
         <h2>
