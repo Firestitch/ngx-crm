@@ -134,8 +134,8 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
         autoOpen: true,
       },
       thumbnail: {
-        width: 400,
-        heightScale: .7,
+        width: 300,
+        heightScale: 1.3,
       },
       actions: [
         {
