@@ -32,6 +32,7 @@ import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/
 })
 export class LeadStatusComponent implements ControlValueAccessor, OnInit {
 
+  @Input() public paddless = false;
   @Input() public statusAttribute;  
   @Input() public initOnClick = false;
   
