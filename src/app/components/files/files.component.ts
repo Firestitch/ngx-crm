@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 import { FsApi } from '@firestitch/api';
 import { FsDateModule } from '@firestitch/date';
 import {
-  FsGalleryConfig, FsGalleryItem, FsGalleryModule, GalleryLayout, GalleryThumbnailSize,
+  FsGalleryConfig, FsGalleryItem, FsGalleryModule,
 } from '@firestitch/gallery';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
@@ -83,11 +83,9 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
         },
       ],
       info: false,
-      layout: GalleryLayout.Flow,
       thumbnail: {
         width: 400,
         heightScale: .7,
-        size: GalleryThumbnailSize.Cover,
       },
       fetch: (query): Observable<FsGalleryItem[]> => {
         query = {
