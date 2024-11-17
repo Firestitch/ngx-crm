@@ -20,12 +20,12 @@
         </mat-tab>
         <mat-tab label="Tasks">
           <ng-template matTabContent>
-            <!-- <app-tasks [subjectObjectId]="crmLead.id"></app-tasks> -->
+            <fs-tasks [apiPath]="['crm/leads', crmLead.id + '', 'tasks']"></fs-tasks>
           </ng-template>
         </mat-tab>
         <mat-tab label="Files">
           <ng-template matTabContent>
-            <!-- <fs-crm-files [objectId]="crmLead.id"></fs-crm-files> -->
+            <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
           </ng-template>
         </mat-tab>
         <mat-tab label="Docs">

@@ -6,6 +6,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -15,7 +16,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { FsApi } from '@firestitch/api';
 import { FsDateModule } from '@firestitch/date';
 import {
+  FsGalleryComponent,
   FsGalleryConfig, FsGalleryItem,
+  FsGalleryModule,
 } from '@firestitch/gallery';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsLabelModule } from '@firestitch/label';
@@ -47,7 +50,7 @@ import { RequestComponent } from './request';
     FsLabelModule,
     FsDateModule,
     FsHtmlRendererModule,
-    //FsGalleryModule,
+    FsGalleryModule,
 
     DocumentRequestStateComponent,
     DocGalleryDetailsComponent,
@@ -55,10 +58,10 @@ import { RequestComponent } from './request';
 })
 export class CrmDocsComponent implements OnInit, OnDestroy {
 
-  // @ViewChild(FsGalleryComponent)
-  // public gallery: FsGalleryComponent;
+  @ViewChild(FsGalleryComponent)
+  public gallery: FsGalleryComponent;
 
-  @Input()
+  @Input()  
   public objectId: number;
 
   public galleryConfig: FsGalleryConfig;
@@ -93,7 +96,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
   };
 
   public reload(): void {
-    //this.gallery.reload();
+    this.gallery.reload();
   }
 
   private _initList(): void {

@@ -10,6 +10,8 @@ import { FsDialogModule } from '@firestitch/dialog';
 import { FsFormModule } from '@firestitch/form';
 import { FsTabsModule } from '@firestitch/tabs';
 
+import { ManageFieldsComponent } from '../../manage-fields';
+
 import { ShowFieldsComponent } from './show-fields';
 
 
@@ -27,7 +29,7 @@ import { ShowFieldsComponent } from './show-fields';
     FsFormModule,
     FsDialogModule,
 
-    // ManageFieldsComponent,
+    ManageFieldsComponent,
     ShowFieldsComponent,
   ],
 })

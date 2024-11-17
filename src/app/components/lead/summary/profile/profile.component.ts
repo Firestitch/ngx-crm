@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/attribute';
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
-import { Field } from '@firestitch/field-editor';
+import { Field, FsFieldViewerModule } from '@firestitch/field-editor';
 import { FsLabelModule } from '@firestitch/label';
 import { FsMessage } from '@firestitch/message';
 import { FsPhoneModule } from '@firestitch/phone';
@@ -50,7 +50,7 @@ import { SettingsComponent } from './settings';
     FsAutocompleteChipsModule,
     FsLabelModule,
     FsAttributeModule,
-    // FsFieldViewerModule,
+    FsFieldViewerModule,
 
     LeadAssignedAccountComponent,
     LeadStatusComponent,

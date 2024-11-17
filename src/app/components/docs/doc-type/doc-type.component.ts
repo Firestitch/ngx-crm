@@ -14,7 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { FsDialogModule } from '@firestitch/dialog';
-import { EditorAction, Field, FieldEditorConfig } from '@firestitch/field-editor';
+import {
+  EditorAction, Field, FieldEditorConfig, FsFieldEditorModule,
+} from '@firestitch/field-editor';
 import { FsFormModule } from '@firestitch/form';
 import { FsMessage } from '@firestitch/message';
 import { FsSkeletonModule } from '@firestitch/skeleton';
@@ -39,7 +41,7 @@ import { LeadDocumentTypeData } from '../../../data/lead-document-type.data';
     MatTabsModule,
 
     FsDialogModule,
-    //FsFieldEditorModule,
+    FsFieldEditorModule,
     FsSkeletonModule,
     FsFormModule,
   ],

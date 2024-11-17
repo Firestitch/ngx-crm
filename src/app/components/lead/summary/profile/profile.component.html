@@ -53,14 +53,10 @@
         {{ field.label }}
       </fs-label>
       @if (crmLead.fields[field.guid]) {
-        <!-- 
-        
         <fs-field-view
           [field]="field"
           [data]="crmLead.fields[field.guid]">
-        </fs-field-view> 
-        
-        -->
+        </fs-field-view>
       }
     </fs-label-field>
   }

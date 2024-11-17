@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FsDialogModule } from '@firestitch/dialog';
 import {
   EditorAction, Field, FieldEditorConfig,
+  FsFieldEditorModule,
 } from '@firestitch/field-editor';
 import { FsMessage } from '@firestitch/message';
 import { FsSkeletonModule } from '@firestitch/skeleton';
@@ -36,7 +37,7 @@ import { FormData } from '../../data';
     
     FsDialogModule,
     FsSkeletonModule,
-    // FsFieldEditorModule,
+    FsFieldEditorModule,
   ],
 })
 export class ManageFieldsComponent implements OnInit, OnDestroy {

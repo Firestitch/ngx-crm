@@ -23,7 +23,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FsDialogModule } from '@firestitch/dialog';
 import {
   Field,
+  FieldRendererComponent,
   FieldRendererConfig,
+  FsFieldRendererModule,
 } from '@firestitch/field-editor';
 import { FsFormDirective, FsFormModule } from '@firestitch/form';
 import { FsLabelModule } from '@firestitch/label';
@@ -60,7 +62,7 @@ import { ManageFieldsDialogComponent } from '../../manage-fields';
     FsSkeletonModule,
     FsLabelModule,
     FsDialogModule,
-    // FsFieldRendererModule,
+    FsFieldRendererModule,
 
     ChannelsComponent,
     LeadStatusComponent,
@@ -73,8 +75,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @ViewChild(FsFormDirective)
   public form: FsFormDirective;
 
-  // @ViewChild(FieldRendererComponent)
-  // public fieldRenderer: FieldRendererComponent;
+  @ViewChild(FieldRendererComponent)
+  public fieldRenderer: FieldRendererComponent;
 
   @Input('crmLead') public _crmLead: CrmLead;
 
@@ -142,8 +144,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
           };
           this.crmLeadChange.emit(this.crmLead);
         }),
-        // switchMap(() => this._leadData
-        //   .putFields(this.crmLead.id, this.fieldRenderer.fields)),
+        switchMap(() => this._leadData
+          .putFields(this.crmLead.id, this.fieldRenderer.fields)),
         tap(() => {
           this._cdRef.markForCheck();
           this._message.success('Saved Changes');

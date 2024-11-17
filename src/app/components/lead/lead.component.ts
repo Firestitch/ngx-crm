@@ -17,6 +17,7 @@ import { FsAuditsModule } from '@firestitch/audit';
 import { FsDialogModule } from '@firestitch/dialog';
 import { FsHtmlEditorComponent, FsHtmlEditorConfig } from '@firestitch/html-editor';
 import { FsSkeletonModule } from '@firestitch/skeleton';
+import { FsTasksComponent } from '@firestitch/task';
 
 import { of, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -43,6 +44,7 @@ import { SummaryComponent } from './summary/summary.component';
 
     FsSkeletonModule,
     FsDialogModule,
+    FsTasksComponent,
     FsAuditsModule,
 
     CrmNotesComponent,

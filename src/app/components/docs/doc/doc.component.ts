@@ -22,6 +22,7 @@ import { FsDialogModule } from '@firestitch/dialog';
 //   FieldFile,
 //   FieldRendererComponent, FieldRendererConfig, FsFieldRendererModule, RendererAction,
 // } from '@firestitch/field-editor';
+import { FsFieldRendererModule } from '@firestitch/field-editor';
 import { FsFormModule } from '@firestitch/form';
 import { FsLabelModule } from '@firestitch/label';
 import { FsMessage } from '@firestitch/message';
@@ -52,6 +53,7 @@ import { ManageTypesComponent } from '../manage-types/manage-types.component';
     FsDialogModule,
     FsLabelModule,
     FsAutocompleteChipsModule,
+    FsFieldRendererModule,
     FsSkeletonModule,
     FsFormModule,
   ],

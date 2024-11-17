@@ -18,7 +18,7 @@
           </a>
         </fs-label-field>
         <ng-container *ngTemplateOutlet="general"></ng-container>
-        <!-- <fs-field-renderer [config]="fieldConfig"></fs-field-renderer> -->
+        <fs-field-renderer [config]="fieldConfig"></fs-field-renderer>
       } @else {
         <fs-autocomplete-chips
             [(ngModel)]="document.documentType"

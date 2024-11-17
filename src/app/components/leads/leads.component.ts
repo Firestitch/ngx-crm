@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { FsDateModule } from '@firestitch/date';
 import { FsDialog } from '@firestitch/dialog';
-import { Field } from '@firestitch/field-editor';
+import { Field, FsFieldViewerModule } from '@firestitch/field-editor';
 import { ItemType } from '@firestitch/filter';
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
 
@@ -24,6 +24,7 @@ import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
 import { FsCrmLeadComponent } from '../lead/lead.component';
+import { CrmNotesComponent } from '../notes';
 
 import { SettingsComponent } from './settings/settings.component';
 
@@ -39,10 +40,10 @@ import { SettingsComponent } from './settings/settings.component';
     RouterModule,
     
     FsListModule,
-    // FsFieldViewerModule,
+    FsFieldViewerModule,
     FsDateModule,
 
-    //CrmNotesComponent,
+    CrmNotesComponent,
   ],
 })
 export class FsCrmLeadsComponent implements OnInit, OnDestroy {

@@ -13,7 +13,9 @@ import { RouterModule } from '@angular/router';
 
 import { FsApi } from '@firestitch/api';
 import { FsDateModule } from '@firestitch/date';
-import { FsGalleryConfig, FsGalleryItem, FsGalleryModule, GalleryLayout, GalleryThumbnailSize } from '@firestitch/gallery';
+import {
+  FsGalleryConfig, FsGalleryItem, FsGalleryModule, GalleryLayout, GalleryThumbnailSize,
+} from '@firestitch/gallery';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
 
