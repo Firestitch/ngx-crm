@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { guid } from '@firestitch/common';
+import { FsFormModule } from '@firestitch/form';
 import { FsPhoneModule } from '@firestitch/phone';
 
 import { Subject } from 'rxjs';
@@ -44,6 +45,7 @@ import { CrmChannel } from '../../interfaces';
     MatIconModule,
 
     FsPhoneModule,
+    FsFormModule,
   ],
 })
 export class ChannelsComponent implements OnInit, OnDestroy {

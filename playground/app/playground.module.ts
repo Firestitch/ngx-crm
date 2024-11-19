@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { FS_API_REQUEST_INTERCEPTOR } from '@firestitch/api';
-import { FS_ATTRIBUTE_CONFIG } from '@firestitch/attribute';
+import { FS_ATTRIBUTE_CONFIG, FsAttributeModule } from '@firestitch/attribute';
 import { FsExampleModule } from '@firestitch/example';
 import { FsHtmlEditorModule } from '@firestitch/html-editor';
 import { FsMessageModule } from '@firestitch/message';
@@ -35,6 +35,7 @@ const routes: Routes = [
     FormsModule,
     FsMessageModule.forRoot(),
     FsExampleModule.forRoot(),
+    FsAttributeModule.forRoot(),
     RouterModule.forRoot(routes),
     FsHtmlEditorModule.forRoot({
       activationKey: '2J1B10dD7F6F5A3F3I3cWHNGGDTCWHId1Eb1Oc1Yh1b2Ld1POkE3D3F3C9A4E5A3G3B2G2==',

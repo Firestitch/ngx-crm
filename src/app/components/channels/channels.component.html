@@ -32,18 +32,19 @@
       <div>
         <ng-container [ngSwitch]="type">
           <ng-container *ngSwitchCase="'email'">
-            <mat-form-field class="form-field-padless field-value">
+            <mat-form-field class="field-value">
               <input
                 matInput
                 [required]="true"
                 placeholder="Email"
+                fsFormEmail
                 (ngModelChange)="channelsChanged()"
                 [(ngModel)]="channel.value"
                 [name]="'value-' + channel.guid">
             </mat-form-field>
           </ng-container>
           <ng-container *ngSwitchCase="'phone'">
-            <mat-form-field class="form-field-padless field-value">
+            <mat-form-field class="field-value">
               <input
                 matInput
                 [required]="true"
@@ -67,7 +68,7 @@
       </div>
     </div>
   </ng-container>
-  <div class="fs-row">
+  <div class="actions">
     <a
         mat-icon-button
         (click)="addChannel()">

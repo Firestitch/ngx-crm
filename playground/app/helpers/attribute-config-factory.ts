@@ -6,7 +6,6 @@ import { FlatItemNode } from '@firestitch/tree';
 import { of } from 'rxjs';
 
 export function attributeConfigFactory(): FsAttributeConfig {
-  debugger;
   const config: FsAttributeConfig = {
     configs: [],
     mapping: {
