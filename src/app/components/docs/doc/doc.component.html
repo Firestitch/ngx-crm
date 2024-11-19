@@ -25,6 +25,7 @@
             (ngModelChange)="documentTypeChange($event)"
             [fetch]="fetchDocumentTypes"
             [multiple]="false"
+            required
             [placeholder]="'Document type'"
             name="documentType">
           <ng-template
@@ -47,6 +48,7 @@
             </mat-label>
             <input
               matInput
+              required
               [(ngModel)]="document.name"
               name="name">
           </mat-form-field>
