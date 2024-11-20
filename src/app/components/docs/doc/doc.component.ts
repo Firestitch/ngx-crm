@@ -135,8 +135,8 @@ export class DocComponent implements OnInit, OnDestroy {
   public documentTypeChange(documentType) {
     const data = {
       ...this.document,
-      documentTypeId: documentType.id,
-      name: documentType.name,
+      documentTypeId: documentType?.id,
+      name: documentType?.name,
       state: 'draft',
     };
 
@@ -151,7 +151,8 @@ export class DocComponent implements OnInit, OnDestroy {
           };
           this._cdRef.markForCheck();
         }),
-      );
+      )
+      .subscribe();
   }
 
   public openDocumentType() {
