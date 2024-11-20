@@ -19,6 +19,7 @@ import {
   FsGalleryComponent,
   FsGalleryConfig, FsGalleryItem,
   FsGalleryModule,
+  MimeType,
 } from '@firestitch/gallery';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsLabelModule } from '@firestitch/label';
@@ -193,7 +194,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
                   preview,
                   url,
                   mime: {
-                    type: null,
+                    type: MimeType.Application,
                     extension: 'pdf',
                   },
                   data: document,
