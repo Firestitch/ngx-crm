@@ -112,7 +112,8 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
         icon: 'delete',
         label: 'Delete',
         click: (item: FsGalleryItem) => {
-          this._leadDocumentData.delete(this.objectId, item.data)
+          this._leadDocumentData
+            .delete(this.objectId, item.data)
             .subscribe(() => {
               this.reload();
             });
@@ -121,7 +122,12 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
       {
         icon: 'download',
         label: 'Download',
-        download: true,
+        click: (item: FsGalleryItem) => {
+          const document = item.data;
+          this._api
+            .createApiFile(`crm/leads/${document.objectId}/documents/${document.id}/download`)
+            .download();
+        },
       },
     ];
 
