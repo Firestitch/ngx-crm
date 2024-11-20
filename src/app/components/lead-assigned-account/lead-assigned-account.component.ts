@@ -43,9 +43,9 @@ export class LeadAssignedAccountComponent implements ControlValueAccessor {
 
   private _leadData = inject(LeadData);
 
-  public fetchAccounts = (query) => {
+  public fetchAccounts = (keyword) => {
     return this._leadData
-      .getAssignAccounts(query);
+      .getAssignAccounts(keyword);
   };
 
     
