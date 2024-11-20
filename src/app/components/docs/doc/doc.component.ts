@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -51,6 +52,7 @@ import { ManageTypesComponent } from '../manage-types/manage-types.component';
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
+    MatButtonModule,
 
     FsDialogModule,
     FsLabelModule,
@@ -67,7 +69,6 @@ export class DocComponent implements OnInit, OnDestroy {
 
   public fieldConfig: FieldRendererConfig;
   public document;
-  public content: string;
 
   private _dialog = inject(MatDialog);
   private _destroy$ = new Subject<void>();
@@ -104,7 +105,7 @@ export class DocComponent implements OnInit, OnDestroy {
   public save = () => {
     const data = {
       ...this.document,
-      content: this.content,
+      state: 'active',
     };
 
     return this._leadDocumentData
@@ -112,10 +113,8 @@ export class DocComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((document) => 
           (
-            this.document.id ? 
-              this._leadDocumentData
-                .putFields(this._data.crmLeadId, document.id, this.fieldRenderer.fields) :
-              this._loadFields$(document) 
+            this._leadDocumentData
+              .putFields(this._data.crmLeadId, document.id, this.fieldRenderer.fields)
           )
             .pipe(
               tap(() => {
@@ -134,8 +133,25 @@ export class DocComponent implements OnInit, OnDestroy {
   };
 
   public documentTypeChange(documentType) {
-    this.document.documentTypeId = documentType?.id;
-    this.document.name = documentType?.name;
+    const data = {
+      ...this.document,
+      documentTypeId: documentType.id,
+      name: documentType.name,
+      state: 'draft',
+    };
+
+    this._leadDocumentData
+      .save(this._data.crmLeadId, data)
+      .pipe(
+        switchMap((document) => this._loadFields$(document)),
+        tap((document) => {
+          this.document = {
+            ...this.document,
+            ...document,
+          };
+          this._cdRef.markForCheck();
+        }),
+      );
   }
 
   public openDocumentType() {

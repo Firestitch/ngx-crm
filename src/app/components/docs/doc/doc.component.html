@@ -48,7 +48,16 @@
       </ng-template>
     </div>
     <div mat-dialog-actions>
-      <fs-form-dialog-actions [create]="!document.id"></fs-form-dialog-actions>
+      @if (document.id) {
+        <fs-form-dialog-actions [save]="true"></fs-form-dialog-actions>
+      } @else {
+        <button
+            mat-button
+            mat-dialog-close
+            color="primary">
+          Cancel
+        </button>
+      }
     </div>
   </fs-dialog>
 </form>
