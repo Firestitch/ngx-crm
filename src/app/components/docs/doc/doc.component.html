@@ -9,14 +9,6 @@
     </div>
     <div mat-dialog-content>
       @if (document.id) {
-        <fs-label-field>
-          <fs-label>
-            Type
-          </fs-label>
-          <a (click)="openDocumentType()">
-            {{ document.documentType.name }}
-          </a>
-        </fs-label-field>
         <ng-container *ngTemplateOutlet="general"></ng-container>
         <fs-field-renderer [config]="fieldConfig"></fs-field-renderer>
       } @else {

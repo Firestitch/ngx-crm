@@ -7,6 +7,7 @@ import {
   Inject,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -17,12 +18,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
 import { FsDialogModule } from '@firestitch/dialog';
-// import {
-//   Field,
-//   FieldFile,
-//   FieldRendererComponent, FieldRendererConfig, FsFieldRendererModule, RendererAction,
-// } from '@firestitch/field-editor';
-import { FsFieldRendererModule } from '@firestitch/field-editor';
+import {
+  Field,
+  FieldFile,
+  FieldRendererComponent,
+  FieldRendererConfig,
+  FsFieldRendererModule, RendererAction,
+} from '@firestitch/field-editor';
 import { FsFormModule } from '@firestitch/form';
 import { FsLabelModule } from '@firestitch/label';
 import { FsMessage } from '@firestitch/message';
@@ -60,7 +62,10 @@ import { ManageTypesComponent } from '../manage-types/manage-types.component';
 })
 export class DocComponent implements OnInit, OnDestroy {
 
-  public fieldConfig;
+  @ViewChild(FieldRendererComponent)
+  public fieldRenderer: FieldRendererComponent;
+
+  public fieldConfig: FieldRendererConfig;
   public document;
   public content: string;
 
@@ -109,7 +114,7 @@ export class DocComponent implements OnInit, OnDestroy {
           (
             this.document.id ? 
               this._leadDocumentData
-                .putFields(this._data.crmLeadId, document.id, []) :
+                .putFields(this._data.crmLeadId, document.id, this.fieldRenderer.fields) :
               this._loadFields$(document) 
           )
             .pipe(
@@ -186,7 +191,7 @@ export class DocComponent implements OnInit, OnDestroy {
             canFileDelete: () => {
               return of(true);
             },
-            fileDownload: (field, fieldFile) => {
+            fileDownload: (field: Field, fieldFile: FieldFile) => {
               return this._leadDocumentData
                 .fieldFileDownload(this._data.crmLeadId, document.id, {
                   action: null,
@@ -194,7 +199,7 @@ export class DocComponent implements OnInit, OnDestroy {
                   data: { fieldFile }, 
                 });
             },
-            action:  (action, field, data: any) => {
+            action:  (action: RendererAction, field: Field, data: any) => {
               return this._leadDocumentData
                 .actionFields(this._data.crmLeadId, document.id, { field, action, data });
             },
