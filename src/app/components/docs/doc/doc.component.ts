@@ -143,12 +143,14 @@ export class DocComponent implements OnInit, OnDestroy {
     this._leadDocumentData
       .save(this._data.crmLeadId, data)
       .pipe(
-        switchMap((document) => this._loadFields$(document)),
         tap((document) => {
           this.document = {
             ...this.document,
             ...document,
           };
+        }),
+        switchMap((document) => this._loadFields$(document)),
+        tap(() => {
           this._cdRef.markForCheck();
         }),
       )
