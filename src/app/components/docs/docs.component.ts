@@ -116,6 +116,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
           this._leadDocumentData
             .delete(this.objectId, item.data)
             .subscribe(() => {
+              this.gallery.galleryService.closePreview();
               this.reload();
             });
         },
