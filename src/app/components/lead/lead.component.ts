@@ -17,6 +17,7 @@ import { FsAuditsModule } from '@firestitch/audit';
 import { FsDialogModule } from '@firestitch/dialog';
 import { FsHtmlEditorComponent, FsHtmlEditorConfig } from '@firestitch/html-editor';
 import { FsSkeletonModule } from '@firestitch/skeleton';
+import { FsTabsModule } from '@firestitch/tabs';
 import { FsTasksComponent } from '@firestitch/task';
 
 import { of, Subject } from 'rxjs';
@@ -26,7 +27,6 @@ import { LeadData } from '../../data/lead.data';
 import { CrmLead } from '../../interfaces/crm-lead';
 import { CrmDocsComponent } from '../docs/docs.component';
 import { CrmFilesComponent } from '../files/files.component';
-import { CrmNotesComponent } from '../notes/notes.component';
 
 import { ProfileComponent } from './profile/profile.component';
 import { SummaryComponent } from './summary/summary.component';
@@ -44,10 +44,10 @@ import { SummaryComponent } from './summary/summary.component';
 
     FsSkeletonModule,
     FsDialogModule,
+    FsTabsModule,
     FsTasksComponent,
     FsAuditsModule,
 
-    CrmNotesComponent,
     CrmFilesComponent,
     ProfileComponent,
     SummaryComponent,
@@ -61,6 +61,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
   public crmLead: CrmLead;
   public htmlEditorConfig: FsHtmlEditorConfig;
+  public selected = 'summary';
 
   private _cdRef = inject(ChangeDetectorRef);
   private _route = inject(ActivatedRoute);
@@ -89,8 +90,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
           return leadId
             ? this._leadData
-              .get(leadId,{
-              })
+              .get(leadId)
             : this._leadData.save({
               ...this._data.crmLead,
               state: 'draft',
@@ -99,6 +99,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy$),
       )
       .subscribe((crmLead) => {
+        this.selected = crmLead.state === 'draft' ? 'profile' : 'summary';
         this.crmLead = { 
           ...crmLead, 
         };

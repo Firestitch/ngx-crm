@@ -7,33 +7,48 @@
       {{ crmLead.name || 'Unnamed' }}
     </fs-dialog-title>
     <div mat-dialog-content>
-      <mat-tab-group [dynamicHeight]="true">
-        <mat-tab label="Summary">
+      <mat-tab-group
+          fsTabs
+          [dynamicHeight]="true"
+          [(selected)]="selected">
+        <mat-tab
+            label="Summary"
+            name="summary">
           <ng-template matTabContent>
             <app-crm-lead-summary [crmLead]="crmLead"></app-crm-lead-summary>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Profile">
+        <mat-tab
+            label="Profile"
+            name="profile">
           <ng-template matTabContent>
             <app-crm-lead-profile [(crmLead)]="crmLead"></app-crm-lead-profile>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Tasks">
+        <mat-tab
+            label="Tasks"
+            name="tasks">
           <ng-template matTabContent>
             <fs-tasks [apiPath]="['crm/leads', crmLead.id + '', 'tasks']"></fs-tasks>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Files">
+        <mat-tab
+            label="Files"
+            name="files">
           <ng-template matTabContent>
             <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Docs">
+        <mat-tab
+            label="Docs"
+            name="docs">
           <ng-template matTabContent>
             <fs-crm-docs [objectId]="crmLead.id"></fs-crm-docs>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Audits">
+        <mat-tab
+            label="Audits"
+            name="audits">
           <ng-template matTabContent>
             <fs-audits [apiPath]="['crm/leads', crmLead.id, 'audits']"></fs-audits>
           </ng-template>
