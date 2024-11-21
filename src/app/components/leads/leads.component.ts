@@ -26,6 +26,7 @@ import { LeadData } from '../../data';
 import { FsCrmLeadComponent } from '../lead/lead.component';
 import { CrmNotesComponent } from '../notes';
 
+import { LeadFormComponent } from './lead-form';
 import { SettingsComponent } from './settings/settings.component';
 
 
@@ -138,7 +139,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
           menu: true,
           label: 'Lead form',
           click: () => {
-            // this._dialog.open(LeadFormComponent);
+            this._dialog.open(LeadFormComponent);
           },
         },
       ],
