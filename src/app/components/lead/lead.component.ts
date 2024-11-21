@@ -83,23 +83,21 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   }
 
   private _fetchData(): void {
+    const leadId = this._route.snapshot.params.id || this._data.crmLead.id;
+
     of(null)
       .pipe(
         switchMap(() => {
-          const leadId = this._route.snapshot.params.id || this._data.crmLead.id;
-
           return leadId
-            ? this._leadData
-              .get(leadId)
+            ? this._leadData.get(leadId)
             : this._leadData.save({
               ...this._data.crmLead,
-              state: 'draft',
             });
         }),
         takeUntil(this._destroy$),
       )
       .subscribe((crmLead) => {
-        this.selected = crmLead.state === 'draft' ? 'profile' : 'summary';
+        this.selected = leadId ? 'summary' : 'profile';
         this.crmLead = { 
           ...crmLead, 
         };

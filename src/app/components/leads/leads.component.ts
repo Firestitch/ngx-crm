@@ -90,11 +90,6 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.reload();
-        if (crmLead.state === 'draft' || !crmLead.state) {
-          const url = this._router
-            .parseUrl(`${window.location.pathname.replace(/\/\d+$/, '')}${window.location.search}`);
-          this._location.replaceState(url.toString());
-        }
       });
   }
 

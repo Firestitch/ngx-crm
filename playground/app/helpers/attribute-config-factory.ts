@@ -47,7 +47,7 @@ export function attributeConfigFactory(): FsAttributeConfig {
         return 0;
       });
     },
-    saveAttribute: (e, draft = false) => {
+    saveAttribute: (e) => {
       return of(e);
     },
     saveAttributeImage: (e) => {
