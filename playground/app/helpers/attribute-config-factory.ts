@@ -54,7 +54,7 @@ export function attributeConfigFactory(): FsAttributeConfig {
       return of(e);
     },
     getAttributes: (e) => {
-      return of(e);
+      return of(null);
     },
     getSelectedAttributes: (e) => {
       return of(e);
@@ -72,7 +72,7 @@ export function attributeConfigFactory(): FsAttributeConfig {
       return o1 && o2 && o1.id === o2.id;
     },
     deleteConfirmation: (event) => {
-      return of(event);
+      return of(null);
     },
   };
 
