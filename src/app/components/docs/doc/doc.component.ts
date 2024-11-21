@@ -36,6 +36,7 @@ import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 
 import { LeadDocumentData, LeadDocumentTypeData } from '../../../data';
+import { DocumentState } from '../../../enums';
 import { DocTypeComponent } from '../doc-type/doc-type.component';
 import { ManageTypesComponent } from '../manage-types/manage-types.component';
 
@@ -69,6 +70,7 @@ export class DocComponent implements OnInit, OnDestroy {
 
   public fieldConfig: FieldRendererConfig;
   public document;
+  public DocumentState = DocumentState;
 
   private _dialog = inject(MatDialog);
   private _destroy$ = new Subject<void>();
@@ -105,7 +107,7 @@ export class DocComponent implements OnInit, OnDestroy {
   public save = () => {
     const data = {
       ...this.document,
-      state: 'active',
+      state: DocumentState.Active,
     };
 
     return this._leadDocumentData
@@ -137,7 +139,7 @@ export class DocComponent implements OnInit, OnDestroy {
       ...this.document,
       documentTypeId: documentType?.id,
       name: documentType?.name,
-      state: 'draft',
+      state: DocumentState.Draft,
     };
 
     this._leadDocumentData
