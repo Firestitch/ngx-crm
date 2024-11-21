@@ -15,7 +15,6 @@ import { CrmNotesComponent } from '../../notes/notes.component';
 
 import { ActivityComponent } from './activity';
 import { SummaryProfileComponent } from './profile';
-import { TasksComponent } from './tasks';
 
 
 @Component({
@@ -34,7 +33,6 @@ import { TasksComponent } from './tasks';
     SummaryProfileComponent,
     ActivityComponent,    
     CrmNotesComponent,
-    TasksComponent,
   ],
 })
 export class SummaryComponent{
