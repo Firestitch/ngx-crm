@@ -5,11 +5,11 @@
         let-row="row">
       @if (leadRouterLink) {
         <a [routerLink]="[this.leadRouterLink, row.id]">
-          {{ row.firstName + ' ' + row.lastName }}
+          {{ row.name }}
         </a>
       } @else {
         <a (click)="openDialog(row)">
-          {{ row.firstName + ' ' + row.lastName }}
+          {{ row.name }}
         </a>
       }
       <div class="small">
