@@ -70,7 +70,7 @@ export class DocGalleryDetailsComponent implements OnInit {
     this._leadDocumentData
       .put(this.objectId, {
         id: this.document.id,
-        requestState: requestState.value,
+        requestState: requestState?.value || null,
       })
       .subscribe(() => {
         this.document.requestState = requestState.value;
