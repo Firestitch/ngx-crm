@@ -78,24 +78,19 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
       showChangeSize: false,
       showChangeView: false,
       reload: false,
-      actions: [
-        {
-          label: 'Upload',
-          icon: 'upload',
-          multiple: true,
-          select: (files: FsFile[]) => {
-            const files$ = files.map((fsFile) => {
-              return this._leadFileData
-                .post(this.objectId, fsFile.file);
-            });
+      upload: {
+        label: 'Upload',
+        icon: 'upload',
+        multiple: true,
+        select: (files: FsFile[]) => {
+          const files$ = files.map((fsFile) => {
+            return this._leadFileData
+              .post(this.objectId, fsFile.file);
+          });
 
-            concat(...files$)
-              .subscribe(() => {
-                this.reload();
-              });
-          },
+          return concat(...files$);
         },
-      ],
+      },
       itemActions: [
         {
           label: 'Download',
