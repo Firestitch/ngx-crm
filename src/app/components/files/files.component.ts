@@ -14,13 +14,15 @@ import { RouterModule } from '@angular/router';
 import { FsApi } from '@firestitch/api';
 import { FsDateModule } from '@firestitch/date';
 import {
+  FsGalleryComponent,
   FsGalleryConfig, FsGalleryItem, FsGalleryModule,
 } from '@firestitch/gallery';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
-import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
+import { FsListConfig, FsListModule } from '@firestitch/list';
+import { FsPrompt } from '@firestitch/prompt';
 
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { LeadFileData } from '../../data/lead-file.data';
 
@@ -43,8 +45,8 @@ import { LeadFileData } from '../../data/lead-file.data';
 })
 export class CrmFilesComponent implements OnInit, OnDestroy {
 
-  @ViewChild(FsListComponent)
-  public list: FsListComponent;
+  @ViewChild(FsGalleryComponent)
+  public gallery: FsGalleryComponent;
 
   @Input()
   public objectId: number;
@@ -54,11 +56,12 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
   public galleryConfig: FsGalleryConfig;
 
   private _destroy$ = new Subject<void>();
+  private _prompt = inject(FsPrompt);
   private _leadFileData = inject(LeadFileData);
   private _api = inject(FsApi);
 
   public ngOnInit(): void {
-    this._initList();
+    this._initGallery();
   }
   public ngOnDestroy(): void {
     this._destroy$.next();
@@ -66,10 +69,10 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
   }
 
   public reload(): void {
-    this.list.reload();
+    this.gallery.reload();
   }
 
-  private _initList(): void {
+  private _initGallery(): void {
     this.galleryConfig = {
       showChangeSize: false,
       showChangeView: false,
@@ -85,8 +88,14 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
           label: 'Delete',
           icon: 'delete',
           click: (item: FsGalleryItem) => {
-            this._leadFileData
-              .delete(this.objectId, item.data)
+            this._prompt
+              .delete({
+                objectType: 'file',
+              })
+              .pipe(
+                switchMap(() => this._leadFileData.delete(this.objectId, item.data)),
+                takeUntil(this._destroy$),
+              )
               .subscribe(() => {
                 this.reload();
               });

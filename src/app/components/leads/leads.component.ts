@@ -147,8 +147,8 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
             return this._leadData.delete(data);
           },
           remove: {
-            title: 'Confirm',
-            template: 'Are you sure you would like to delete this record?',
+            title: 'Delete lead',
+            template: 'Are you sure you would like to delete this lead?',
           },
           label: 'Delete',
         },

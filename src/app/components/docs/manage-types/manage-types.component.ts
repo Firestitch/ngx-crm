@@ -81,7 +81,7 @@ export class ManageTypesComponent implements OnInit, OnDestroy {
             return this._leadDocumentTypeData.delete(data);
           },
           remove: {
-            title: 'Confirm',
+            title: 'Delete document type',
             template: 'Are you sure you would like to delete this document type?',
           },
           label: 'Delete',

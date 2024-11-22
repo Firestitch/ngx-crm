@@ -98,8 +98,8 @@ export class CrmNotesComponent implements OnInit, OnDestroy {
               .delete(this.objectId, data);
           },
           remove: {
-            title: 'Confirm',
-            template: 'Are you sure you would like to delete this record?',
+            title: 'Delete n  ote',
+            template: 'Are you sure you would like to delete this note?',
           },
           label: 'Delete',
         },

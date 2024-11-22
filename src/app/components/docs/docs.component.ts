@@ -24,9 +24,10 @@ import {
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsLabelModule } from '@firestitch/label';
 import { FsListModule } from '@firestitch/list';
+import { FsPrompt } from '@firestitch/prompt';
 
 import { Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { LeadDocumentData } from '../../data';
 
@@ -71,6 +72,8 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
   private _leadDocumentData = inject(LeadDocumentData);
   private _dialog = inject(MatDialog);
   private _api = inject(FsApi);
+  private _prompt = inject(FsPrompt);
+
   public ngOnInit(): void {
     this._initList();
   }
@@ -113,10 +116,15 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
         icon: 'delete',
         label: 'Delete',
         click: (item: FsGalleryItem) => {
-          this._leadDocumentData
-            .delete(this.objectId, item.data)
+          this._prompt
+            .delete({
+              objectType: 'document',
+            })
+            .pipe(
+              switchMap(() =>  this._leadDocumentData.delete(this.objectId, item.data)),
+              takeUntil(this._destroy$),
+            )
             .subscribe(() => {
-              this.gallery.galleryService.closePreview();
               this.reload();
             });
         },
