@@ -38,6 +38,13 @@
 <fs-activities [apiPath]="['crm','leads', crmLead.id, 'activities']">
   <ng-template
       fsActivityPreview
+      [activityType]="'crmLeadFile'"
+      let-data="data"
+      let-activity="activity">
+    {{ data.file.filename }}
+  </ng-template>
+  <ng-template
+      fsActivityPreview
       [activityType]="'crmLeadStatus'"
       let-data="data"
       let-activity="activity">
