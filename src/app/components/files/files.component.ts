@@ -81,6 +81,18 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
           tooltip: 'Download',
           icon: 'download',
         },
+        {
+          label: 'Delete',
+          icon: 'delete',
+          click: (item: FsGalleryItem) => {
+            this._leadFileData
+              .delete(this.objectId, item.data)
+              .subscribe(() => {
+                this.reload();
+              });
+          },
+        },
+
       ],
       info: false,
       thumbnail: {
@@ -99,11 +111,14 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
               return leadFiles.map((leadFile) => {
                 const url = this._api
                   .createApiFile(`crm/leads/${leadFile.objectId}/files/${leadFile.id}/download`);
+
+                const preview = this._api
+                  .createApiFile(`crm/leads/${leadFile.objectId}/files/${leadFile.id}/preview`);
     
                 const item: FsGalleryItem = { 
                   name: leadFile.file.filename,
-                  preview: leadFile.file.preview?.large,
                   url,
+                  preview,
                   data: leadFile,
                 };
     
@@ -114,54 +129,6 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
        
       },
     };
-    
-    // this.listConfig = {
-    //   filters: [
-    //     {
-    //       name: 'keyword',
-    //       type: ItemType.Keyword,
-    //       label: 'Search',
-    //     },
-    //   ],
-    //   rowActions: [
-    //     {
-    //       click: (data) => {
-    //         return this._leadFileData
-    //           .delete(this.objectId, data);
-    //       },
-    //       remove: {
-    //         title: 'Confirm',
-    //         template: 'Are you sure you would like to delete this record?',
-    //       },
-    //       label: 'Delete',
-    //     },
-    //   ],
-    //   fetch: (query) => {
-    //     query = {
-    //       files: true,
-    //       ...query,
-    //     };
-        
-    //     return this._leadFileData.gets(this.objectId, query, { key: null })
-    //       .pipe(
-    //         map((response: any) => {
-    //           const data = response.crmFiles;
-
-    //           return { data, paging: response.paging };
-    //         }),
-    //       );
-    //   },
-    //   restore: {
-    //     query: { state: 'deleted' },
-    //     filterLabel: 'Show Deleted',
-    //     menuLabel: 'Restore',
-    //     reload: true,
-    //     click: (row) => {
-    //       return this._leadFileData 
-    //         .put(this.objectId, { id: row.id, state: 'active' });
-    //     },
-    //   },
-    // };
   }
 
 }

@@ -12,6 +12,15 @@ fs-field-renderer {
   position: sticky;
   bottom: 0px;
   background: #fff;
-  padding: 8px 0 5px;
+  padding-top: 10px;
   z-index: 999;
+
+  &::before {
+    content: ' ';
+    background: #ffffff;
+    height: 20px;
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+  }
 }
