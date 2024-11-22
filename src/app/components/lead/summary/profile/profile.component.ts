@@ -3,10 +3,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   inject,
   Input,
   OnDestroy,
   OnInit,
+  Output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -59,6 +61,7 @@ import { SettingsComponent } from './settings';
 export class SummaryProfileComponent implements OnInit, OnDestroy {
 
   @Input('crmLead') public _crmLead: CrmLead;
+  @Output() public crmLeadChange = new EventEmitter<CrmLead>();
 
   public crmLead: CrmLead;
   public fields: Field[];
@@ -119,6 +122,7 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       tagAttributes,
     })
       .subscribe(() => {
+        this.crmLeadChange.emit(this.crmLead);
         this._message.success();
       });
   }
@@ -129,6 +133,7 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       assignedAccountId: attribute?.id,
     })
       .subscribe(() => {
+        this.crmLeadChange.emit(this.crmLead);
         this._message.success();
       });
   }

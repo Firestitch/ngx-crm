@@ -1,11 +1,17 @@
 <ng-container *fsSkeletonForm="crmLead">
   <div class="fs-row.align-start.gap-md">
     <div class="card">
-      <app-crm-lead-summary-profile [crmLead]="crmLead"></app-crm-lead-summary-profile>
+      <app-crm-lead-summary-profile
+        [crmLead]="crmLead"
+        (crmLeadChange)="activity.loadNew()">
+      </app-crm-lead-summary-profile>
     </div>
     <div class="fs-row.align-start.gap-lg full-width">
       <div class="activities">
-        <app-crm-lead-summary-activity [crmLead]="crmLead"></app-crm-lead-summary-activity>
+        <app-crm-lead-summary-activity
+          #activity
+          [crmLead]="crmLead">
+        </app-crm-lead-summary-activity>
       </div>
       <div class="notes">
         <h2>

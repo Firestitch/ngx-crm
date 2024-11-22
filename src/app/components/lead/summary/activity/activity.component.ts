@@ -29,7 +29,6 @@ import { RequestComponent } from '../../../docs/request';
 import { NoteComponent } from '../../../note';
 
 import { LogComponent } from './../log';
-import { SummaryProfileComponent } from './../profile';
 
 
 @Component({
@@ -48,8 +47,6 @@ import { SummaryProfileComponent } from './../profile';
     FsChipModule,
     FsActivitiesComponent, 
     FsActivityPreviewDirective,
-
-    SummaryProfileComponent,
   ],
 })
 export class ActivityComponent implements OnInit, OnDestroy {
@@ -129,7 +126,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
 
               concat(...files$)
                 .subscribe(() => {
-                  this.reloadActivities();
+                  this.loadNew();
                   this._message.success();
                 });
             },
@@ -139,7 +136,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
     ];
   }
 
-  public reloadActivities(): void {
+  public loadNew(): void {
     this.activities.loadNew();
   }
 
@@ -155,7 +152,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy$),
       )
       .subscribe(() => {
-        this.reloadActivities();
+        this.loadNew();
       });
   }
 
@@ -171,7 +168,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy$),
       )
       .subscribe(() => {
-        this.reloadActivities();
+        this.loadNew();
       });
   }
 
