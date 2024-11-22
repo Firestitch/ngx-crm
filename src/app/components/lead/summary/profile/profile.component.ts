@@ -112,6 +112,7 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       statusAttributeId: attribute?.id,
     })
       .subscribe(() => {
+        this.crmLeadChange.emit(this.crmLead);
         this._message.success();
       });
   }

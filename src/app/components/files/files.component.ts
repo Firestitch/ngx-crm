@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 
 import { FsApi } from '@firestitch/api';
 import { FsDateModule } from '@firestitch/date';
+import { FsFile } from '@firestitch/file';
 import {
   FsGalleryComponent,
   FsGalleryConfig, FsGalleryItem, FsGalleryModule,
@@ -21,7 +22,7 @@ import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsListConfig, FsListModule } from '@firestitch/list';
 import { FsPrompt } from '@firestitch/prompt';
 
-import { Observable, Subject } from 'rxjs';
+import { concat, Observable, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { LeadFileData } from '../../data/lead-file.data';
@@ -77,6 +78,24 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
       showChangeSize: false,
       showChangeView: false,
       reload: false,
+      actions: [
+        {
+          label: 'Upload',
+          icon: 'upload',
+          multiple: true,
+          select: (files: FsFile[]) => {
+            const files$ = files.map((fsFile) => {
+              return this._leadFileData
+                .post(this.objectId, fsFile.file);
+            });
+
+            concat(...files$)
+              .subscribe(() => {
+                this.reload();
+              });
+          },
+        },
+      ],
       itemActions: [
         {
           label: 'Download',
