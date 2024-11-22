@@ -20,12 +20,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
+import { FsApi, RequestMethod } from '@firestitch/api';
 import { FsDialogModule } from '@firestitch/dialog';
 import {
   Field,
+  FieldFile,
   FieldRendererComponent,
   FieldRendererConfig,
   FsFieldRendererModule,
+  RendererAction,
 } from '@firestitch/field-editor';
 import { FsFormDirective, FsFormModule } from '@firestitch/form';
 import { FsLabelModule } from '@firestitch/label';
@@ -91,6 +94,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private _location = inject(Location);
   private _leadData = inject(LeadData);
   private _dialog = inject(MatDialog);
+  private _api = inject(FsApi);
   private _destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
@@ -185,6 +189,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  private get _crmLeadFieldsUrl(): (string | number)[] {
+    return ['crm/leads', this.crmLead.id, 'fields'];
+  }
+
   private _loadFields$(): Observable<Field[]> {
     return this._leadData
       .getFields(this.crmLead.id)
@@ -192,6 +200,30 @@ export class ProfileComponent implements OnInit, OnDestroy {
         tap((fields) => {
           this.fieldConfig = {
             fields,
+            action: (action: RendererAction, field, data: any): Observable<any> => {
+              return this._api
+                .post([...this._crmLeadFieldsUrl, 'action'], {
+                  action, 
+                  data,
+                  field,
+                }, { key: null });
+            },
+            fileDownload: (field: Field, fieldFile: FieldFile) => {
+              return this._api
+                .createApiFile([...this._crmLeadFieldsUrl, 'download'], 
+                  {
+                    method: RequestMethod.Post,
+                    data: { field, fieldFile },
+                  });
+            },
+            filePreviewDownload: (field: Field, fieldFile: FieldFile) => {
+              return this._api
+                .createApiFile([...this._crmLeadFieldsUrl, 'preview'], 
+                  {
+                    method: RequestMethod.Post,
+                    data: { field, fieldFile },
+                  });
+            },
           };
         }),
       );

@@ -1,4 +1,4 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -9,7 +9,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -60,8 +60,6 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
 
   private _destroy$ = new Subject<void>();
   private _dialog = inject(MatDialog);
-  private _router = inject(Router); 
-  private _location = inject(Location);
   private _leadData = inject(LeadData);
   private _fsDialog = inject(FsDialog);
   private _cdRef = inject(ChangeDetectorRef);
