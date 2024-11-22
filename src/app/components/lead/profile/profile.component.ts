@@ -213,7 +213,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 .createApiFile([...this._crmLeadFieldsUrl, 'download'], 
                   {
                     method: RequestMethod.Post,
-                    data: { field, fieldFile },
+                    data: { 
+                      field,
+                      data: { 
+                        fieldFile, 
+                      },
+                    },
                   });
             },
             filePreviewDownload: (field: Field, fieldFile: FieldFile) => {
@@ -221,7 +226,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 .createApiFile([...this._crmLeadFieldsUrl, 'preview'], 
                   {
                     method: RequestMethod.Post,
-                    data: { field, fieldFile },
+                    data: { 
+                      field, 
+                      data: { 
+                        fieldFile, 
+                      },
+                    },
                   });
             },
           };
