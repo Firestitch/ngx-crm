@@ -49,7 +49,7 @@ import { LeadDocumentData, LeadDocumentRequestData, LeadDocumentTypeData } from 
 })
 export class RequestComponent implements OnInit, OnDestroy {
 
-  public requestObjects;
+  public selectedRequestObjects;
   public documentRequest: any;
 
   private _destroy$ = new Subject<void>();
@@ -125,7 +125,7 @@ export class RequestComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap(() => {
           return forkJoin(
-            ...this.requestObjects
+            ...this.selectedRequestObjects
               .filter((item) => item.group === 'new')
               .map((item) => this._leadDocumentData
                 .post(this._data.crmLeadId, {
@@ -138,7 +138,7 @@ export class RequestComponent implements OnInit, OnDestroy {
           const data = {
             documents: [
               ...documents,
-              ...this._requestObjects
+              ...this.selectedRequestObjects
                 .filter((item) => item.group === 'existing'),
             ],
           };

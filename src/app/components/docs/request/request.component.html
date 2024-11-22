@@ -26,7 +26,7 @@
         </fs-label-field>
       } @else {
         <fs-autocomplete-chips
-            [(ngModel)]="requestObjects"
+            [(ngModel)]="selectedRequestObjects"
             [fetch]="fetchDocumentTypes"
             [groupBy]="groupBy"
             [required]="true"
