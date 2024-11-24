@@ -9,4 +9,4 @@ import { DocumentRequestRoutingModule } from './document-request-routing.module'
     DocumentRequestRoutingModule,
   ],
 })
-export class DocumentRequestModule { }
+export class FsDocumentRequestModule { }

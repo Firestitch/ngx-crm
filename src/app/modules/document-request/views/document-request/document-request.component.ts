@@ -9,7 +9,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 
 import { RouteObserver } from '@firestitch/core';
-import { FsMessage } from '@firestitch/message';
 import { FsSkeletonModule } from '@firestitch/skeleton';
 
 import { Subject } from 'rxjs';
@@ -42,7 +41,6 @@ export class DocumentRequestComponent implements OnInit, OnDestroy {
 
   constructor(
     private _route: ActivatedRoute,
-    private _message: FsMessage,
     private _cdRef: ChangeDetectorRef,
   ) {
     this.documentRequest$ = new RouteObserver(this._route, 'documentRequest');

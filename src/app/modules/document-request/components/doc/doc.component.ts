@@ -29,8 +29,7 @@ import { FsSkeletonModule } from '@firestitch/skeleton';
 import { Subject } from 'rxjs';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
-
-import { DocumentRequestData } from '@app/document-request/data';
+import { DocumentRequestData } from '../../data';
 
 
 @Component({
