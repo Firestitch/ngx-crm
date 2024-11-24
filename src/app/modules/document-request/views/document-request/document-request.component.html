@@ -6,7 +6,7 @@
   </mat-card-header>
   <mat-card-content>
     <ng-container *fsSkeleton="documentRequest">
-      @if (documentRequest.documentRequestItems) {
+      @if (documentRequest.documentRequestItems.length) {
         @for (documentRequestItem of documentRequest.documentRequestItems; track documentRequestItem.documentRequestItemId) {
           <br>
           <div class="fs-row.gap-sm.justify-between full-width">
