@@ -1,0 +1,17 @@
+<form
+    fsForm
+    [submit]="save"
+    *fsSkeletonForm="fieldConfig"
+    [dirtySubmitButton]="false">
+  <fs-dialog>
+    <div mat-dialog-title>
+      Document
+    </div>
+    <div mat-dialog-content>
+      <fs-field-renderer [config]="fieldConfig"></fs-field-renderer>
+    </div>
+    <div mat-dialog-actions>
+      <fs-form-dialog-actions [save]="true"></fs-form-dialog-actions>
+    </div>
+  </fs-dialog>
+</form>

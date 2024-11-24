@@ -1,0 +1,22 @@
+<ng-container *fsSkeleton="documentRequest">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Document request
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @for (documentRequestItem of documentRequest.documentRequestItems; track documentRequestItem.documentRequestItemId) {
+        <br>
+        <div class="fs-row.gap-sm.justify-between full-width">
+          {{ documentRequestItem.document.name }}
+          <a
+              mat-raised-button
+              (click)="uploadDocument(documentRequestItem)">
+            Upload
+          </a>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</ng-container>
