@@ -19,7 +19,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
 import { FsDialogModule } from '@firestitch/dialog';
 import {
+  Field,
   FieldRendererComponent, FieldRendererConfig, FsFieldRendererModule,
+  RendererAction,
 } from '@firestitch/field-editor';
 import { FsFormModule } from '@firestitch/form';
 import { FsLabelModule } from '@firestitch/label';
@@ -126,10 +128,10 @@ export class DocComponent implements OnInit, OnDestroy {
         tap((fields) => {
           this.fieldConfig = { 
             fields,
-            // action:  (action: RendererAction, field: Field, data: any) => {
-            //   return this._leadDocumentData
-            //     .actionFields(this._data.crmLeadId, document.id, { field, action, data });
-            // },
+            action:  (action: RendererAction, field: Field, data: any) => {
+              return this._documentRequestData
+                .fieldAction(this.documentRequest.guid, this._data.documentRequestItem.id, { field, action, data });
+            },
           };
         }),
       );
