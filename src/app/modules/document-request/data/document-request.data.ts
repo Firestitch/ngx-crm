@@ -42,7 +42,7 @@ export class DocumentRequestData {
 
   public fieldAction(guid, documentRequestItemId, data): Observable<any> {
     return this._api
-      .get(`documentrequest/${guid}/items/${documentRequestItemId}/fields/action`, data, { 
+      .post(`documentrequest/${guid}/items/${documentRequestItemId}/fields/action`, data, { 
         key: null,
       });
   }
