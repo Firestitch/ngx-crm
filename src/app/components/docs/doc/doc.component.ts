@@ -215,7 +215,15 @@ export class DocComponent implements OnInit, OnDestroy {
             fileDownload: (field: Field, fieldFile: FieldFile) => {
               return this._leadDocumentData
                 .fieldFileDownload(this._data.crmLeadId, document.id, {
-                  action: null,
+                  action: RendererAction.FileDownload,
+                  field, 
+                  data: { fieldFile }, 
+                });
+            },
+            filePreviewDownload: (field: Field, fieldFile: FieldFile) => {
+              return this._leadDocumentData
+                .fieldFileDownload(this._data.crmLeadId, document.id, {
+                  action: 'filePreview',
                   field, 
                   data: { fieldFile }, 
                 });
