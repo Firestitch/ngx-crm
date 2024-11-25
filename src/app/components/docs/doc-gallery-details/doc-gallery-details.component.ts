@@ -73,7 +73,7 @@ export class DocGalleryDetailsComponent implements OnInit {
         requestState: requestState?.value || null,
       })
       .subscribe(() => {
-        this.document.requestState = requestState.value;
+        this.document.requestState = requestState?.value || null;
         this._gallery.updateItemData(this.item, this.document);
         this._message.success();
       });
