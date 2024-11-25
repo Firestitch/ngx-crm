@@ -3,7 +3,9 @@
     <ng-template
         fs-list-cell
         let-row="row">
-      @if (leadRouterLink) {
+      @if (row.state === 'deleted') {
+        {{ row.name }}
+      } @else if (leadRouterLink) {
         <a [routerLink]="[this.leadRouterLink, row.id]">
           {{ row.name }}
         </a>
