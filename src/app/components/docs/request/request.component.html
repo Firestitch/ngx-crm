@@ -45,18 +45,27 @@
       }
     </div>
     <div mat-dialog-actions>
-      <button
-          type="submit"
-          color="primary"
-          mat-button>
-        Request
-      </button>
-      <button
-          mat-button
-          type="button"
-          [mat-dialog-close]="undefined">
-        Cancel
-      </button>
+      @if (documentRequest.id) {
+        <button
+            mat-button
+            type="button"
+            [mat-dialog-close]="undefined">
+          Close
+        </button>
+      } @else {
+        <button
+            type="submit"
+            color="primary"
+            mat-button>
+          Request
+        </button>
+        <button
+            mat-button
+            type="button"
+            [mat-dialog-close]="undefined">
+          Cancel
+        </button>
+      }
     </div>
   </fs-dialog>
 </form>
