@@ -22,7 +22,7 @@ import { FsMessage } from '@firestitch/message';
 import { FsSkeletonModule } from '@firestitch/skeleton';
 
 import { forkJoin, of, Subject } from 'rxjs';
-import { defaultIfEmpty, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { defaultIfEmpty, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadDocumentData, LeadDocumentRequestData, LeadDocumentTypeData } from '../../../data';
 
@@ -110,7 +110,7 @@ export class RequestComponent implements OnInit, OnDestroy {
               }),
             );
         }),
-        filter((requestObjects) => requestObjects
+        map((requestObjects) => requestObjects
           .filter((requestObject) => {
             return !keyword || String(requestObject.name)
               .toLowerCase()
