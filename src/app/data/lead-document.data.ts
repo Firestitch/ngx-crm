@@ -101,7 +101,7 @@ export class LeadDocumentData<T = any> {
     );
   }
 
-  public fieldFileDownload(crmLeadId, documentId: any, data: any, config: RequestConfig = {}): FsApiFile {
+  public fieldFileAction(crmLeadId, documentId: any, data: any): FsApiFile {
     return this._api.createApiFile(
       `crm/leads/${crmLeadId}/documents/${documentId}/fields/action`,
       {

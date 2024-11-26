@@ -58,7 +58,8 @@
       @if (crmLead.fields[field.guid]) {
         <fs-field-view
           [field]="field"
-          [data]="crmLead.fields[field.guid]">
+          [data]="crmLead.fields[field.guid]"
+          [filePreviewDownload]="filePreviewDownload">
         </fs-field-view>
       }
     </fs-label-field>

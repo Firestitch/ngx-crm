@@ -214,7 +214,7 @@ export class DocComponent implements OnInit, OnDestroy {
             },
             fileDownload: (field: Field, fieldFile: FieldFile) => {
               return this._leadDocumentData
-                .fieldFileDownload(this._data.crmLeadId, document.id, {
+                .fieldFileAction(this._data.crmLeadId, document.id, {
                   action: RendererAction.FileDownload,
                   field, 
                   data: { fieldFile }, 
@@ -222,8 +222,8 @@ export class DocComponent implements OnInit, OnDestroy {
             },
             filePreviewDownload: (field: Field, fieldFile: FieldFile) => {
               return this._leadDocumentData
-                .fieldFileDownload(this._data.crmLeadId, document.id, {
-                  action: 'filePreview',
+                .fieldFileAction(this._data.crmLeadId, document.id, {
+                  action: RendererAction.FilePreview,
                   field, 
                   data: { fieldFile }, 
                 });

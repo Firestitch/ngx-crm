@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/attribute';
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
-import { Field, FsFieldViewerModule } from '@firestitch/field-editor';
+import { Field, FieldFile, FsFieldViewerModule, RendererAction } from '@firestitch/field-editor';
 import { FsLabelModule } from '@firestitch/label';
 import { FsMessage } from '@firestitch/message';
 import { FsPhoneModule } from '@firestitch/phone';
@@ -84,6 +84,15 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       backgroundColor: AttributeColor.Enabled,
     };
   }
+
+  public filePreviewDownload = (field: Field, fieldFile: FieldFile) => {
+    return this._leadData
+      .fieldAction(this.crmLead.id, {
+        action: RendererAction.FilePreview,
+        field, 
+        data: { fieldFile }, 
+      });
+  };
 
   public summaryProfileSettings(): void {
     this._dialog.open(SettingsComponent)

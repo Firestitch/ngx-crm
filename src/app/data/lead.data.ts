@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { FsApi, RequestConfig } from '@firestitch/api';
+import { FsApi, FsApiFile, RequestConfig, RequestMethod } from '@firestitch/api';
 
 import { Observable } from 'rxjs';
 
@@ -109,6 +109,16 @@ export class LeadData<T = any> {
         key: 'fields',
         ...config,
       },
+    );
+  }
+
+  public fieldAction(crmLeadId, data: any): FsApiFile {
+    return this._api.createApiFile(
+      `crm/leads/${crmLeadId}/fields/action`,
+      {
+        data,
+        method: RequestMethod.Post,
+      },      
     );
   }
 
