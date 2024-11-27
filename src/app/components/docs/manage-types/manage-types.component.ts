@@ -97,8 +97,8 @@ export class ManageTypesComponent implements OnInit, OnDestroy {
             .put({ id: row.id, state: 'active' });
         },
       },
-      fetch: () => {
-        return this._leadDocumentTypeData.gets()
+      fetch: (query) => {
+        return this._leadDocumentTypeData.gets(query)
           .pipe(
             map((documentTypes) => ({ data: documentTypes })),
           );
