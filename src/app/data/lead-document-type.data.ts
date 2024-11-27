@@ -26,7 +26,7 @@ export class LeadDocumentTypeData<T = any> {
   public gets(query: any = {}, config: RequestConfig = {}): Observable<T> {
     return this._api.request(
       'GET',
-      `crm/leads/documents/types`,
+      'crm/leads/documents/types',
       query,
       {
         key: 'documentTypes',
@@ -48,7 +48,7 @@ export class LeadDocumentTypeData<T = any> {
 
   public post(data: any, config: RequestConfig = {}): Observable<T> {
     return this._api.post(
-      `crm/leads/documents/types`,
+      'crm/leads/documents/types',
       data,
       {
         key: 'documentType',

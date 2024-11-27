@@ -87,6 +87,16 @@ export class ManageTypesComponent implements OnInit, OnDestroy {
           label: 'Delete',
         },
       ],
+      restore: {
+        query: { state: 'deleted' },
+        filterLabel: 'Show Deleted',
+        menuLabel: 'Restore',
+        reload: true,
+        click: (row) => {
+          return this._leadDocumentTypeData 
+            .put({ id: row.id, state: 'active' });
+        },
+      },
       fetch: () => {
         return this._leadDocumentTypeData.gets()
           .pipe(
