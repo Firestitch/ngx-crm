@@ -80,7 +80,7 @@ export class ChannelsComponent implements OnInit, OnDestroy {
 
     this.channels.push({
       value: '',
-      label,
+      label: label || 'other',
       guid: guid(),
     });
   }
