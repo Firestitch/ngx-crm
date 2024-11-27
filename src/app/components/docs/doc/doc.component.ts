@@ -96,8 +96,8 @@ export class DocComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
   
-  public fetchDocumentTypes = (query: any) => {
-    return this._leadDocumentTypeData.gets(query);
+  public fetchDocumentTypes = (keyword: any) => {
+    return this._leadDocumentTypeData.gets({ keyword });
   };
 
   public manageDocumentTypes = () => {
