@@ -5,7 +5,7 @@
     [dirtySubmitButton]="false">
   <fs-dialog>
     <div mat-dialog-title>
-      Document
+      {{ document.state === DocumentState.Draft ? 'Create Document' : 'Document' }} Document
     </div>
     <div mat-dialog-content>
       @if (document.id) {

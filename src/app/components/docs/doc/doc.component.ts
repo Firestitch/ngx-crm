@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
-  Inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -12,7 +11,7 @@ import {
 import { FormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -75,17 +74,14 @@ export class DocComponent implements OnInit, OnDestroy {
   private _dialog = inject(MatDialog);
   private _destroy$ = new Subject<void>();
   private _leadDocumentTypeData = inject(LeadDocumentTypeData);
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private _data: {
-      document: any;
-      crmLeadId: number;
-    },
-    private _message: FsMessage,
-    private _leadDocumentData: LeadDocumentData,
-    private _cdRef: ChangeDetectorRef,
-  ) { 
-  }
+  private _leadDocumentData = inject(LeadDocumentData);
+  private _cdRef = inject(ChangeDetectorRef);
+  private _message = inject(FsMessage);
+  private _dialogRef = inject(MatDialogRef);
+  private _data = inject<{
+    document: any;
+    crmLeadId: number;
+  }>(MAT_DIALOG_DATA);
 
   public ngOnInit(): void {
     this._fetchData();
@@ -128,6 +124,7 @@ export class DocComponent implements OnInit, OnDestroy {
             ),
         ),
         tap(() => {
+          this._dialogRef.close();
           this._cdRef.markForCheck();
           this._message.success('Saved Changes');
         }),
