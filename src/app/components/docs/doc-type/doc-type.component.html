@@ -28,7 +28,7 @@
       }
     </div>
     <div mat-dialog-actions>
-      <fs-form-dialog-actions [create]="!documentType.id"></fs-form-dialog-actions>
+      <fs-form-dialog-actions [create]="documentType.state === 'draft'"></fs-form-dialog-actions>
     </div>
   </fs-dialog>
 </form>

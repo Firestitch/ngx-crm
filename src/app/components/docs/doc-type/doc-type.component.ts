@@ -21,7 +21,7 @@ import { FsFormModule } from '@firestitch/form';
 import { FsMessage } from '@firestitch/message';
 import { FsSkeletonModule } from '@firestitch/skeleton';
 
-import { forkJoin, Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 
@@ -71,6 +71,7 @@ export class DocTypeComponent implements OnInit, OnDestroy {
     const data = {
       ...this.documentType,
       content: this.content,
+      state: 'active',
     };
 
     return this._leadDocumentTypeData
@@ -89,7 +90,8 @@ export class DocTypeComponent implements OnInit, OnDestroy {
   };
 
   private _loadFields$(documentType) {
-    return this._leadDocumentTypeData.getFields(documentType)
+    return this
+      ._leadDocumentTypeData.getFields(documentType)
       .pipe(
         tap((fields) => {
           this.fieldConfig = {
@@ -114,20 +116,23 @@ export class DocTypeComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((documentType) => {
           return documentType.id
-            ? forkJoin({
-              documentType: this._leadDocumentTypeData
-                .get(documentType.id),
-              fields: this._loadFields$(documentType),
-            })
-            : of({ documentType, fields: null });
+            ? this._leadDocumentTypeData
+              .get(documentType.id)
+            : this._leadDocumentTypeData
+              .save({
+                ...documentType,
+                state: 'draft',
+              });
         }),
+        tap((documentType) => {
+          this.documentType = {
+            ...documentType,
+          };
+        }),
+        switchMap((documentType) => this._loadFields$(documentType)),
         takeUntil(this._destroy$),
       )
-      .subscribe(({ documentType }) => {
-        this.documentType = { 
-          ...documentType,
-        };
-
+      .subscribe(() => {
         this._cdRef.markForCheck();
       });
   }
