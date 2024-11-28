@@ -111,6 +111,7 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
                 takeUntil(this._destroy$),
               )
               .subscribe(() => {
+                this.gallery.galleryService.closePreview();
                 this.reload();
               });
           },
