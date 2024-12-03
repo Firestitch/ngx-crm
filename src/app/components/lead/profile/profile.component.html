@@ -58,17 +58,17 @@
           </h2>
           <app-lead-status
             [(ngModel)]="crmLead.statusAttribute"
-            (ngModelChange)="crmLead.statusAttributeId = $event.id"
+            (ngModelChange)="crmLead.statusAttributeId = $event?.id || null"
             name="statusAttribute">
           </app-lead-status>
           <app-lead-assigned-account
             [(ngModel)]="crmLead.assignedAccount"
-            (ngModelChange)="crmLead.assignedAccountId = $event.id"
+            (ngModelChange)="crmLead.assignedAccountId = $event?.id || null"
             name="assignedAccount">
           </app-lead-assigned-account>
           <app-lead-source
             [(ngModel)]="crmLead.sourceAttribute"
-            (ngModelChange)="crmLead.sourceAttributeId = $event.id"
+            (ngModelChange)="crmLead.sourceAttributeId = $event?.id || null"
             name="sourceAttribute">
           </app-lead-source>
           <mat-form-field>
