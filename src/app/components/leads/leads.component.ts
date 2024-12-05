@@ -86,32 +86,34 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
         switchMap(() => {
           return openCrmLead.id ? 
             of(openCrmLead) : 
-            this._leadData.save(openCrmLead)
-              .pipe(
-                tap((crmLead) => {
-                  if(this.leadRouterLink) {
-                    this._fsDialog
-                      .navigate([crmLead.id], {
-                        relativeTo: this._route,
-                      });
-                  }
-                }),
-              );
+            this._leadData.save(openCrmLead);
         }),
         switchMap((crmLead) => {
+          if(this.leadRouterLink) {
+            this._fsDialog
+              .navigate([crmLead.id], {
+                relativeTo: this._route,
+              });
+
+            return of(null);
+          }
+          
           return this._dialog
             .open(FsCrmLeadComponent, {
               data: {
                 crmLead,
               },
             })
-            .afterClosed();
+            .afterClosed()
+            .pipe(
+              tap(() => {
+                this.reload();
+              }),
+            );
         }),
         takeUntil(this._destroy$),
       )  
-      .subscribe(() => {
-        this.reload();
-      });
+      .subscribe();
   }
 
   private _initDialog(): void {
