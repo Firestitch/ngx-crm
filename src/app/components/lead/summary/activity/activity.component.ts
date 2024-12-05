@@ -24,10 +24,9 @@ import { FsMessage } from '@firestitch/message';
 import { concat, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { CrmLogTypes } from 'src/app/consts';
-import { CrmLogType } from 'src/app/enums/crm-log-type.enum';
-
+import { CrmLogTypes } from '../../../../consts';
 import { LeadFileData } from '../../../../data';
+import { CrmLogType } from '../../../../enums/crm-log-type.enum';
 import { CrmLead } from '../../../../interfaces';
 import { DocComponent } from '../../../docs/doc';
 import { RequestComponent } from '../../../docs/request';
