@@ -100,6 +100,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this._fetchData();
   }
 
+  public formDirty(): void {
+    this.form.dirty();
+  }
+
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
