@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FsActivitiesComponent, FsActivityPreviewDirective } from '@firestitch/activity';
 import { FsChipModule } from '@firestitch/chip';
 import { FsFile } from '@firestitch/file';
+import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsMenuModule } from '@firestitch/menu';
 import { FsMessage } from '@firestitch/message';
 
@@ -44,6 +45,7 @@ import { LogComponent } from './../log';
     MatButtonModule,
 
     FsMenuModule,
+    FsHtmlRendererModule,
     FsChipModule,
     FsActivitiesComponent, 
     FsActivityPreviewDirective,
