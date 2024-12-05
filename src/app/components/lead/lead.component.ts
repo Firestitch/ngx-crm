@@ -8,6 +8,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -40,6 +41,7 @@ import { SummaryComponent } from './summary/summary.component';
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     
     MatTabsModule,
 

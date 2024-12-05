@@ -59,7 +59,9 @@
         </mat-tab-group>
       </div>
       @if (selected === 'profile') {
-        <fs-form-dialog-actions [save]="true"></fs-form-dialog-actions>
+        <mat-dialog-actions>
+          <fs-form-dialog-actions [save]="true"></fs-form-dialog-actions>
+        </mat-dialog-actions>
       }
     </fs-dialog>
   </ng-container>
