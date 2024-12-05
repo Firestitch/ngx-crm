@@ -9,7 +9,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -19,10 +19,11 @@ import { Field, FsFieldViewerModule } from '@firestitch/field-editor';
 import { ItemType } from '@firestitch/filter';
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
 
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
+import { CrmLead } from '../../interfaces';
 import { FsCrmLeadComponent } from '../lead/lead.component';
 import { CrmNotesComponent } from '../notes';
 
@@ -62,6 +63,8 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _dialog = inject(MatDialog);
   private _leadData = inject(LeadData);
   private _fsDialog = inject(FsDialog);
+  private _router = inject(Router);
+  private _route = inject(ActivatedRoute);
   private _cdRef = inject(ChangeDetectorRef);
 
   public ngOnInit(): void {
@@ -77,23 +80,41 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
     this.list.reload();
   }
 
-  public openDialog(crmLead: any): void {
-    this._dialog.open(FsCrmLeadComponent, {
-      data: {
-        crmLead,
-      },
-    })
-      .afterClosed()
+  public openDialog(openCrmLead: CrmLead): void {
+    of(null)
       .pipe(
+        switchMap(() => {
+          return openCrmLead.id ? 
+            of(openCrmLead) : 
+            this._leadData.save(openCrmLead)
+              .pipe(
+                tap((crmLead) => {
+                  this._router
+                    .navigate([...this.leadRouterLink, crmLead.id], {
+                      relativeTo: this._route,
+                    });
+                }),
+              );
+        }),
+        switchMap((crmLead) => {
+          return this._dialog
+            .open(FsCrmLeadComponent, {
+              data: {
+                crmLead,
+              },
+            })
+            .afterClosed();
+        }),
         takeUntil(this._destroy$),
-      )
+      )  
       .subscribe(() => {
         this.reload();
       });
   }
 
   private _initDialog(): void {
-    this._fsDialog.dialogRef$(FsCrmLeadComponent)
+    this._fsDialog
+      .dialogRef$(FsCrmLeadComponent)
       .pipe(
         switchMap((dialogRef) => dialogRef.afterClosed()),
         takeUntil(this._destroy$),
