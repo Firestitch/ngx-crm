@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { FsActivitiesComponent, FsActivityPreviewDirective } from '@firestitch/activity';
 import { FsChipModule } from '@firestitch/chip';
+import { index } from '@firestitch/common';
 import { FsFile } from '@firestitch/file';
 import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsMenuModule } from '@firestitch/menu';
@@ -22,6 +23,9 @@ import { FsMessage } from '@firestitch/message';
 
 import { concat, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { CrmLogTypes } from 'src/app/consts';
+import { CrmLogType } from 'src/app/enums/crm-log-type.enum';
 
 import { LeadFileData } from '../../../../data';
 import { CrmLead } from '../../../../interfaces';
@@ -60,6 +64,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
   public crmLead: CrmLead;
 
   public menuActions: any[];
+  public CrmLogTypes = index(CrmLogTypes, 'name', 'value');
 
   private _leadFileData = inject(LeadFileData);
   private _destroy$ = new Subject<void>();
@@ -75,7 +80,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
             label: 'Call',
             click: () => {
               this.openLog({
-                type: 'outgoingCall',
+                type: CrmLogType.OutgoingCall,
               });
             },
           },
@@ -83,7 +88,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
             label: 'Email',
             click: () => {
               this.openLog({
-                type: 'outgoingEmail',
+                type: CrmLogType.OutgoingEmail,
               });
             },
           },

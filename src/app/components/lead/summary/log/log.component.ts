@@ -26,6 +26,7 @@ import { Subject, of } from 'rxjs';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 
+import { CrmLogTypes } from '../../../../consts';
 import { LeadLogData } from '../../../../data';
 import { CrmLog } from '../../../../interfaces';
 
@@ -53,14 +54,7 @@ import { CrmLog } from '../../../../interfaces';
 export class LogComponent implements OnInit, OnDestroy {
 
   public crmLog: CrmLog;
-  public types = [
-    { name: 'Outgoing call', value: 'outgoingCall' },
-    { name: 'Incoming call', value: 'incomingCall' },
-    { name: 'Outgoing email', value: 'outgoingEmail' },
-    { name: 'Incoming email', value: 'incomingEmail' },
-    { name: 'Meeting', value: 'meeting' },
-    { name: 'Other', value: 'other' },
-  ];
+  public types = CrmLogTypes;
 
   private _destroy$ = new Subject<void>();
 

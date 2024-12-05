@@ -41,6 +41,9 @@
       [activityType]="'crmLeadLog'"
       let-data="data"
       let-activity="activity">
+    <div class="small">
+      {{ CrmLogTypes[data.type] }}
+    </div>
     <fs-html-renderer [html]="data.notes"></fs-html-renderer>
   </ng-template>
   <ng-template
