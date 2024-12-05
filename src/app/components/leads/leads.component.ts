@@ -90,7 +90,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
               .pipe(
                 tap((crmLead) => {
                   if(this.leadRouterLink) {
-                    this._router
+                    this._fsDialog
                       .navigate([crmLead.id], {
                         relativeTo: this._route,
                       });
