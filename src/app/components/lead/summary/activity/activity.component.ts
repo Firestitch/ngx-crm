@@ -63,7 +63,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
   public crmLead: CrmLead;
 
   public menuActions: any[];
-  public CrmLogTypes = index(CrmLogTypes, 'name', 'value');
+  public CrmLogTypes = index(CrmLogTypes, 'value', 'name');
 
   private _leadFileData = inject(LeadFileData);
   private _destroy$ = new Subject<void>();
