@@ -74,9 +74,6 @@ import { ManageFieldsDialogComponent } from '../../manage-fields';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
-  @ViewChild(FsFormDirective)
-  public form: FsFormDirective;
-
   @ViewChild(FieldRendererComponent)
   public fieldRenderer: FieldRendererComponent;
 
@@ -88,6 +85,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public fieldConfig: FieldRendererConfig;
 
   private _message = inject(FsMessage);
+  private _form = inject(FsFormDirective);
   private _cdRef = inject(ChangeDetectorRef);
   private _router = inject(Router);
   private _location = inject(Location);
@@ -101,7 +99,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   public formDirty(): void {
-    this.form.dirty();
+    this._form.dirty();
   }
 
   public ngOnDestroy(): void {
