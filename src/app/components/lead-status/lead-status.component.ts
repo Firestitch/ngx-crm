@@ -5,7 +5,9 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlContainer, ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgForm,
+} from '@angular/forms';
 
 import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/attribute';
 
@@ -15,6 +17,7 @@ import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/
   templateUrl: './lead-status.component.html',
   styleUrls: ['./lead-status.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

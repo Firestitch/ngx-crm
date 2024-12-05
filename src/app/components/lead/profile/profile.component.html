@@ -31,7 +31,6 @@
           </fs-label>
           <app-crm-channels
             [(channels)]="crmLead.emailCrmChannels"
-            (channelsChange)="formDirty()"
             [type]="'email'">
           </app-crm-channels>
         </div>
@@ -41,7 +40,6 @@
           </fs-label>
           <app-crm-channels
             [(channels)]="crmLead.phoneCrmChannels"
-            (channelsChange)="formDirty()"
             [type]="'phone'">
           </app-crm-channels>
         </div>

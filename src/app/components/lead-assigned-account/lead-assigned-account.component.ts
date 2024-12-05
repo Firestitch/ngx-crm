@@ -5,7 +5,9 @@ import {
   inject,
   Input,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlContainer, ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgForm,
+} from '@angular/forms';
 
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
 
@@ -17,6 +19,8 @@ import { LeadData } from '../../data';
   templateUrl: './lead-assigned-account.component.html',
   styleUrls: ['./lead-assigned-account.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -24,7 +28,6 @@ import { LeadData } from '../../data';
       multi: true,
     },
   ],
-  standalone: true,
   imports: [
     FormsModule,
     CommonModule,

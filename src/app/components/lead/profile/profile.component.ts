@@ -11,7 +11,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ControlContainer, FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -51,6 +51,7 @@ import { ManageFieldsDialogComponent } from '../../manage-fields';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   standalone: true,
   imports: [
     FormsModule,
@@ -112,10 +113,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     return this.save$(crmLead);
   };
-
-  public formDirty(): void {
-    this.form.dirty();
-  }
 
   public customizeLeadField(): void {
     this._dialog.open(ManageFieldsDialogComponent)
