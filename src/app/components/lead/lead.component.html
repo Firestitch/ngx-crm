@@ -1,59 +1,66 @@
-<ng-container *fsSkeletonForm="crmLead">
-  <fs-dialog [dock]="'expanded'">
-    <fs-dialog-title [close]="true">
-      <ng-template fsDialogSupertitle>
-        Lead
-      </ng-template>
-      {{ crmLead.name || 'Unnamed' }}
-    </fs-dialog-title>
-    <div mat-dialog-content>
-      <mat-tab-group
-          fsTabs
-          [dynamicHeight]="true"
-          [(selected)]="selected">
-        <mat-tab
-            label="Summary"
-            name="summary">
-          <ng-template matTabContent>
-            <app-crm-lead-summary [crmLead]="crmLead"></app-crm-lead-summary>
-          </ng-template>
-        </mat-tab>
-        <mat-tab
-            label="Profile"
-            name="profile">
-          <ng-template matTabContent>
-            <app-crm-lead-profile [(crmLead)]="crmLead"></app-crm-lead-profile>
-          </ng-template>
-        </mat-tab>
-        <mat-tab
-            label="Tasks"
-            name="tasks">
-          <ng-template matTabContent>
-            <fs-tasks [apiPath]="['crm/leads', crmLead.id, 'tasks']"></fs-tasks>
-          </ng-template>
-        </mat-tab>
-        <mat-tab
-            label="Files"
-            name="files">
-          <ng-template matTabContent>
-            <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
-          </ng-template>
-        </mat-tab>
-        <mat-tab
-            label="Docs"
-            name="docs">
-          <ng-template matTabContent>
-            <fs-crm-docs [objectId]="crmLead.id"></fs-crm-docs>
-          </ng-template>
-        </mat-tab>
-        <mat-tab
-            label="Audits"
-            name="audits">
-          <ng-template matTabContent>
-            <fs-audits [apiPath]="['crm/leads', crmLead.id, 'audits']"></fs-audits>
-          </ng-template>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-  </fs-dialog>
-</ng-container>
+<form
+    fsForm
+    [submit]="submit$">
+  <ng-container *fsSkeletonForm="crmLead">
+    <fs-dialog [dock]="'expanded'">
+      <fs-dialog-title [close]="true">
+        <ng-template fsDialogSupertitle>
+          Lead
+        </ng-template>
+        {{ crmLead.name || 'Unnamed' }}
+      </fs-dialog-title>
+      <div mat-dialog-content>
+        <mat-tab-group
+            fsTabs
+            [dynamicHeight]="true"
+            [(selected)]="selected">
+          <mat-tab
+              label="Summary"
+              name="summary">
+            <ng-template matTabContent>
+              <app-crm-lead-summary [crmLead]="crmLead"></app-crm-lead-summary>
+            </ng-template>
+          </mat-tab>
+          <mat-tab
+              label="Profile"
+              name="profile">
+            <ng-template matTabContent>
+              <app-crm-lead-profile [(crmLead)]="crmLead"></app-crm-lead-profile>
+            </ng-template>
+          </mat-tab>
+          <mat-tab
+              label="Tasks"
+              name="tasks">
+            <ng-template matTabContent>
+              <fs-tasks [apiPath]="['crm/leads', crmLead.id, 'tasks']"></fs-tasks>
+            </ng-template>
+          </mat-tab>
+          <mat-tab
+              label="Files"
+              name="files">
+            <ng-template matTabContent>
+              <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
+            </ng-template>
+          </mat-tab>
+          <mat-tab
+              label="Docs"
+              name="docs">
+            <ng-template matTabContent>
+              <fs-crm-docs [objectId]="crmLead.id"></fs-crm-docs>
+            </ng-template>
+          </mat-tab>
+          <mat-tab
+              label="Audits"
+              name="audits">
+            <ng-template matTabContent>
+              <fs-audits [apiPath]="['crm/leads', crmLead.id, 'audits']"></fs-audits>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      @if (selected === 'profile') {
+        <fs-form-dialog-actions [save]="true"></fs-form-dialog-actions>
+      }
+    </fs-dialog>
+  </ng-container>
+</form>

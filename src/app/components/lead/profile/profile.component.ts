@@ -21,7 +21,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 import { FsApi, RequestMethod } from '@firestitch/api';
-import { FsDialogModule } from '@firestitch/dialog';
 import {
   Field,
   FieldFile,
@@ -64,7 +63,6 @@ import { ManageFieldsDialogComponent } from '../../manage-fields';
     FsFormModule,
     FsSkeletonModule,
     FsLabelModule,
-    FsDialogModule,
     FsFieldRendererModule,
 
     ChannelsComponent,

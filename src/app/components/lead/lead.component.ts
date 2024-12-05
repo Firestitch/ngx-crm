@@ -15,6 +15,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { FsAuditsModule } from '@firestitch/audit';
 import { FsDialogModule } from '@firestitch/dialog';
+import { FsFormModule } from '@firestitch/form';
 import { FsHtmlEditorComponent, FsHtmlEditorConfig } from '@firestitch/html-editor';
 import { FsSkeletonModule } from '@firestitch/skeleton';
 import { FsTabsModule } from '@firestitch/tabs';
@@ -47,6 +48,7 @@ import { SummaryComponent } from './summary/summary.component';
     FsTabsModule,
     FsTasksComponent,
     FsAuditsModule,
+    FsFormModule,
 
     CrmFilesComponent,
     ProfileComponent,
@@ -58,6 +60,10 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
   @ViewChild(FsHtmlEditorComponent)
   public htmlEditor: FsHtmlEditorComponent; 
+
+
+  @ViewChild(ProfileComponent)
+  public profile: ProfileComponent; 
 
   public crmLead: CrmLead;
   public htmlEditorConfig: FsHtmlEditorConfig;
@@ -81,6 +87,14 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   public close(value?): void {
     inject(MatDialogRef).close(value);
   }
+
+  public submit$ = () => {
+    if(this.selected === 'profile') {
+      return this.profile.submit$();
+    }
+
+    return of(null);
+  };
 
   private _fetchData(): void {
     const leadId = this._route.snapshot.params.id || this._data.crmLead.id;
