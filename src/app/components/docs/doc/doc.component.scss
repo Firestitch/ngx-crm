@@ -1,5 +1,6 @@
-fs-autocomplete-chips {
-  width: 400px;
-  max-width: 100%;
-  display: block;
+:host ::ng-deep  {
+  .mat-dialog-content {
+    width: 400px;
+    max-width: 100%;
+  }
 }
