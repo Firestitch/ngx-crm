@@ -9,59 +9,61 @@
       </mat-icon>
     </a>
   </h2>
-  <fs-label-field>
-    <fs-label>
-      Email
-    </fs-label>
-    {{ crmLead.primaryEmailCrmChannel?.value || 'N/A' }}
-  </fs-label-field>
-  <fs-label-field>
-    <fs-label>
-      Phone
-    </fs-label>
-    {{ (crmLead.primaryPhoneCrmChannel?.value | fsPhone) || 'N/A' }}
-  </fs-label-field>
-  <app-lead-status
-    [padless]="true"
-    [(ngModel)]="crmLead.statusAttribute"
-    name="statusAttribute"
-    (ngModelChange)="statusAttributeChanged($event)"
-    [initOnClick]="true">
-  </app-lead-status>
-  <app-lead-assigned-account
-    [padless]="true"
-    [(ngModel)]="crmLead.assignedAccount"
-    (ngModelChange)="assignedAccountChanged($event)"
-    name="assignedAccount"
-    [initOnClick]="true">
-  </app-lead-assigned-account>
-  <fs-attribute-autocomplete-chips
-    name="attributeTags"
-    [padless]="true"
-    class="attribute-tag"
-    [initOnClick]="true"
-    [floatLabel]="'always'"
-    [placeholder]="'N/A'"
-    [size]="'small'"
-    [config]="tagAttributeConfig"
-    [(ngModel)]="crmLead.tagAttributes"
-    [showManage]="true"
-    (ngModelChange)="tagAttributeChanged($event)"
-    [saveOnChange]="false"
-    label="Tags">
-  </fs-attribute-autocomplete-chips>
-  @for (field of fields; track field) {
+  <div class="card-content">
     <fs-label-field>
       <fs-label>
-        {{ field.label }}
+        Email
       </fs-label>
-      @if (crmLead.fields[field.guid]) {
-        <fs-field-view
-          [field]="field"
-          [data]="crmLead.fields[field.guid]"
-          [filePreviewDownload]="filePreviewDownload">
-        </fs-field-view>
-      }
+      {{ crmLead.primaryEmailCrmChannel?.value || 'N/A' }}
     </fs-label-field>
-  }
+    <fs-label-field>
+      <fs-label>
+        Phone
+      </fs-label>
+      {{ (crmLead.primaryPhoneCrmChannel?.value | fsPhone) || 'N/A' }}
+    </fs-label-field>
+    <app-lead-status
+      [padless]="true"
+      [(ngModel)]="crmLead.statusAttribute"
+      name="statusAttribute"
+      (ngModelChange)="statusAttributeChanged($event)"
+      [initOnClick]="true">
+    </app-lead-status>
+    <app-lead-assigned-account
+      [padless]="true"
+      [(ngModel)]="crmLead.assignedAccount"
+      (ngModelChange)="assignedAccountChanged($event)"
+      name="assignedAccount"
+      [initOnClick]="true">
+    </app-lead-assigned-account>
+    <fs-attribute-autocomplete-chips
+      name="attributeTags"
+      [padless]="true"
+      class="attribute-tag"
+      [initOnClick]="true"
+      [floatLabel]="'always'"
+      [placeholder]="'N/A'"
+      [size]="'small'"
+      [config]="tagAttributeConfig"
+      [(ngModel)]="crmLead.tagAttributes"
+      [showManage]="true"
+      (ngModelChange)="tagAttributeChanged($event)"
+      [saveOnChange]="false"
+      label="Tags">
+    </fs-attribute-autocomplete-chips>
+    @for (field of fields; track field) {
+      <fs-label-field>
+        <fs-label>
+          {{ field.label }}
+        </fs-label>
+        @if (crmLead.fields[field.guid]) {
+          <fs-field-view
+            [field]="field"
+            [data]="crmLead.fields[field.guid]"
+            [filePreviewDownload]="filePreviewDownload">
+          </fs-field-view>
+        }
+      </fs-label-field>
+    }
+  </div>
 </ng-container>
