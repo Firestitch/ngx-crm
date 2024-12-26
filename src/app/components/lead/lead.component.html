@@ -32,7 +32,10 @@
               label="Tasks"
               name="tasks">
             <ng-template matTabContent>
-              <fs-tasks [apiPath]="['crm/leads', crmLead.id, 'tasks']"></fs-tasks>
+              <fs-tasks
+                [apiPath]="['crm/leads', crmLead.id, 'tasks']"
+                [showCreateTask]="true">
+              </fs-tasks>
             </ng-template>
           </mat-tab>
           <mat-tab

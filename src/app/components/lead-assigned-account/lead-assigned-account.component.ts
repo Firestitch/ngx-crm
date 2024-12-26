@@ -37,7 +37,7 @@ import { LeadData } from '../../data';
 })
 export class LeadAssignedAccountComponent implements ControlValueAccessor {
 
-  @Input() public paddless = false;
+  @Input() public padless = false;
   @Input() public assignedAccount;
   
   @Input() public initOnClick = false;

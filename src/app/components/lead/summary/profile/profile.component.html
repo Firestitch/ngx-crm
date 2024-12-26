@@ -22,14 +22,14 @@
     {{ (crmLead.primaryPhoneCrmChannel?.value | fsPhone) || 'N/A' }}
   </fs-label-field>
   <app-lead-status
-    [paddless]="true"
+    [padless]="true"
     [(ngModel)]="crmLead.statusAttribute"
     name="statusAttribute"
     (ngModelChange)="statusAttributeChanged($event)"
     [initOnClick]="true">
   </app-lead-status>
   <app-lead-assigned-account
-    [paddless]="true"
+    [padless]="true"
     [(ngModel)]="crmLead.assignedAccount"
     (ngModelChange)="assignedAccountChanged($event)"
     name="assignedAccount"
@@ -37,7 +37,7 @@
   </app-lead-assigned-account>
   <fs-attribute-autocomplete-chips
     name="attributeTags"
-    [paddless]="true"
+    [padless]="true"
     class="attribute-tag"
     [initOnClick]="true"
     [floatLabel]="'always'"

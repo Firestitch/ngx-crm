@@ -3,6 +3,7 @@ import { Injector } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DisplayApiError, FsApiConfig, makeInterceptorFactory, ProcessApiError } from '@firestitch/api';
+import { FsCookie } from '@firestitch/cookie';
 import { FsErrorMessage } from '@firestitch/message';
 
 import { Observable, throwError } from 'rxjs';
@@ -30,7 +31,13 @@ export class ApiInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const url = 'https://specify.local.firestitch.com/api/'.concat(req.url);
 
-    const headers = req.headers;
+    let headers = req.headers;
+    const xsrf = this._injector.get(FsCookie).get('Token-XSRF');
+
+    if (xsrf) {
+      headers = headers.append('Token-XSRF', xsrf);
+    }
+
 
     return next.handle(req.clone({ url, headers }))
       .pipe(
