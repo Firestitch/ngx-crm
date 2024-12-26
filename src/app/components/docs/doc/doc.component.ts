@@ -175,7 +175,13 @@ export class DocComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((document) => {
           if(!document.id) {
-            return of({ document, fields: null });
+            return of({ 
+              document: {
+                ...document,
+                state: DocumentState.Draft,
+              }, 
+              fields: null, 
+            });
           }
           
           return forkJoin(
