@@ -7,7 +7,9 @@
     <div mat-dialog-title>
       {{ document.state === DocumentState.Draft ? 'Create Document' : 'Document' }}
     </div>
-    <div mat-dialog-content>
+    <div
+        mat-dialog-content
+        [style.width]="'400px'">
       @if (document.id) {
         <ng-container *ngTemplateOutlet="general"></ng-container>
         <fs-field-renderer [config]="fieldConfig"></fs-field-renderer>
