@@ -19,7 +19,7 @@ app-lead-assigned-account,
 :host ::ng-deep {
   fs-autocomplete-chips {
     .mdc-notched-outline__leading {
-      width: 6px;
+      width: 6px !important;
     }
 
     .mdc-text-field--outlined {
