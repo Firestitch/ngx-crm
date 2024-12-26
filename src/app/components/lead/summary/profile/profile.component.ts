@@ -118,7 +118,7 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
   public statusAttributeChanged(attribute): void {
     this._leadData.save({
       id: this.crmLead.id,
-      statusAttributeId: attribute?.id,
+      statusAttributeId: attribute?.id || null,
     })
       .subscribe(() => {
         this.crmLeadChange.emit(this.crmLead);
@@ -137,10 +137,10 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       });
   }
 
-  public assignedAccountChanged(attribute): void {
+  public assignedAccountChanged(account): void {
     this._leadData.save({
       id: this.crmLead.id,
-      assignedAccountId: attribute?.id,
+      assignedAccountId: account?.id || null,
     })
       .subscribe(() => {
         this.crmLeadChange.emit(this.crmLead);
