@@ -14,23 +14,16 @@ app-lead-assigned-account,
   margin-left: -10px;
   margin-right: -10px;
   display: block;
+}
 
-  ::ng-deep {
+:host ::ng-deep {
+  fs-autocomplete-chips {
     .mdc-notched-outline__leading {
       width: 6px;
     }
 
     .mdc-text-field--outlined {
       padding-left: 10px;
-    }
-  }
-}
-
-app-lead-assigned-account,
-app-lead-status {
-  ::ng-deep {
-    fs-autocomplete-chips {
-      margin-bottom: 12px;
     }
   }
 }
