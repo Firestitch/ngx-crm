@@ -1,6 +1,7 @@
 <form
     fsForm
-    [submit]="submit$">
+    [submit]="submit$"
+    [confirm]="selected === 'profile'">
   <ng-container *fsSkeletonForm="crmLead">
     <fs-dialog [dock]="'expanded'">
       <fs-dialog-title [close]="true">
