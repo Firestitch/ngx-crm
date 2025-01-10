@@ -8,9 +8,13 @@
         <ng-template
             fs-list-cell
             let-row="row">
-          <a (click)="openDocType(row)">
-            {{ row.name }}
-          </a>
+          @if(row.state !== 'deleted') {
+            <a (click)="openDocType(row)">
+              {{row.name}}
+            </a>
+          } @else {
+            {{row.name}}
+          }
         </ng-template>
       </fs-list-column>
     </fs-list>
