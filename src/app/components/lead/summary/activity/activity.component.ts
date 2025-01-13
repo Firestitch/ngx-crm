@@ -50,7 +50,7 @@ import { LogComponent } from './../log';
     FsMenuModule,
     FsHtmlRendererModule,
     FsChipModule,
-    FsActivitiesComponent, 
+    FsActivitiesComponent,
     FsActivityPreviewDirective,
   ],
 })
@@ -58,7 +58,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
 
   @ViewChild(FsActivitiesComponent)
   public activities: FsActivitiesComponent;
-  
+
   @Input()
   public crmLead: CrmLead;
 
@@ -69,7 +69,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
   private _message = inject(FsMessage);
   private _dialog = inject(MatDialog);
-  
+
   public ngOnInit(): void {
     this.menuActions = [
       {
@@ -110,6 +110,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
             label: 'Create',
             click: () => {
               this._dialog.open(DocComponent, {
+                autoFocus: false,
                 data: {
                   crmLeadId: this.crmLead.id,
                 },

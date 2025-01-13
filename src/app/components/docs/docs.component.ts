@@ -63,7 +63,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
   @ViewChild(FsGalleryComponent)
   public gallery: FsGalleryComponent;
 
-  @Input()  
+  @Input()
   public objectId: number;
 
   public galleryConfig: FsGalleryConfig;
@@ -85,6 +85,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
 
   public openDocument = (document) => {
     this._dialog.open(DocComponent, {
+      autoFocus: false,
       data: {
         document,
         crmLeadId: this.objectId,
@@ -121,7 +122,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
               objectType: 'document',
             })
             .pipe(
-              switchMap(() =>  this._leadDocumentData.delete(this.objectId, item.data)),
+              switchMap(() => this._leadDocumentData.delete(this.objectId, item.data)),
               takeUntil(this._destroy$),
             )
             .subscribe(() => {
@@ -196,10 +197,10 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
                   .createApiFile(`crm/leads/${document.objectId}/documents/${document.id}/download`);
 
                 const preview = document.previewFileId ? this._api
-                  .createApiFile(`crm/leads/${document.objectId}/documents/${document.id}/preview`) : 
+                  .createApiFile(`crm/leads/${document.objectId}/documents/${document.id}/preview`) :
                   null;
-    
-                const item: FsGalleryItem = { 
+
+                const item: FsGalleryItem = {
                   name: document.name || document.documentType.name,
                   preview,
                   url,
@@ -209,12 +210,12 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
                   },
                   data: document,
                 };
-    
+
                 return item;
               });
             }),
           );
-       
+
       },
     };
   }

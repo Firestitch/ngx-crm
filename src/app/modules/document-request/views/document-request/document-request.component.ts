@@ -48,9 +48,10 @@ export class DocumentRequestComponent implements OnInit, OnDestroy {
 
   public uploadDocument(documentRequestItem) {
     this._dialog.open(DocComponent, {
-      data: { 
-        documentRequestItem, 
-        documentRequest: this.documentRequest, 
+      autoFocus: false,
+      data: {
+        documentRequestItem,
+        documentRequest: this.documentRequest,
       },
     });
   }
