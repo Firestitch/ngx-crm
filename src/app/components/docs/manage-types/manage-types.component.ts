@@ -9,6 +9,7 @@ import {
 
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { FsDialog, FsDialogModule } from '@firestitch/dialog';
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
@@ -27,6 +28,7 @@ import { DocTypeComponent } from '../doc-type/doc-type.component';
   standalone: true, 
   imports: [
     MatButtonModule,
+    MatDialogModule,
 
     FsListModule,
     FsDialogModule,

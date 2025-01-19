@@ -11,7 +11,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { FsAuditsModule } from '@firestitch/audit';
@@ -44,7 +44,7 @@ import { SummaryComponent } from './summary/summary.component';
     FormsModule,
     
     MatTabsModule,
-
+    MatDialogModule,
     FsSkeletonModule,
     FsDialogModule,
     FsTabsModule,
