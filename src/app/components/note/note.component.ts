@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -35,6 +35,7 @@ import { CrmNote } from '../../interfaces';
   imports: [
     FormsModule,
 
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
 
