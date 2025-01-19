@@ -63,7 +63,6 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   @ViewChild(FsHtmlEditorComponent)
   public htmlEditor: FsHtmlEditorComponent; 
 
-
   @ViewChild(ProfileComponent)
   public profile: ProfileComponent; 
 

@@ -48,16 +48,10 @@
       </ng-template>
     </div>
     <div mat-dialog-actions>
-      @if (document.id) {
-        <fs-form-dialog-actions [create]="document.state === DocumentState.Draft"></fs-form-dialog-actions>
-      } @else {
-        <button
-            mat-button
-            mat-dialog-close
-            color="primary">
-          Cancel
-        </button>
-      }
+      <fs-form-dialog-actions
+        [create]="document.state === DocumentState.Draft"
+        [save]="true">
+      </fs-form-dialog-actions>
     </div>
   </fs-dialog>
 </form>
