@@ -10,7 +10,7 @@
         </ng-template>
         {{ crmLead.name || 'Unnamed' }}
       </fs-dialog-title>
-      <div mat-dialog-content>
+      <mat-dialog-content>
         <mat-tab-group
             fsTabs
             [dynamicHeight]="true"
@@ -61,7 +61,7 @@
             </ng-template>
           </mat-tab>
         </mat-tab-group>
-      </div>
+      </mat-dialog-content>
       @if (selected === 'profile') {
         <mat-dialog-actions>
           <fs-form-dialog-actions [save]="true"></fs-form-dialog-actions>

@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -46,6 +46,7 @@ import { DocumentRequestData } from '../../data';
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
+    MatDialogModule,
 
     FsDialogModule,
     FsLabelModule,

@@ -7,7 +7,7 @@
     <div mat-dialog-title>
       Document type
     </div>
-    <div mat-dialog-content>
+    <mat-dialog-content>
       <div class="fs-column">
         <mat-form-field class="full-width">
           <mat-label>
@@ -26,9 +26,9 @@
         </h2>
         <fs-field-editor [config]="fieldConfig"></fs-field-editor>
       }
-    </div>
-    <div mat-dialog-actions>
+    </mat-dialog-content>
+    <mat-dialog-actions>
       <fs-form-dialog-actions [create]="documentType.state === 'draft'"></fs-form-dialog-actions>
-    </div>
+    </mat-dialog-actions>
   </fs-dialog>
 </form>

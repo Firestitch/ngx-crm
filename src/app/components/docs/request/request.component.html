@@ -7,7 +7,7 @@
     <div mat-dialog-title>
       Request documents
     </div>
-    <div mat-dialog-content>
+    <mat-dialog-content>
       @if (documentRequest.id) {
         <fs-label-field>
           <fs-label>
@@ -43,8 +43,8 @@
           </ng-template>
         </fs-autocomplete-chips>
       }
-    </div>
-    <div mat-dialog-actions>
+    </mat-dialog-content>
+    <mat-dialog-actions>
       @if (documentRequest.id) {
         <button
             mat-button
@@ -67,6 +67,6 @@
           Cancel
         </button>
       }
-    </div>
+    </mat-dialog-actions>
   </fs-dialog>
 </form>

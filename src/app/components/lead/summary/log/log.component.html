@@ -7,7 +7,7 @@
     <div mat-dialog-title>
       {{ crmLog.id ? '' : 'Create' }} Log
     </div>
-    <div mat-dialog-content>
+    <mat-dialog-content>
       <div class="fs-column">
         <mat-form-field>
           <mat-label>
@@ -28,9 +28,9 @@
           name="notes">
         </fs-html-editor>
       </div>
-    </div>
-    <div mat-dialog-actions>
+    </mat-dialog-content>
+    <mat-dialog-actions>
       <fs-form-dialog-actions [create]="!crmLog.id"></fs-form-dialog-actions>
-    </div>
+    </mat-dialog-actions>
   </fs-dialog>
 </form>

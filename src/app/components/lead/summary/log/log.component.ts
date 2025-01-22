@@ -10,7 +10,7 @@ import {
 import { FormsModule } from '@angular/forms';
 
 import { MatOptionModule } from '@angular/material/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -39,6 +39,7 @@ import { CrmLog } from '../../../../interfaces';
   imports: [
     FormsModule,
     CommonModule,
+    MatDialogModule,
 
     MatFormFieldModule,
     MatInputModule,

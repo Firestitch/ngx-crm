@@ -6,7 +6,7 @@
     <div mat-dialog-title>
       Lead form
     </div>
-    <div mat-dialog-content>
+    <mat-dialog-content>
       <ng-container *fsSkeleton="fields">
         <div class="fs-column">
           <fs-label-field>
@@ -54,8 +54,8 @@
           </mat-form-field>
         </div>
       </ng-container>
-    </div>
-    <div mat-dialog-actions>
+    </mat-dialog-content>
+    <mat-dialog-actions>
       <button
           mat-button
           type="submit"
@@ -68,6 +68,6 @@
           type="button">
         Cancel
       </button>
-    </div>
+    </mat-dialog-actions>
   </fs-dialog>
 </form>

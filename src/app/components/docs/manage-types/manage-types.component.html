@@ -2,7 +2,7 @@
   <div mat-dialog-title>
     Manage document types
   </div>
-  <div mat-dialog-content>
+  <mat-dialog-content>
     <fs-list [config]="listConfig">
       <fs-list-column>
         <ng-template
@@ -18,8 +18,8 @@
         </ng-template>
       </fs-list-column>
     </fs-list>
-  </div>
-  <div mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
     <button
         mat-button
         color="primary"
@@ -27,5 +27,5 @@
         [mat-dialog-close]="undefined">
       Done
     </button>
-  </div>
+  </mat-dialog-actions>
 </fs-dialog>
