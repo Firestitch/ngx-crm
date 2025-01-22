@@ -201,6 +201,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
                   null;
 
                 const item: FsGalleryItem = {
+                  guid: String(document.id),
                   name: document.name || document.documentType.name,
                   preview,
                   url,

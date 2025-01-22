@@ -140,6 +140,7 @@ export class CrmFilesComponent implements OnInit, OnDestroy {
                   .createApiFile(`crm/leads/${leadFile.objectId}/files/${leadFile.id}/preview`);
     
                 const item: FsGalleryItem = { 
+                  guid: String(leadFile.id),
                   name: leadFile.file.filename,
                   url,
                   preview,
