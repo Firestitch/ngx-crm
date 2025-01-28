@@ -176,7 +176,7 @@ export class CrmDocsComponent implements OnInit, OnDestroy {
         },
         {
           label: 'Create',
-          primary: false,
+          primary: true,
           click: () => {
             this.openDocument({});
           },
