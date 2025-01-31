@@ -25,7 +25,7 @@ import { DocTypeComponent } from '../doc-type/doc-type.component';
   templateUrl: './manage-types.component.html',
   styleUrls: ['./manage-types.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true, 
+  standalone: true,
   imports: [
     MatButtonModule,
     MatDialogModule,
@@ -47,7 +47,7 @@ export class ManageTypesComponent implements OnInit, OnDestroy {
 
   constructor(
     private _leadDocumentTypeData: LeadDocumentTypeData,
-  ) { 
+  ) {
   }
 
   public openDocType(documentType: any): void {
@@ -91,11 +91,11 @@ export class ManageTypesComponent implements OnInit, OnDestroy {
       ],
       restore: {
         query: { state: 'deleted' },
-        filterLabel: 'Show Deleted',
+        filterLabel: 'Show deleted',
         menuLabel: 'Restore',
         reload: true,
         click: (row) => {
-          return this._leadDocumentTypeData 
+          return this._leadDocumentTypeData
             .put({ id: row.id, state: 'active' });
         },
       },

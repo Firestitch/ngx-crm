@@ -98,7 +98,7 @@ export class CrmNotesComponent implements OnInit, OnDestroy {
               .delete(this.objectId, data);
           },
           remove: {
-            title: 'Delete n  ote',
+            title: 'Delete note',
             template: 'Are you sure you would like to delete this note?',
           },
           label: 'Delete',
@@ -111,7 +111,7 @@ export class CrmNotesComponent implements OnInit, OnDestroy {
           order: 'modify_date,desc',
           ...query,
         };
-        
+
         return this._leadNoteData.gets(this.objectId, query, { key: null })
           .pipe(
             map((response: any) => {

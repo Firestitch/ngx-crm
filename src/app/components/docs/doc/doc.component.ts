@@ -44,7 +44,7 @@ import { ManageTypesComponent } from '../manage-types/manage-types.component';
   templateUrl: './doc.component.html',
   styleUrls: ['./doc.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true, 
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -92,14 +92,14 @@ export class DocComponent implements OnInit, OnDestroy {
     this._destroy$.next();
     this._destroy$.complete();
   }
-  
+
   public fetchDocumentTypes = (keyword: any) => {
     return this._leadDocumentTypeData.gets({ keyword });
   };
 
   public manageDocumentTypes = () => {
     this._dialog.open(ManageTypesComponent);
-  }; 
+  };
 
   public save = () => {
     const data = {
@@ -110,7 +110,7 @@ export class DocComponent implements OnInit, OnDestroy {
     return this._leadDocumentData
       .save(this._data.crmLeadId, data)
       .pipe(
-        switchMap((document) => 
+        switchMap((document) =>
           (
             this._leadDocumentData
               .putFields(this._data.crmLeadId, document.id, this.fieldRenderer.fields)
@@ -127,7 +127,7 @@ export class DocComponent implements OnInit, OnDestroy {
         tap(() => {
           this._dialogRef.close();
           this._cdRef.markForCheck();
-          this._message.success('Saved Changes');
+          this._message.success('Saved changes');
         }),
       );
   };
@@ -175,25 +175,25 @@ export class DocComponent implements OnInit, OnDestroy {
     of({ ...this._data.document })
       .pipe(
         switchMap((document) => {
-          if(!document.id) {
-            return of({ 
+          if (!document.id) {
+            return of({
               document: {
                 ...document,
                 state: DocumentState.Draft,
-              }, 
-              fields: null, 
+              },
+              fields: null,
             });
           }
-          
+
           return forkJoin(
-            { 
+            {
               document: this._leadDocumentData
                 .get(this._data.crmLeadId, document.id, {
                   documentTypes: true,
                 }),
               fields: this._loadFields$(document),
             },
-          );    
+          );
         }),
         takeUntil(this._destroy$),
       )
@@ -208,7 +208,7 @@ export class DocComponent implements OnInit, OnDestroy {
       .getFields(this._data.crmLeadId, document.id)
       .pipe(
         tap((fields) => {
-          this.fieldConfig = { 
+          this.fieldConfig = {
             fields,
             canFileDownload: () => {
               return of(true);
@@ -220,19 +220,19 @@ export class DocComponent implements OnInit, OnDestroy {
               return this._leadDocumentData
                 .fieldFileAction(this._data.crmLeadId, document.id, {
                   action: RendererAction.FileDownload,
-                  field, 
-                  data: { fieldFile }, 
+                  field,
+                  data: { fieldFile },
                 });
             },
             filePreviewDownload: (field: Field, fieldFile: FieldFile) => {
               return this._leadDocumentData
                 .fieldFileAction(this._data.crmLeadId, document.id, {
                   action: RendererAction.FilePreview,
-                  field, 
-                  data: { fieldFile }, 
+                  field,
+                  data: { fieldFile },
                 });
             },
-            action:  (action: RendererAction, field: Field, data: any) => {
+            action: (action: RendererAction, field: Field, data: any) => {
               return this._leadDocumentData
                 .actionFields(this._data.crmLeadId, document.id, { field, action, data });
             },

@@ -35,7 +35,7 @@ import { CrmLog } from '../../../../interfaces';
   templateUrl: './log.component.html',
   styleUrls: ['./log.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true, 
+  standalone: true,
   imports: [
     FormsModule,
     CommonModule,
@@ -67,7 +67,7 @@ export class LogComponent implements OnInit, OnDestroy {
     private _message: FsMessage,
     private _leadLogData: LeadLogData,
     private _cdRef: ChangeDetectorRef,
-  ) { 
+  ) {
   }
 
   public ngOnInit(): void {
@@ -94,7 +94,7 @@ export class LogComponent implements OnInit, OnDestroy {
           };
 
           this._cdRef.markForCheck();
-          this._message.success('Saved Changes');
+          this._message.success('Saved changes');
         }),
       );
   };
@@ -104,7 +104,7 @@ export class LogComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((crmLog) => {
           return crmLog.id
-            ? this._leadLogData  
+            ? this._leadLogData
               .get(this._data.crmLeadId, this._data.crmLog.id)
             : of({
               ...crmLog,
@@ -114,7 +114,7 @@ export class LogComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy$),
       )
       .subscribe((crmLog) => {
-        this.crmLog = { 
+        this.crmLog = {
           ...crmLog,
         };
 

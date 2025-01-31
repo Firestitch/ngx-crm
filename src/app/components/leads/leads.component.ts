@@ -40,7 +40,7 @@ import { SettingsComponent } from './settings/settings.component';
   imports: [
     CommonModule,
     RouterModule,
-    
+
     FsListModule,
     FsFieldViewerModule,
     FsDateModule,
@@ -84,12 +84,12 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
     of(null)
       .pipe(
         switchMap(() => {
-          return openCrmLead.id ? 
-            of(openCrmLead) : 
+          return openCrmLead.id ?
+            of(openCrmLead) :
             this._leadData.save(openCrmLead);
         }),
         switchMap((crmLead) => {
-          if(this.leadRouterLink) {
+          if (this.leadRouterLink) {
             this._fsDialog
               .navigate([crmLead.id], {
                 relativeTo: this._route,
@@ -97,7 +97,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
 
             return of(null);
           }
-          
+
           return this._dialog
             .open(FsCrmLeadComponent, {
               data: {
@@ -112,7 +112,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
             );
         }),
         takeUntil(this._destroy$),
-      )  
+      )
       .subscribe();
   }
 
@@ -183,7 +183,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
           ...query,
           leadsFields: true,
         };
-        
+
         return this._leadData.gets(query, { key: null })
           .pipe(
             tap(({ fields }) => {
@@ -193,13 +193,13 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
             map(({ leads, paging }) => {
               const data = leads
                 .map((lead) => {
-                  const leadRouterLink = this.leadRouterLink ? 
-                    [...this.leadRouterLink, lead.id] : 
+                  const leadRouterLink = this.leadRouterLink ?
+                    [...this.leadRouterLink, lead.id] :
                     null;
 
                   return {
                     ...lead,
-                    leadRouterLink, 
+                    leadRouterLink,
                   };
                 });
 
@@ -209,7 +209,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
       },
       restore: {
         query: { state: 'deleted' },
-        filterLabel: 'Show Deleted',
+        filterLabel: 'Show deleted',
         menuLabel: 'Restore',
         reload: true,
         click: (row) => {

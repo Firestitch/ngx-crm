@@ -31,7 +31,7 @@ import { CrmNote } from '../../interfaces';
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true, 
+  standalone: true,
   imports: [
     FormsModule,
 
@@ -60,7 +60,7 @@ export class NoteComponent implements OnInit, OnDestroy {
     private _message: FsMessage,
     private _leadNoteData: LeadNoteData,
     private _cdRef: ChangeDetectorRef,
-  ) { 
+  ) {
   }
 
   public ngOnInit(): void {
@@ -88,7 +88,7 @@ export class NoteComponent implements OnInit, OnDestroy {
           };
 
           this._cdRef.markForCheck();
-          this._message.success('Saved Changes');
+          this._message.success('Saved changes');
         }),
       );
   };
@@ -98,7 +98,7 @@ export class NoteComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((crmNote) => {
           return crmNote.id
-            ? this._leadNoteData  
+            ? this._leadNoteData
               .get(this._data.crmLeadId, this._data.crmNote.id, { crmNoteVersions: true })
             : of({
               ...crmNote,
@@ -109,7 +109,7 @@ export class NoteComponent implements OnInit, OnDestroy {
       )
       .subscribe((crmNote) => {
         this.content = crmNote.crmNoteVersion?.content;
-        this.crmNote = { 
+        this.crmNote = {
           ...crmNote,
         };
 

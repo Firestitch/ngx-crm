@@ -125,7 +125,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       )
       .subscribe();
   }
-  
+
   public save$(data) {
     return this._leadData
       .save({
@@ -149,7 +149,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           .putFields(this.crmLead.id, this.fieldRenderer.fields)),
         tap(() => {
           this._cdRef.markForCheck();
-          this._message.success('Saved Changes');
+          this._message.success('Saved changes');
         }),
       );
   }
@@ -173,8 +173,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       })
       .pipe(
         tap((crmLead) => {
-          this.crmLead = { 
-            ...crmLead, 
+          this.crmLead = {
+            ...crmLead,
           };
         }),
         switchMap(() => this._loadFields$()),
@@ -200,33 +200,33 @@ export class ProfileComponent implements OnInit, OnDestroy {
             action: (action: RendererAction, field, data: any): Observable<any> => {
               return this._api
                 .post([...this._crmLeadFieldsUrl, 'action'], {
-                  action, 
+                  action,
                   data,
                   field,
                 }, { key: null });
             },
             fileDownload: (field: Field, fieldFile: FieldFile) => {
               return this._api
-                .createApiFile([...this._crmLeadFieldsUrl, 'download'], 
+                .createApiFile([...this._crmLeadFieldsUrl, 'download'],
                   {
                     method: RequestMethod.Post,
-                    data: { 
+                    data: {
                       field,
-                      data: { 
-                        fieldFile, 
+                      data: {
+                        fieldFile,
                       },
                     },
                   });
             },
             filePreviewDownload: (field: Field, fieldFile: FieldFile) => {
               return this._api
-                .createApiFile([...this._crmLeadFieldsUrl, 'preview'], 
+                .createApiFile([...this._crmLeadFieldsUrl, 'preview'],
                   {
                     method: RequestMethod.Post,
-                    data: { 
-                      field, 
-                      data: { 
-                        fieldFile, 
+                    data: {
+                      field,
+                      data: {
+                        fieldFile,
                       },
                     },
                   });

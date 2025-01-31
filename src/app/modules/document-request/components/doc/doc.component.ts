@@ -38,7 +38,7 @@ import { DocumentRequestData } from '../../data';
   templateUrl: './doc.component.html',
   styleUrls: ['./doc.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true, 
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -77,7 +77,7 @@ export class DocComponent implements OnInit, OnDestroy {
       documentRequestItem: any;
       documentRequest: any;
     },
-  ) { 
+  ) {
     this.documentRequest = _data.documentRequest;
   }
 
@@ -89,7 +89,7 @@ export class DocComponent implements OnInit, OnDestroy {
     this._destroy$.next();
     this._destroy$.complete();
   }
-  
+
   public save = () => {
     const data = {
       fields: this.fieldRenderer.fields,
@@ -99,7 +99,7 @@ export class DocComponent implements OnInit, OnDestroy {
       .postDocumentRequestItem(this.documentRequest.guid, this._data.documentRequestItem.id, data)
       .pipe(
         tap((documentRequestItem) => {
-          this._message.success('Saved Changes');
+          this._message.success('Saved changes');
           this._dialogRef.close(documentRequestItem);
         }),
       );
@@ -110,10 +110,10 @@ export class DocComponent implements OnInit, OnDestroy {
       .getDocumentRequestItem(this.documentRequest.guid, this._data.documentRequestItem.id, {
         documentTypes: true,
       })
-      .pipe(   
+      .pipe(
         tap((documentRequestItem) => {
           this.documentRequestItem = documentRequestItem;
-        }),   
+        }),
         switchMap((documentRequestItem) => this._loadFields$(documentRequestItem)),
         takeUntil(this._destroy$),
       )
@@ -127,9 +127,9 @@ export class DocComponent implements OnInit, OnDestroy {
       .getFields(this.documentRequest.guid, documentRequestItem.id)
       .pipe(
         tap((fields) => {
-          this.fieldConfig = { 
+          this.fieldConfig = {
             fields,
-            action:  (action: RendererAction, field: Field, data: any) => {
+            action: (action: RendererAction, field: Field, data: any) => {
               return this._documentRequestData
                 .fieldAction(this.documentRequest.guid, this._data.documentRequestItem.id, { field, action, data });
             },

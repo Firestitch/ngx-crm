@@ -32,7 +32,7 @@ import { LeadDocumentTypeData } from '../../../data/lead-document-type.data';
   templateUrl: './doc-type.component.html',
   styleUrls: ['./doc-type.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true, 
+  standalone: true,
   imports: [
     FormsModule,
 
@@ -85,7 +85,7 @@ export class DocTypeComponent implements OnInit, OnDestroy {
           };
 
           this._cdRef.markForCheck();
-          this._message.success('Saved Changes');
+          this._message.success('Saved changes');
         }),
       );
   };
