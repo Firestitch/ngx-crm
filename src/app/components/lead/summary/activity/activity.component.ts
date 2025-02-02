@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { FsActivitiesComponent, FsActivityPreviewDirective } from '@firestitch/activity';
+import { ActivityConfig, FsActivitiesComponent, FsActivityPreviewDirective } from '@firestitch/activity';
 import { FsChipModule } from '@firestitch/chip';
 import { index } from '@firestitch/common';
 import { FsFile } from '@firestitch/file';
@@ -62,6 +62,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
   @Input()
   public crmLead: CrmLead;
 
+  public config: ActivityConfig;
   public menuActions: any[];
   public CrmLogTypes = index(CrmLogTypes, 'value', 'name');
 
@@ -71,6 +72,10 @@ export class ActivityComponent implements OnInit, OnDestroy {
   private _dialog = inject(MatDialog);
 
   public ngOnInit(): void {
+    this.config = {
+      apiPath: ['crm', 'leads', this.crmLead.id, 'activities'],
+    };
+
     this.menuActions = [
       {
         label: 'Log',

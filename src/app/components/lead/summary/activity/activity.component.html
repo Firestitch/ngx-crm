@@ -35,7 +35,7 @@
     </fs-menu>
   </div>
 </h2>
-<fs-activities [apiPath]="['crm','leads', crmLead.id, 'activities']">
+<fs-activities [config]="config">
   <ng-template
       fsActivityPreview
       [activityType]="'crmLeadLog'"
