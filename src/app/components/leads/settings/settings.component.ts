@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { FsDialogModule } from '@firestitch/dialog';
@@ -24,6 +25,7 @@ import { ShowFieldsComponent } from './show-fields';
     FormsModule,
 
     MatTabsModule,
+    MatDialogModule,
 
     FsTabsModule,
     FsFormModule,

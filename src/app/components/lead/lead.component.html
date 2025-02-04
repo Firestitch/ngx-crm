@@ -3,7 +3,7 @@
     [submit]="submit$"
     [confirm]="selected === 'profile'">
   <ng-container *fsSkeletonForm="crmLead">
-    <fs-dialog>
+    <fs-dialog [mode]="'stretch'">
       <fs-dialog-title [close]="true">
         <ng-template fsDialogSupertitle>
           Lead

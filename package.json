@@ -1,7 +1,7 @@
 {
   "name": "@firestitch/crm",
   "title": "CRM",
-  "version": "18.0.112",
+  "version": "18.0.113",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-crm"
@@ -58,7 +58,7 @@
     "@firestitch/component-tools": "^18.0.16",
     "@firestitch/core": "^18.0.1",
     "@firestitch/date": "^18.0.1",
-    "@firestitch/datepicker": "^18.0.6",
+    "@firestitch/datepicker": "^18.0.7",
     "@firestitch/dialog": "^18.0.17",
     "@firestitch/drawer": "^18.0.1",
     "@firestitch/example": "^18.0.7",
@@ -69,7 +69,7 @@
     "@firestitch/filter": "^18.0.23",
     "@firestitch/gallery": "^18.0.31",
     "@firestitch/html": "^18.0.0",
-    "@firestitch/html-editor": "^18.0.19",
+    "@firestitch/html-editor": "^18.0.21",
     "@firestitch/icon-picker": "^18.0.5",
     "@firestitch/iframe": "^18.0.0",
     "@firestitch/label": "^18.0.15",
@@ -89,7 +89,7 @@
     "@firestitch/store": "^18.0.0",
     "@firestitch/style": "^18.0.38",
     "@firestitch/tabs": "^18.0.9",
-    "@firestitch/task": "^18.0.153",
+    "@firestitch/task": "^18.0.157",
     "@firestitch/tree": "^18.0.0",
     "@firestitch/upload": "^18.0.1",
     "@firestitch/zoom-pan": "^18.0.2",
