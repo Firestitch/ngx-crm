@@ -18,7 +18,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/attribute';
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
 import { Field, FieldFile, FsFieldViewerModule, RendererAction } from '@firestitch/field-editor';
-import { FsFormDirective } from '@firestitch/form';
 import { FsLabelModule } from '@firestitch/label';
 import { FsMessage } from '@firestitch/message';
 import { FsPhoneModule } from '@firestitch/phone';
@@ -73,10 +72,8 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
   private _message = inject(FsMessage);
   private _dialog = inject(MatDialog);
-  private _form = inject(FsFormDirective);
   
   public ngOnInit(): void {
-    this._form.pristine();
     this._fetchProfile$()
       .subscribe();
 
