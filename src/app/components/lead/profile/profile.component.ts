@@ -95,7 +95,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
-    this._form.reset();
+    this._form.pristine();
     this._fetchData();
   }
 
