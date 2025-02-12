@@ -43,9 +43,9 @@
       let-activity="activity">
     <div>
       <div class="small">
-        {{ CrmLogTypes[data.type] }}
+        {{ CrmLogTypes[data?.type] }}
       </div>
-      <fs-html-renderer [html]="data.notes"></fs-html-renderer>
+      <fs-html-renderer [html]="data?.notes"></fs-html-renderer>
     </div>
   </ng-template>
   <ng-template
@@ -53,7 +53,7 @@
       [activityType]="'crmLeadFile'"
       let-data="data"
       let-activity="activity">
-    {{ data.file.filename }}
+    {{ data?.file?.filename }}
   </ng-template>
   <ng-template
       fsActivityPreview
@@ -62,8 +62,8 @@
       let-activity="activity">
     <fs-chip
         [size]="'small'"
-        [backgroundColor]="data.backgroundColor">
-      {{ data.name }}
+        [backgroundColor]="data?.backgroundColor">
+      {{ data?.name }}
     </fs-chip>
   </ng-template>
 </fs-activities>
