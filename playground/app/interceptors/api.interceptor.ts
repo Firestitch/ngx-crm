@@ -29,7 +29,7 @@ export class ApiInterceptor implements HttpInterceptor {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const url = 'https://specify.local.firestitch.com/api/'.concat(req.url);
+    const url = 'http://specify.local.firestitch.com/api/'.concat(req.url);
 
     let headers = req.headers;
     const xsrf = this._injector.get(FsCookie).get('Token-XSRF');
