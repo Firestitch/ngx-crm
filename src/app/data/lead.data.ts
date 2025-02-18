@@ -82,7 +82,7 @@ export class LeadData<T = any> {
   public getAssignAccounts(keyword, config: RequestConfig = {}): Observable<T> {
     return this._api.get(
       'crm/leads/assign/accounts',
-      { keyword },
+      { keyword, avatars: true },
       {
         key: 'accounts',
         ...config,
