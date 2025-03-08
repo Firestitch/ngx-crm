@@ -149,7 +149,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
   }
 
   public loadNew(): void {
-    this.activities.loadNew();
+    this.activities.loadMore();
   }
 
   public openLog(crmLog): void {
