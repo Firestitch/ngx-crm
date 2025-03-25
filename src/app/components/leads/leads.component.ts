@@ -9,7 +9,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -25,7 +25,6 @@ import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { LeadData } from '../../data';
 import { CrmLead } from '../../interfaces';
 import { FsCrmLeadComponent } from '../lead/lead.component';
-import { CrmNotesComponent } from '../notes';
 
 import { LeadFormComponent } from './lead-form';
 import { SettingsComponent } from './settings/settings.component';
@@ -44,8 +43,6 @@ import { SettingsComponent } from './settings/settings.component';
     FsListModule,
     FsFieldViewerModule,
     FsDateModule,
-
-    CrmNotesComponent,
   ],
 })
 export class FsCrmLeadsComponent implements OnInit, OnDestroy {
@@ -63,7 +60,6 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _dialog = inject(MatDialog);
   private _leadData = inject(LeadData);
   private _fsDialog = inject(FsDialog);
-  private _router = inject(Router);
   private _route = inject(ActivatedRoute);
   private _cdRef = inject(ChangeDetectorRef);
 

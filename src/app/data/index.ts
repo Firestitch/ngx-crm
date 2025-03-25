@@ -8,3 +8,4 @@ export * from './lead-log.data';
 export * from './lead-note.data';
 export * from './lead.data';
 export * from './settings.data';
+export * from './visit.data';

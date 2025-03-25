@@ -1,0 +1,90 @@
+<fs-list [config]="listConfig">
+  <fs-list-column
+      name="name"
+      title="Date"
+      [sortable]="false">
+    <ng-template
+        fs-list-cell
+        let-row="row">
+      <a (click)="openDialog(row)">
+        <fs-date [date]="row.createDate"></fs-date>
+      </a>
+    </ng-template>
+  </fs-list-column>
+  <fs-list-column
+      title="Referrer URL"
+      [sortable]="false">
+    <ng-template
+        fs-list-cell
+        let-row="row">
+      <div class="fs-row.gap-xs">
+        <a
+            [href]="row.referrerUrl"
+            mat-icon-button
+            target="_blank">
+          {{ row.referrerUrl }}
+        </a>
+      </div>
+    </ng-template>
+  </fs-list-column>
+  <fs-list-column
+      title="Entry URL"
+      [sortable]="false">
+    <ng-template
+        fs-list-cell
+        let-row="row">
+      <div class="fs-row.gap-xs">
+        <a
+            [href]="row.entryUrl"
+            mat-icon-button
+            target="_blank">
+          {{ row.entryUrl }}
+        </a>
+      </div>
+    </ng-template>
+  </fs-list-column>
+  <fs-list-column
+      title="Device"
+      align="center">
+    <ng-template
+        fs-list-cell
+        let-row="row">
+      @if (row.device) {
+        <fs-device-os
+          [type]="row.device.type"
+          [os]="row.device.osType"
+          [version]="row.device.osVersion"
+          [meta]="row.meta">
+        </fs-device-os>
+      }
+    </ng-template>
+  </fs-list-column>
+  <fs-list-column title="Browser">
+    <ng-template
+        fs-list-cell
+        let-row="row">
+      @if (row.device) {
+        <fs-device-browser
+          [type]="row.device.browserType"
+          [version]="row.device.browserVersion"
+          [showName]="true">
+        </fs-device-browser>
+      }
+    </ng-template>
+  </fs-list-column>
+  <fs-list-column title="Location">
+    <ng-template
+        fs-list-cell
+        let-row="row">
+      @if (row.ip) {
+        <fs-ip
+          [country]="row.ip.country"
+          [region]="row.ip.region"
+          [ip]="row.ip.ip"
+          [lng]="row.ip.lng"
+          [lat]="row.ip.lat">
+        </fs-ip>
+      }
+    </ng-template>
+  </fs-list-column>
+</fs-list>

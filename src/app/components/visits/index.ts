@@ -1,0 +1,2 @@
+export * from './visits.component';
+

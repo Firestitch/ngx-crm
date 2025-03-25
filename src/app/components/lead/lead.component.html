@@ -54,6 +54,13 @@
             </ng-template>
           </mat-tab>
           <mat-tab
+              label="Visits"
+              name="visits">
+            <ng-template matTabContent>
+              <fs-crm-visits [crmLeadId]="crmLead.id"></fs-crm-visits>
+            </ng-template>
+          </mat-tab>
+          <mat-tab
               label="Audits"
               name="audits">
             <ng-template matTabContent>

@@ -1,0 +1,14 @@
+<fs-dialog>
+  <fs-dialog-title>
+    Visit
+  </fs-dialog-title>
+  <div mat-dialog-content>
+    {{ crmVisit | json }}
+  </div>
+  <div mat-dialog-actions>
+    <fs-form-dialog-actions
+      [save]="false"
+      [close]="true">
+    </fs-form-dialog-actions>
+  </div>
+</fs-dialog>

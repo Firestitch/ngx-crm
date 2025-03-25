@@ -29,6 +29,7 @@ import { LeadData } from '../../data/lead.data';
 import { CrmLead } from '../../interfaces/crm-lead';
 import { CrmDocsComponent } from '../docs/docs.component';
 import { CrmFilesComponent } from '../files/files.component';
+import { FsCrmVisitsComponent } from '../visits/visits.component';
 
 import { ProfileComponent } from './profile/profile.component';
 import { SummaryComponent } from './summary/summary.component';
@@ -56,6 +57,7 @@ import { SummaryComponent } from './summary/summary.component';
     ProfileComponent,
     SummaryComponent,
     CrmDocsComponent, 
+    FsCrmVisitsComponent,
   ],
 })
 export class FsCrmLeadComponent implements OnInit, OnDestroy {
