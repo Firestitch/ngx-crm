@@ -61,15 +61,13 @@ export class ChannelsComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.channels = this.channels || [];
     this.labels = this.type === 'phone' ? [
-      'mobile',
-      'home',
+      'personal',
       'work',
-      'school',
-      'home fax',
-      'work fax',
+      'fax',
+      'home',
       'other',
     ] : 
-      ['home', 'work', 'school', 'other'];
+      ['personal', 'work', 'home','other'];
   }
 
   public addChannel(): void {
