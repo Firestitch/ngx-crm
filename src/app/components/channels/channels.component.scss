@@ -1,5 +1,6 @@
 .channel {
   margin-bottom: 20px;
+  overflow: hidden;
 
   .container-value {
     width: 100%;
@@ -21,7 +22,7 @@
   }
 
   .field-label {
-    width: 100px;
+    width: 125px;
   }
 
   mat-form-field {
