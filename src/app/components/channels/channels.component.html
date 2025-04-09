@@ -55,6 +55,17 @@
                 [name]="'value-' + channel.guid">
             </mat-form-field>
           </ng-container>
+          <ng-container *ngSwitchCase="'url'">
+            <mat-form-field class="field-value">
+              <input
+                matInput
+                [required]="true"
+                placeholder="URL"
+                (ngModelChange)="channelsChanged()"
+                [(ngModel)]="channel.value"
+                [name]="'value-' + channel.guid">
+            </mat-form-field>
+          </ng-container>
         </ng-container>
       </div>
       <div>

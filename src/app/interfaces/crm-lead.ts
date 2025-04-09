@@ -26,4 +26,5 @@ export interface CrmLead {
   value?: number;
   sourceAttributeId?: number;
   sourceAttribute?: any;
+  companyName?: string;
 }

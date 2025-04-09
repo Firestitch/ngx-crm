@@ -50,7 +50,7 @@ import { CrmChannel } from '../../interfaces';
 })
 export class ChannelsComponent implements OnInit, OnDestroy {
 
-  @Input() public type: 'email' | 'phone';
+  @Input() public type: 'email' | 'phone' | 'url';
   @Input() public channels: CrmChannel[] = [];
   @Output() public channelsChange = new EventEmitter<CrmChannel[]>();
 
@@ -60,14 +60,29 @@ export class ChannelsComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.channels = this.channels || [];
-    this.labels = this.type === 'phone' ? [
-      'personal',
-      'work',
-      'fax',
-      'home',
-      'other',
-    ] : 
-      ['personal', 'work', 'home','other'];
+    switch (this.type) {
+      case 'url': {
+        this.labels = ['personal', 'work', 'other'];
+      
+        break;
+      }
+      case 'email': {
+        this.labels = ['personal', 'work', 'home','other'];
+      
+        break;
+      }
+      case 'phone': {
+        this.labels = [
+          'personal',
+          'work',
+          'fax',
+          'home',
+          'other',
+        ];
+      
+        break;
+      }
+    }
   }
 
   public addChannel(): void {
