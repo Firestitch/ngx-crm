@@ -18,6 +18,7 @@ import { FsDialog } from '@firestitch/dialog';
 import { Field, FsFieldViewerModule } from '@firestitch/field-editor';
 import { ItemType } from '@firestitch/filter';
 import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
+import { FsPhoneModule } from '@firestitch/phone';
 
 import { of, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -41,6 +42,7 @@ import { SettingsComponent } from './settings/settings.component';
     RouterModule,
 
     FsListModule,
+    FsPhoneModule,
     FsFieldViewerModule,
     FsDateModule,
   ],
@@ -177,6 +179,8 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
       fetch: (query) => {
         query = {
           ...query,
+          primaryEmailCrmChannels: true,
+          primaryPhoneCrmChannels: true,
           leadsFields: true,
         };
 
