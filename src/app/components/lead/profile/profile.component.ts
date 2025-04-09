@@ -168,6 +168,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .get(this._crmLead.id, {
         emailCrmChannels: true,
         phoneCrmChannels: true,
+        urlCrmChannels: true,
         statusAttributes: true,
         assignedAccounts: true,
         sourceAttributes: true,
