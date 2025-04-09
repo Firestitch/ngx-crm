@@ -24,7 +24,7 @@
         fs-list-cell
         let-row="row">
       @if (row.primaryEmailCrmChannel) {
-        {{ row.primaryEmailCrmChannels.value }}
+        {{ row.primaryEmailCrmChannel.value }}
       }
     </ng-template>
   </fs-list-column>
@@ -33,7 +33,7 @@
         fs-list-cell
         let-row="row">
       @if (row.primaryPhoneCrmChannel) {
-        {{ row.primaryPhoneCrmChannels.value | fsPhone }}
+        {{ row.primaryPhoneCrmChannel.value | fsPhone }}
       }
     </ng-template>
   </fs-list-column>
