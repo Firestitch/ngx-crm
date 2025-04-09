@@ -54,6 +54,16 @@
             [type]="'phone'">
           </app-crm-channels>
         </div>
+        <div class="full-width">
+          <fs-label>
+            URLs
+          </fs-label>
+          <app-crm-channels
+            [(channels)]="crmLead.urlCrmChannels"
+            (channelsChange)="formDirty()"
+            [type]="'url'">
+          </app-crm-channels>
+        </div>
       </div>
       <h2 class="fs-row.justify-between">
         General information

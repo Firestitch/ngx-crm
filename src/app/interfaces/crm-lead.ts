@@ -14,6 +14,7 @@ export interface CrmLead {
   modifyDate?: Date;
   phoneCrmChannelId?: any;
   phoneCrmChannels?: CrmChannel[];
+  urlCrmChannels?: CrmChannel[];
   primaryEmailCrmChannel?: CrmChannel;
   primaryEmailCrmChannelId?: number;
   primaryPhoneCrmChannel?: CrmChannel;
