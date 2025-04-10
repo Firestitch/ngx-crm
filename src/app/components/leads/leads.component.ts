@@ -25,6 +25,7 @@ import { of, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
+import { FS_CRM_LEADS_CONFIG } from '../../injectors/crm-leads-config.injector';
 import { CrmLead, CrmLeadsConfig } from '../../interfaces';
 import { CrmLeadService } from '../../services/crm-lead.service';
 import { FsCrmLeadComponent } from '../lead/lead.component';
@@ -73,10 +74,14 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);
   private _cdRef = inject(ChangeDetectorRef); 
   private _injector = inject(Injector);
+  private _config = inject(FS_CRM_LEADS_CONFIG, { optional: true });
   private _crmLeadService = inject(CrmLeadService);
 
   public ngOnInit(): void {
-    this._crmLeadService.init(this.config?.crmLeadConfig);
+    if(this.config?.crmLeadConfig || this._config?.crmLeadConfig) {
+      this._crmLeadService.init(this.config?.crmLeadConfig || this._config?.crmLeadConfig);
+    } 
+
     this._initList();
     this._initDialog();
   }

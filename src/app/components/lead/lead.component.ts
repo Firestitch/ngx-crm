@@ -26,6 +26,8 @@ import { of, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { LeadData } from '../../data/lead.data';
+import { FS_CRM_LEAD_CONFIG } from '../../injectors/crm-lead-config.injector';
+import { CrmLeadConfig } from '../../interfaces';
 import { CrmLead } from '../../interfaces/crm-lead';
 import { CrmLeadService } from '../../services/crm-lead.service';
 import { CrmDocsComponent } from '../docs/docs.component';
@@ -34,7 +36,6 @@ import { FsCrmVisitsComponent } from '../visits/visits.component';
 
 import { ProfileComponent } from './profile/profile.component';
 import { SummaryComponent } from './summary/summary.component';
-
 
 @Component({
   templateUrl: './lead.component.html',
@@ -60,6 +61,14 @@ import { SummaryComponent } from './summary/summary.component';
     CrmDocsComponent, 
     FsCrmVisitsComponent,
   ],
+  providers: [
+    { 
+      provide: CrmLeadService, 
+      useFactory: () => {
+        return inject(CrmLeadService, { optional: true, skipSelf: true }) || new CrmLeadService();
+      },
+    },
+  ],
 })
 export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
@@ -76,11 +85,16 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   private _cdRef = inject(ChangeDetectorRef);
   private _route = inject(ActivatedRoute);
   private _leadData = inject(LeadData);
-  private _data = inject<{ crmLead: any }>(MAT_DIALOG_DATA, { optional: true });
+  private _config = inject(FS_CRM_LEAD_CONFIG, { optional: true });
+  private _data = inject<{ crmLead: any, config: CrmLeadConfig }>(MAT_DIALOG_DATA, { optional: true });
   private _crmLeadService = inject(CrmLeadService);
   private _destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
+    if(this._data?.config || this._config) {
+      this._crmLeadService.init(this._data?.config || this._config);
+    }
+
     this._fetchData();
   }
 
