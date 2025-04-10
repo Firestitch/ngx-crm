@@ -29,37 +29,45 @@
               <app-crm-lead-profile [(crmLead)]="crmLead"></app-crm-lead-profile>
             </ng-template>
           </mat-tab>
-          <mat-tab
-              label="Tasks"
-              name="tasks">
-            <ng-template matTabContent>
-              <fs-tasks
-                [apiPath]="['crm/leads', crmLead.id, 'tasks']"
-                [config]="{ showCreate: true }">
-              </fs-tasks>
-            </ng-template>
-          </mat-tab>
-          <mat-tab
-              label="Files"
-              name="files">
-            <ng-template matTabContent>
-              <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
-            </ng-template>
-          </mat-tab>
-          <mat-tab
-              label="Docs"
-              name="docs">
-            <ng-template matTabContent>
-              <fs-crm-docs [objectId]="crmLead.id"></fs-crm-docs>
-            </ng-template>
-          </mat-tab>
-          <mat-tab
-              label="Visits"
-              name="visits">
-            <ng-template matTabContent>
-              <fs-crm-visits [crmLeadId]="crmLead.id"></fs-crm-visits>
-            </ng-template>
-          </mat-tab>
+          @if (crmLeadService.task.enabled) {
+            <mat-tab
+                label="Tasks"
+                name="tasks">
+              <ng-template matTabContent>
+                <fs-tasks
+                  [apiPath]="['crm/leads', crmLead.id, 'tasks']"
+                  [config]="{ showCreate: true }">
+                </fs-tasks>
+              </ng-template>
+            </mat-tab>
+          }
+          @if (crmLeadService.file.enabled) {
+            <mat-tab
+                label="Files"
+                name="files">
+              <ng-template matTabContent>
+                <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
+              </ng-template>
+            </mat-tab>
+          }
+          @if (crmLeadService.doc.enabled) {
+            <mat-tab
+                label="Docs"
+                name="docs">
+              <ng-template matTabContent>
+                <fs-crm-docs [objectId]="crmLead.id"></fs-crm-docs>
+              </ng-template>
+            </mat-tab>
+          }
+          @if (crmLeadService.visit.enabled) {
+            <mat-tab
+                label="Visits"
+                name="visits">
+              <ng-template matTabContent>
+                <fs-crm-visits [crmLeadId]="crmLead.id"></fs-crm-visits>
+              </ng-template>
+            </mat-tab>
+          }
           <mat-tab
               label="Audits"
               name="audits">

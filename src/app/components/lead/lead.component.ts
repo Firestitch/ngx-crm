@@ -27,6 +27,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { LeadData } from '../../data/lead.data';
 import { CrmLead } from '../../interfaces/crm-lead';
+import { CrmLeadService } from '../../services/crm-lead.service';
 import { CrmDocsComponent } from '../docs/docs.component';
 import { CrmFilesComponent } from '../files/files.component';
 import { FsCrmVisitsComponent } from '../visits/visits.component';
@@ -76,6 +77,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);
   private _leadData = inject(LeadData);
   private _data = inject<{ crmLead: any }>(MAT_DIALOG_DATA, { optional: true });
+  private _crmLeadService = inject(CrmLeadService);
   private _destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
@@ -89,6 +91,10 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
   public close(value?): void {
     inject(MatDialogRef).close(value);
+  }
+
+  public get crmLeadService(): CrmLeadService {
+    return this._crmLeadService;
   }
 
   public submit$ = () => {
