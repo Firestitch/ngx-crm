@@ -14,25 +14,27 @@
         </app-crm-lead-summary-activity>
       </div>
       <div class="notes">
-        <h2>
-          <div class="fs-row.justify-between">
-            Tasks
-            <a
-                mat-icon-button
-                (click)="summaryTasks.openTask({})">
-              <mat-icon>
-                add_circle_outline
-              </mat-icon>
-            </a>
-          </div>
-        </h2>
-        <fs-tasks-summary
-          #summaryTasks
-          [apiPath]="['crm/leads', crmLead.id, 'tasks']"
-          [subjectObjectId]="crmLead.id">
-        </fs-tasks-summary>
-        <br>
-        <br>
+        @if (crmLeadService.task.enabled) {
+          <h2>
+            <div class="fs-row.justify-between">
+              Tasks
+              <a
+                  mat-icon-button
+                  (click)="summaryTasks.openTask({})">
+                <mat-icon>
+                  add_circle_outline
+                </mat-icon>
+              </a>
+            </div>
+          </h2>
+          <fs-tasks-summary
+            #summaryTasks
+            [apiPath]="['crm/leads', crmLead.id, 'tasks']"
+            [subjectObjectId]="crmLead.id">
+          </fs-tasks-summary>
+          <br>
+          <br>
+        }
         <h2>
           <div class="fs-row.justify-between">
             Notes

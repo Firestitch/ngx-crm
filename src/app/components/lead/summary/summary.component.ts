@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
 } from '@angular/core';
 
@@ -11,6 +12,7 @@ import { FsSkeletonModule } from '@firestitch/skeleton';
 import { FsTasksSummaryComponent } from '@firestitch/task';
 
 import { CrmLead } from '../../../interfaces/crm-lead';
+import { CrmLeadService } from '../../../services/crm-lead.service';
 import { CrmNotesComponent } from '../../notes/notes.component';
 
 import { ActivityComponent } from './activity';
@@ -38,5 +40,11 @@ import { SummaryProfileComponent } from './profile';
 export class SummaryComponent{
 
   @Input() public crmLead: CrmLead;
+
+  private _crmLeadService = inject(CrmLeadService);
+
+  public get crmLeadService(): CrmLeadService {
+    return this._crmLeadService;
+  }
 
 }
