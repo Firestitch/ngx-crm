@@ -23,6 +23,9 @@ export interface CrmLeadConfig {
   }[];
   secondaryContainer?: {
     component: Type<LeadSecondaryContainer>;
-  }
+  };
+  fetch?: {
+    query?: any;
+  };
 }
 

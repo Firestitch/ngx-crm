@@ -5,5 +5,6 @@ export * from './app/injectors';
 export * from './app/interfaces';
 export { CrmLeadConfig } from './app/interfaces/crm-lead-config';
 export { FsCrmLeadModule } from './app/modules/crm-lead/crm-lead.module';
+export { FsCrmLeadsModule } from './app/modules/crm-leads/crm-leads.module';
 export { FsDocumentRequestModule } from './app/modules/document-request/document-request.module';
 

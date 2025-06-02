@@ -8,6 +8,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  Type,
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
@@ -26,11 +27,13 @@ import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
 import { FS_CRM_LEADS_CONFIG } from '../../injectors/crm-leads-config.injector';
-import { CrmLead, CrmLeadsConfig } from '../../interfaces';
+import { FS_CRM_LEADS_ROOT_CONFIG } from '../../injectors/crm-leads-root-config.injector';
+import { CrmLead, CrmLeadsConfig, LeadsColumn } from '../../interfaces';
 import { CrmLeadService } from '../../services/crm-lead.service';
 import { FsCrmLeadComponent } from '../lead/lead.component';
 
 import { LeadFormComponent } from './lead-form';
+import { ColumnComponent } from './leads-column';
 import { SettingsComponent } from './settings/settings.component';
 
 
@@ -43,7 +46,7 @@ import { SettingsComponent } from './settings/settings.component';
   imports: [
     CommonModule,
     RouterModule,
-
+    ColumnComponent,
     FsListModule,
     FsPhoneModule,
     FsFieldViewerModule,
@@ -75,13 +78,22 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _cdRef = inject(ChangeDetectorRef); 
   private _injector = inject(Injector);
   private _config = inject(FS_CRM_LEADS_CONFIG, { optional: true });
-  private _crmLeadService = inject(CrmLeadService);
+  private _rootConfig = inject(FS_CRM_LEADS_ROOT_CONFIG, { optional: true });
+
+  public get columns(): {
+    title: string;
+    component: Type<LeadsColumn>;
+  }[] {
+    return this.config.columns || [];
+  }
 
   public ngOnInit(): void {
-    if(this.config?.crmLeadConfig || this._config?.crmLeadConfig) {
-      this._crmLeadService.init(this.config?.crmLeadConfig || this._config?.crmLeadConfig);
-    } 
-
+    this.config = {
+      ...(this._rootConfig || {}),
+      ...(this._config || {}),
+      ...(this.config || {}),
+    };
+    
     this._initList();
     this._initDialog();
   }
@@ -116,6 +128,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
             .open(FsCrmLeadComponent, {
               data: {
                 crmLead,
+                config: this.config.crmLeadConfig || {},
               },
               injector: this._injector,
             })
@@ -196,6 +209,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
       fetch: (query) => {
         query = {
           ...query,
+          ...(this.config?.fetch?.query || {}),
           primaryEmailCrmChannels: true,
           primaryPhoneCrmChannels: true,
           leadsFields: true,

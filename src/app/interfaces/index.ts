@@ -8,3 +8,4 @@ export * from './crm-note';
 export * from './crm-visit';
 export * from './lead-secondary-container';
 export * from './lead-tab';
+export * from './leads-column';

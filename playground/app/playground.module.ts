@@ -14,6 +14,7 @@ import { FsTabsModule } from '@firestitch/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FsCrmLeadsComponent } from '../../src/app/components/leads/leads.component';
+import { FsCrmLeadsModule } from '../../src/app/modules/crm-leads';
 import { FsCrmLeadModule } from '../../src/public_api';
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import {
   ExamplesComponent,
   LeadsComponent,
 } from './components';
+import { LeadColumnComponent } from './components/leads/components/lead-column';
 import { LeadSecondaryContainerComponent } from './components/leads/components/lead-secondary-container/lead-secondary-container.component';
 import { LeadTabComponent } from './components/leads/components/lead-tab/lead-tab.component';
 import { attributeConfigFactory } from './helpers/attribute-config-factory';
@@ -40,6 +42,14 @@ const routes: Routes = [
     FsExampleModule.forRoot(),
     FsAttributeModule.forRoot(),
     RouterModule.forRoot(routes),
+    FsCrmLeadsModule.forRoot({
+      columns: [
+        {
+          title: 'Custom column',
+          component: LeadColumnComponent,
+        },
+      ],
+    }),
     FsCrmLeadModule.forRoot({
       secondaryContainer: {
         component: LeadSecondaryContainerComponent,

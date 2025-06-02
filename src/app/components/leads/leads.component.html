@@ -59,6 +59,18 @@
       </ng-template>
     </fs-list-column>
   }
+  @for (column of columns; track column.title) {
+    <fs-list-column [title]="column.title">
+      <ng-template
+          fs-list-cell
+          let-row="row">
+        <app-column
+          [componentClass]="column.component"
+          [crmLead]="row">
+        </app-column>
+      </ng-template>
+    </fs-list-column>
+  }
   <fs-list-column
       name="modify_date"
       title="Modified"
