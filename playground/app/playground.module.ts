@@ -14,12 +14,15 @@ import { FsTabsModule } from '@firestitch/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FsCrmLeadsComponent } from '../../src/app/components/leads/leads.component';
+import { FsCrmLeadModule } from '../../src/public_api';
 
 import { AppComponent } from './app.component';
 import {
   ExamplesComponent,
   LeadsComponent,
 } from './components';
+import { LeadSecondaryContainerComponent } from './components/leads/components/lead-secondary-container/lead-secondary-container.component';
+import { LeadTabComponent } from './components/leads/components/lead-tab/lead-tab.component';
 import { attributeConfigFactory } from './helpers/attribute-config-factory';
 import { ApiInterceptorFactory } from './interceptors';
 
@@ -37,6 +40,17 @@ const routes: Routes = [
     FsExampleModule.forRoot(),
     FsAttributeModule.forRoot(),
     RouterModule.forRoot(routes),
+    FsCrmLeadModule.forRoot({
+      secondaryContainer: {
+        component: LeadSecondaryContainerComponent,
+      },
+      tabs: [
+        {
+          label: 'Custom tab',
+          component: LeadTabComponent,
+        },
+      ],
+    }),
     FsHtmlEditorModule.forRoot({
       activationKey: '2J1B10dD7F6F5A3F3I3cWHNGGDTCWHId1Eb1Oc1Yh1b2Ld1POkE3D3F3C9A4E5A3G3B2G2==',
     }),

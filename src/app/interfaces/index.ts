@@ -6,3 +6,5 @@ export * from './crm-leads-config';
 export * from './crm-log';
 export * from './crm-note';
 export * from './crm-visit';
+export * from './lead-secondary-container';
+export * from './lead-tab';

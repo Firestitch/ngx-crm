@@ -6,52 +6,67 @@
         (crmLeadChange)="activity.loadNew()">
       </app-crm-lead-summary-profile>
     </div>
-    <div class="fs-row.align-start.gap-lg full-width">
+    <div
+        class="fs-row.align-start.gap-lg full-width"
+        fs.lt-md="fs-column">
       <div class="activities">
         <app-crm-lead-summary-activity
           #activity
           [crmLead]="crmLead">
         </app-crm-lead-summary-activity>
       </div>
-      <div class="notes">
-        @if (crmLeadService.task.enabled) {
-          <h2>
-            <div class="fs-row.justify-between">
-              Tasks
-              <a
-                  mat-icon-button
-                  (click)="summaryTasks.openTask({})">
-                <mat-icon>
-                  add_circle_outline
-                </mat-icon>
-              </a>
-            </div>
-          </h2>
-          <fs-tasks-summary
-            #summaryTasks
-            [apiPath]="['crm/leads', crmLead.id, 'tasks']"
-            [subjectObjectId]="crmLead.id">
-          </fs-tasks-summary>
-          <br>
-          <br>
+      <div class="secondary-container">
+        @if (crmLeadService.secondaryContainer) {
+          <app-secondary-container
+            [componentClass]="crmLeadService.secondaryContainer.component"
+            [crmLead]="crmLead"
+            [notesTemplate]="notesTemplate"
+            [taskTemplate]="taskTemplate">
+          </app-secondary-container>
+        } @else {
+          <ng-container *ngTemplateOutlet="taskTemplate"></ng-container>
+          <ng-container *ngTemplateOutlet="notesTemplate"></ng-container>
         }
-        <h2>
-          <div class="fs-row.justify-between">
-            Notes
-            <a
-                mat-icon-button
-                (click)="crmNotes.openDialog({})">
-              <mat-icon>
-                add_circle_outline
-              </mat-icon>
-            </a>
-          </div>
-        </h2>
-        <fs-crm-notes
-          #crmNotes
-          [objectId]="crmLead.id">
-        </fs-crm-notes>
       </div>
     </div>
   </div>
 </ng-container>
+<ng-template #taskTemplate>
+  @if (crmLeadService.task.enabled) {
+    <h2>
+      <div class="fs-row.justify-between">
+        Tasks
+        <a
+            mat-icon-button
+            (click)="summaryTasks.openTask({})">
+          <mat-icon>
+            add_circle_outline
+          </mat-icon>
+        </a>
+      </div>
+    </h2>
+    <fs-tasks-summary
+      #summaryTasks
+      [apiPath]="['crm/leads', crmLead.id, 'tasks']"
+      [subjectObjectId]="crmLead.id">
+    </fs-tasks-summary>
+  }
+</ng-template>
+<ng-template #notesTemplate>
+  <h2>
+    <div class="fs-row.justify-between">
+      Notes
+      <a
+          mat-icon-button
+          (click)="crmNotes.openDialog({})">
+        <mat-icon>
+          add_circle_outline
+        </mat-icon>
+      </a>
+    </div>
+  </h2>
+  <fs-crm-notes
+    #crmNotes
+    [objectId]="crmLead.id">
+  </fs-crm-notes>
+</ng-template>

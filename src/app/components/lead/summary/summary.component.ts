@@ -14,6 +14,7 @@ import { FsTasksSummaryComponent } from '@firestitch/task';
 import { CrmLead } from '../../../interfaces/crm-lead';
 import { CrmLeadService } from '../../../services/crm-lead.service';
 import { CrmNotesComponent } from '../../notes/notes.component';
+import { SecondaryContainerComponent } from '../secondary-container';
 
 import { ActivityComponent } from './activity';
 import { SummaryProfileComponent } from './profile';
@@ -33,6 +34,7 @@ import { SummaryProfileComponent } from './profile';
     FsTasksSummaryComponent,
 
     SummaryProfileComponent,
+    SecondaryContainerComponent,
     ActivityComponent,    
     CrmNotesComponent,
   ],

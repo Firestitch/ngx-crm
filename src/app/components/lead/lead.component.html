@@ -68,6 +68,17 @@
               </ng-template>
             </mat-tab>
           }
+          @for (tab of crmLeadService.tabs; track tab.label) {
+            <mat-tab [label]="tab.label">
+              <ng-template matTabContent>
+                <app-tab
+                  [componentClass]="tab.component"
+                  [crmLead]="crmLead"
+                  [label]="tab.label">
+                </app-tab>
+              </ng-template>
+            </mat-tab>
+          }
           <mat-tab
               label="Audits"
               name="audits">

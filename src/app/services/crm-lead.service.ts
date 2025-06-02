@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
-import { CrmLeadConfig } from '../interfaces';
+import { CrmLeadConfig, LeadSecondaryContainer, LeadTab } from '../interfaces';
 
 @Injectable()
 export class CrmLeadService {
@@ -21,6 +21,11 @@ export class CrmLeadService {
     enabled: true,
   };
 
+  public tabs: {
+    label: string;
+    component: Type<LeadTab>;
+  }[] = [];
+
   private _config: CrmLeadConfig;
 
   public init(config: CrmLeadConfig): void {
@@ -30,6 +35,11 @@ export class CrmLeadService {
     this.file.enabled = this._config.file?.enabled ?? true;
     this.doc.enabled = this._config.doc?.enabled ?? true;
     this.visit.enabled = this._config.visit?.enabled ?? true;
+    this.tabs = this._config.tabs || [];
+  }
+
+  public get secondaryContainer(): { component: Type<LeadSecondaryContainer> } {
+    return this._config.secondaryContainer;
   }
 
   public getConfig(): CrmLeadConfig {

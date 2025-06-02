@@ -1,3 +1,7 @@
+import { Type } from '@angular/core';
+
+import { LeadSecondaryContainer } from './lead-secondary-container';
+import { LeadTab } from './lead-tab';
 
 
 export interface CrmLeadConfig {
@@ -13,6 +17,12 @@ export interface CrmLeadConfig {
   file?: {
     enabled?: boolean;
   };
-  
+  tabs?: {
+    label: string;
+    component: Type<LeadTab>;
+  }[];
+  secondaryContainer?: {
+    component: Type<LeadSecondaryContainer>;
+  }
 }
 
