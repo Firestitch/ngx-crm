@@ -26,7 +26,10 @@
               label="Profile"
               name="profile">
             <ng-template matTabContent>
-              <app-crm-lead-profile [(crmLead)]="crmLead"></app-crm-lead-profile>
+              <app-crm-lead-profile
+                [crmLead]="crmLead"
+                (crmLeadChange)="profileChange($event)">
+              </app-crm-lead-profile>
             </ng-template>
           </mat-tab>
           @if (crmLeadService.task.enabled) {
