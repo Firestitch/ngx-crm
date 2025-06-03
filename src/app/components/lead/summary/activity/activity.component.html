@@ -1,38 +1,40 @@
-<h2 class="fs-row.justify-between">
-  Activity
-  <div>
-    <a
-        mat-icon-button
-        [fsMenuTriggerFor]="menu">
-      <mat-icon>
-        add_circle_outline
-      </mat-icon>
-    </a>
-    <fs-menu #menu>
-      @for (action of menuActions; track action) {
-        <fs-menu-group>
-          <ng-template fs-group-menu-item-template>
-            {{ action.label }}
-          </ng-template>
-          @for (item of action.items; track item) {
-            @if (item.mode === 'file') {
-              <ng-template
-                  fs-menu-file-item
-                  [multiple]="item.multiple"
-                  (select)="item.fileSelected($event)">
-                {{ item.label }}
-              </ng-template>
-            } @else {
-              <ng-template
-                  fs-menu-item
-                  (click)="item.click()">
-                {{ item.label }}
-              </ng-template>
+<h2>
+  <div class="fs-row.justify-between">
+    Activity
+    <div>
+      <a
+          mat-icon-button
+          [fsMenuTriggerFor]="menu">
+        <mat-icon>
+          add_circle_outline
+        </mat-icon>
+      </a>
+      <fs-menu #menu>
+        @for (action of menuActions; track action) {
+          <fs-menu-group>
+            <ng-template fs-group-menu-item-template>
+              {{ action.label }}
+            </ng-template>
+            @for (item of action.items; track item) {
+              @if (item.mode === 'file') {
+                <ng-template
+                    fs-menu-file-item
+                    [multiple]="item.multiple"
+                    (select)="item.fileSelected($event)">
+                  {{ item.label }}
+                </ng-template>
+              } @else {
+                <ng-template
+                    fs-menu-item
+                    (click)="item.click()">
+                  {{ item.label }}
+                </ng-template>
+              }
             }
-          }
-        </fs-menu-group>
-      }
-    </fs-menu>
+          </fs-menu-group>
+        }
+      </fs-menu>
+    </div>
   </div>
 </h2>
 <fs-activities [config]="config">
