@@ -42,7 +42,7 @@ export class CrmLeadService {
     return this._config.secondaryContainer;
   }
 
-  public getConfig(): CrmLeadConfig {
+  public get config(): CrmLeadConfig {
     return this._config;
   }
 }

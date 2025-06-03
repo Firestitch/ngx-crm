@@ -140,7 +140,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap(() => {
           return this._leadData.get(leadId, {
-            ...(this._config?.fetch?.query || {}),
+            ...(this.crmLeadService.config.fetch?.query || {}),
           });
         }),
         takeUntil(this._destroy$),

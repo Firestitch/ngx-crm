@@ -12,6 +12,12 @@
   <div class="card-content">
     <fs-label-field>
       <fs-label>
+        ID
+      </fs-label>
+      {{ crmLead.id }}
+    </fs-label-field>
+    <fs-label-field>
+      <fs-label>
         Email
       </fs-label>
       {{ crmLead.primaryEmailCrmChannel?.value || 'N/A' }}
