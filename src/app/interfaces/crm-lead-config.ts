@@ -1,5 +1,6 @@
 import { Type } from '@angular/core';
 
+import { AddActivityMenuItem } from './add-actvity-menu-item';
 import { LeadSecondaryContainer } from './lead-secondary-container';
 import { LeadTab } from './lead-tab';
 
@@ -26,6 +27,10 @@ export interface CrmLeadConfig {
   };
   fetch?: {
     query?: any;
+  };
+  activity?: {
+    enabled?: boolean;
+    getAddMenuItems?: (addActivityMenuItems: AddActivityMenuItem[]) => AddActivityMenuItem[];
   };
 }
 

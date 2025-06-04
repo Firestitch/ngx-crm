@@ -27,7 +27,8 @@ import { takeUntil } from 'rxjs/operators';
 import { CrmLogTypes } from '../../../../consts';
 import { LeadFileData } from '../../../../data';
 import { CrmLogType } from '../../../../enums/crm-log-type.enum';
-import { CrmLead } from '../../../../interfaces';
+import { AddActivityMenuItem, CrmLead } from '../../../../interfaces';
+import { CrmLeadService } from '../../../../services';
 import { DocComponent } from '../../../docs/doc';
 import { RequestComponent } from '../../../docs/request';
 import { NoteComponent } from '../../../note';
@@ -63,20 +64,74 @@ export class ActivityComponent implements OnInit, OnDestroy {
   public crmLead: CrmLead;
 
   public config: ActivityConfig;
-  public menuActions: any[];
+  public menuActions: AddActivityMenuItem[];
   public CrmLogTypes = index(CrmLogTypes, 'value', 'name');
 
   private _leadFileData = inject(LeadFileData);
   private _destroy$ = new Subject<void>();
   private _message = inject(FsMessage);
   private _dialog = inject(MatDialog);
+  private _crmLeadService = inject(CrmLeadService);
 
   public ngOnInit(): void {
     this.config = {
       apiPath: ['crm', 'leads', this.crmLead.id, 'activities'],
     };
+    this._initMenuActions();
+  }
 
-    this.menuActions = [
+  public get enabled(): boolean {
+    return this._crmLeadService.config.activity?.enabled ?? true;
+  }
+
+  public loadNew(): void {
+    this.activities.loadMore();
+  }
+
+  public openLog(crmLog): void {
+    this._dialog.open(LogComponent, {
+      data: {
+        crmLog,
+        crmLeadId: this.crmLead.id,
+      },
+    })
+      .afterClosed()
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this.loadNew();
+      });
+  }
+
+  public openNote(crmNote): void {
+    this._dialog.open(NoteComponent, {
+      data: {
+        crmNote,
+        crmLeadId: this.crmLead.id,
+      },
+    })
+      .afterClosed()
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe(() => {
+        this.loadNew();
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  public close(value?): void {
+    inject(MatDialogRef).close(value);
+  }
+
+  
+  private _initMenuActions(): void {
+    let menuActions: AddActivityMenuItem[] = [
       {
         label: 'Log',
         items: [
@@ -129,7 +184,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
         items: [
           {
             label: 'Upload',
-            mode: 'file',
+            type: 'file',
             multiple: true,
             fileSelected: (files: FsFile[]) => {
               const files$ = files.map((fsFile) => {
@@ -146,50 +201,12 @@ export class ActivityComponent implements OnInit, OnDestroy {
         ],
       },
     ];
+
+    if (this._crmLeadService.config.activity?.getAddMenuItems) {
+      menuActions = this._crmLeadService.config.activity.getAddMenuItems(menuActions);
+    }
+
+    this.menuActions = menuActions;
   }
 
-  public loadNew(): void {
-    this.activities.loadMore();
-  }
-
-  public openLog(crmLog): void {
-    this._dialog.open(LogComponent, {
-      data: {
-        crmLog,
-        crmLeadId: this.crmLead.id,
-      },
-    })
-      .afterClosed()
-      .pipe(
-        takeUntil(this._destroy$),
-      )
-      .subscribe(() => {
-        this.loadNew();
-      });
-  }
-
-  public openNote(crmNote): void {
-    this._dialog.open(NoteComponent, {
-      data: {
-        crmNote,
-        crmLeadId: this.crmLead.id,
-      },
-    })
-      .afterClosed()
-      .pipe(
-        takeUntil(this._destroy$),
-      )
-      .subscribe(() => {
-        this.loadNew();
-      });
-  }
-
-  public ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
-
-  public close(value?): void {
-    inject(MatDialogRef).close(value);
-  }
 }
