@@ -43,6 +43,9 @@ import { LeadFileData } from '../../data/lead-file.data';
     FsHtmlRendererModule,
     FsGalleryModule,
   ],
+  viewProviders: [
+    LeadFileData,
+  ],
 })
 export class CrmFilesComponent implements OnInit, OnDestroy {
 

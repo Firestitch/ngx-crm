@@ -55,6 +55,9 @@ import { SettingsComponent } from './settings/settings.component';
   providers: [
     CrmLeadService,
   ],
+  viewProviders: [
+    LeadData,
+  ],
 })
 export class FsCrmLeadsComponent implements OnInit, OnDestroy {
 

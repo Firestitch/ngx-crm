@@ -20,7 +20,10 @@ import { LeadData } from '../../data';
   styleUrls: ['./lead-assigned-account.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
+  viewProviders: [
+    { provide: ControlContainer, useExisting: NgForm },
+    LeadData,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

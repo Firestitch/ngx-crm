@@ -55,6 +55,9 @@ import { DocumentRequestData } from '../../data';
     FsSkeletonModule,
     FsFormModule,
   ],
+  viewProviders: [
+    DocumentRequestData,
+  ],
 })
 export class DocComponent implements OnInit, OnDestroy {
 

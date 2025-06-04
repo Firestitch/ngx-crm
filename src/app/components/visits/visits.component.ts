@@ -38,6 +38,9 @@ import { VisitComponent } from './components/visit/visit.component';
     FsIpModule,
     FsDateModule,
   ],
+  viewProviders: [
+    VisitData,
+  ],
 })
 export class FsCrmVisitsComponent implements OnInit {
 

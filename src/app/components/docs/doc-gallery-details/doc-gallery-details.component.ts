@@ -30,6 +30,9 @@ import { LeadDocumentData } from '../../../data';
 
     FsAutocompleteChipsModule,
   ],
+  viewProviders: [
+    LeadDocumentData,
+  ],
 })
 export class DocGalleryDetailsComponent implements OnInit {
 

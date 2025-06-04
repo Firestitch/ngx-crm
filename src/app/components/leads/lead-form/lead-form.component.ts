@@ -47,6 +47,9 @@ import { FormData } from '../../../data';
     FsSkeletonModule,
     FsLabelModule,
   ],
+  viewProviders: [
+    FormData,
+  ],
 })
 export class LeadFormComponent implements OnInit {
 

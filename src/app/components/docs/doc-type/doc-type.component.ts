@@ -46,6 +46,9 @@ import { LeadDocumentTypeData } from '../../../data/lead-document-type.data';
     FsSkeletonModule,
     FsFormModule,
   ],
+  viewProviders: [
+    LeadDocumentTypeData,
+  ],  
 })
 export class DocTypeComponent implements OnInit, OnDestroy {
 

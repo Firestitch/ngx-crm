@@ -57,6 +57,9 @@ import { RequestComponent } from './request';
     DocumentRequestStateComponent,
     DocGalleryDetailsComponent,
   ],
+  viewProviders: [
+    LeadDocumentData,
+  ],
 })
 export class CrmDocsComponent implements OnInit, OnDestroy {
 

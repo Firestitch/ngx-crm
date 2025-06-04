@@ -34,6 +34,9 @@ import { FormData, SettingData } from '../../../../data';
     FsSkeletonModule,
     FsFormModule,
   ],
+  viewProviders: [
+    SettingData,
+  ],
 })
 export class ShowFieldsComponent implements OnInit, OnDestroy {
   

@@ -39,6 +39,9 @@ import { FormData } from '../../data';
     FsSkeletonModule,
     FsFieldEditorModule,
   ],
+  viewProviders: [
+    FormData,
+  ],
 })
 export class ManageFieldsComponent implements OnInit, OnDestroy {
 

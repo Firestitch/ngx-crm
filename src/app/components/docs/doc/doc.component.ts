@@ -62,6 +62,10 @@ import { ManageTypesComponent } from '../manage-types/manage-types.component';
     FsSkeletonModule,
     FsFormModule,
   ],
+  viewProviders: [
+    LeadDocumentTypeData,
+    LeadDocumentData,
+  ],
 })
 export class DocComponent implements OnInit, OnDestroy {
 

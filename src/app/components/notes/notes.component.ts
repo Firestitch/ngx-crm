@@ -41,6 +41,9 @@ import { NoteComponent } from '../note';
 
     FsActivityObjectTypeComponent,
   ],
+  viewProviders: [
+    LeadNoteData,
+  ],
 })
 export class CrmNotesComponent implements OnInit, OnDestroy {
 

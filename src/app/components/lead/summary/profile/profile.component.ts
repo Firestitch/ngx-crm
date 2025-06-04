@@ -57,6 +57,9 @@ import { SettingsComponent } from './settings';
     LeadAssignedAccountComponent,
     LeadStatusComponent,
   ],
+  viewProviders: [
+    LeadData,
+  ],
 })
 export class SummaryProfileComponent implements OnInit, OnDestroy {
 

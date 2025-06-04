@@ -51,7 +51,10 @@ import { ManageFieldsDialogComponent } from '../../manage-fields';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
+  viewProviders: [
+    { provide: ControlContainer, useExisting: NgForm },
+    LeadData,
+  ],
   standalone: true,
   imports: [
     FormsModule,

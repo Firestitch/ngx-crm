@@ -47,6 +47,11 @@ import { LeadDocumentData, LeadDocumentRequestData, LeadDocumentTypeData } from 
     FsLabelModule,
     FsFormModule,
   ],
+  viewProviders: [
+    LeadDocumentData,
+    LeadDocumentTypeData,
+    LeadDocumentRequestData,
+  ],
 })
 export class RequestComponent implements OnInit, OnDestroy {
 

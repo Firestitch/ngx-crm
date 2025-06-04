@@ -54,6 +54,9 @@ import { LogComponent } from './../log';
     FsActivitiesComponent,
     FsActivityPreviewDirective,
   ],
+  viewProviders: [
+    LeadFileData,
+  ],
 })
 export class ActivityComponent implements OnInit, OnDestroy {
 

@@ -39,6 +39,9 @@ import { CrmVisit } from '../../../../interfaces';
     FsSkeletonModule,
     JsonPipe,
   ],
+  viewProviders: [
+    VisitData,
+  ],
 })
 export class VisitComponent implements OnInit {
 

@@ -5,9 +5,7 @@ import { FsApi, FsApiFile, RequestConfig, RequestMethod } from '@firestitch/api'
 import { Observable } from 'rxjs';
 
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class LeadDocumentData<T = any> {
 
   constructor(private _api: FsApi) {}
