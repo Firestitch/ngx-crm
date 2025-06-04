@@ -99,13 +99,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
           crmLeadId: this.crmLead.id,
         },
       })
-      .afterClosed()
-      .pipe(
-        tap(() => {
-          this.loadNew();
-        }),
-        takeUntil(this._destroy$),
-      );
+      .afterClosed();
   }
 
   public openNote(crmNote): void {
@@ -136,8 +130,8 @@ export class ActivityComponent implements OnInit, OnDestroy {
   public clickMenuItem(item: AddActivityMenuItem): void {
     item.click(this.crmLead)
       .pipe(
-        tap((crmLead) => {
-          this.crmLead = crmLead;
+        tap(() => {
+          this.loadNew(); 
         }),
         takeUntil(this._destroy$),
       )
