@@ -21,8 +21,8 @@ import { FsHtmlRendererModule } from '@firestitch/html-editor';
 import { FsMenuModule } from '@firestitch/menu';
 import { FsMessage } from '@firestitch/message';
 
-import { concat, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { concat, Observable, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { CrmLogTypes } from '../../../../consts';
 import { LeadFileData } from '../../../../data';
@@ -91,20 +91,21 @@ export class ActivityComponent implements OnInit, OnDestroy {
     this.activities.loadMore();
   }
 
-  public openLog(crmLog): void {
-    this._dialog.open(LogComponent, {
-      data: {
-        crmLog,
-        crmLeadId: this.crmLead.id,
-      },
-    })
+  public openLog(crmLog): Observable<CrmLead> {
+    return this._dialog
+      .open(LogComponent, {
+        data: {
+          crmLog,
+          crmLeadId: this.crmLead.id,
+        },
+      })
       .afterClosed()
       .pipe(
+        tap(() => {
+          this.loadNew();
+        }),
         takeUntil(this._destroy$),
-      )
-      .subscribe(() => {
-        this.loadNew();
-      });
+      );
   }
 
   public openNote(crmNote): void {
@@ -132,7 +133,17 @@ export class ActivityComponent implements OnInit, OnDestroy {
     inject(MatDialogRef).close(value);
   }
 
-  
+  public clickMenuItem(item: AddActivityMenuItem): void {
+    item.click(this.crmLead)
+      .pipe(
+        tap((crmLead) => {
+          this.crmLead = crmLead;
+        }),
+        takeUntil(this._destroy$),
+      )
+      .subscribe();
+  }
+
   private _initMenuActions(): void {
     let menuActions: AddActivityMenuItem[] = [
       {
@@ -141,7 +152,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
           {
             label: 'Call',
             click: () => {
-              this.openLog({
+              return this.openLog({
                 type: CrmLogType.OutgoingCall,
               });
             },
@@ -149,7 +160,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
           {
             label: 'Email',
             click: () => {
-              this.openLog({
+              return this.openLog({
                 type: CrmLogType.OutgoingEmail,
               });
             },
@@ -162,22 +173,36 @@ export class ActivityComponent implements OnInit, OnDestroy {
           {
             label: 'Request',
             click: () => {
-              this._dialog.open(RequestComponent, {
+              return this._dialog.open(RequestComponent, {
                 data: {
                   crmLeadId: this.crmLead.id,
                 },
-              });
+              })
+                .afterClosed()
+                .pipe(
+                  tap(() => {
+                    this.loadNew();
+                  }),
+                  takeUntil(this._destroy$),
+                );
             },
           },
           {
             label: 'Create',
             click: () => {
-              this._dialog.open(DocComponent, {
+              return this._dialog.open(DocComponent, {
                 autoFocus: false,
                 data: {
                   crmLeadId: this.crmLead.id,
                 },
-              });
+              })
+                .afterClosed()
+                .pipe(
+                  tap(() => {
+                    this.loadNew();
+                  }),
+                  takeUntil(this._destroy$),
+                );
             },
           },
         ],

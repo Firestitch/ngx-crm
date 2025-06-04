@@ -1,5 +1,9 @@
 import { FsFile } from '@firestitch/file';
 
+import { Observable } from 'rxjs';
+
+import { CrmLead } from './crm-lead';
+
 
 export interface AddActivityMenuItem {
   label: string;
@@ -7,5 +11,5 @@ export interface AddActivityMenuItem {
   items?: AddActivityMenuItem[];
   multiple?: boolean;
   fileSelected?: (files: FsFile[] | FsFile) => void;
-  click?: () => void;
+  click?: (crmLead: CrmLead) => Observable<any>;
 }
