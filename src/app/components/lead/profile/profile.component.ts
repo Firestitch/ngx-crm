@@ -53,7 +53,6 @@ import { ManageFieldsDialogComponent } from '../../manage-fields';
   changeDetection: ChangeDetectionStrategy.OnPush,
   viewProviders: [
     { provide: ControlContainer, useExisting: NgForm },
-    LeadData,
   ],
   standalone: true,
   imports: [
@@ -73,6 +72,9 @@ import { ManageFieldsDialogComponent } from '../../manage-fields';
     LeadStatusComponent,
     LeadAssignedAccountComponent,
     LeadSourceComponent,
+  ],
+  providers: [
+    LeadData,
   ],
 })
 export class ProfileComponent implements OnInit, OnDestroy {

@@ -22,7 +22,6 @@ import { LeadData } from '../../data';
   standalone: true,
   viewProviders: [
     { provide: ControlContainer, useExisting: NgForm },
-    LeadData,
   ],
   providers: [
     {
@@ -30,6 +29,7 @@ import { LeadData } from '../../data';
       useExisting: LeadAssignedAccountComponent,
       multi: true,
     },
+    LeadData,
   ],
   imports: [
     FormsModule,

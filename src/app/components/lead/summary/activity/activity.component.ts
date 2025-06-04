@@ -54,7 +54,7 @@ import { LogComponent } from './../log';
     FsActivitiesComponent,
     FsActivityPreviewDirective,
   ],
-  viewProviders: [
+  providers: [
     LeadFileData,
   ],
 })

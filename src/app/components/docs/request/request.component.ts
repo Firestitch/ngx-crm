@@ -47,7 +47,7 @@ import { LeadDocumentData, LeadDocumentRequestData, LeadDocumentTypeData } from 
     FsLabelModule,
     FsFormModule,
   ],
-  viewProviders: [
+  providers: [
     LeadDocumentData,
     LeadDocumentTypeData,
     LeadDocumentRequestData,

@@ -39,7 +39,7 @@ import { FormData } from '../../data';
     FsSkeletonModule,
     FsFieldEditorModule,
   ],
-  viewProviders: [
+  providers: [
     FormData,
   ],
 })

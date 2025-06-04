@@ -41,7 +41,7 @@ import { NoteComponent } from '../note';
 
     FsActivityObjectTypeComponent,
   ],
-  viewProviders: [
+  providers: [
     LeadNoteData,
   ],
 })

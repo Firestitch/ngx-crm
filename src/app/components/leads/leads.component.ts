@@ -54,8 +54,6 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   providers: [
     CrmLeadService,
-  ],
-  viewProviders: [
     LeadData,
   ],
 })

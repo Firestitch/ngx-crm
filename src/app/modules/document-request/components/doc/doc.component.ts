@@ -55,7 +55,7 @@ import { DocumentRequestData } from '../../data';
     FsSkeletonModule,
     FsFormModule,
   ],
-  viewProviders: [
+  providers: [
     DocumentRequestData,
   ],
 })

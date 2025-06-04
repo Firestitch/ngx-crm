@@ -57,7 +57,7 @@ import { RequestComponent } from './request';
     DocumentRequestStateComponent,
     DocGalleryDetailsComponent,
   ],
-  viewProviders: [
+  providers: [
     LeadDocumentData,
   ],
 })

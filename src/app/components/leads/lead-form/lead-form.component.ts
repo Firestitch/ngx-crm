@@ -47,7 +47,7 @@ import { FormData } from '../../../data';
     FsSkeletonModule,
     FsLabelModule,
   ],
-  viewProviders: [
+  providers: [
     FormData,
   ],
 })

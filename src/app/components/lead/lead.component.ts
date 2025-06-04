@@ -71,6 +71,7 @@ import { TabComponent } from './tab';
         return inject(CrmLeadService, { optional: true, skipSelf: true }) || new CrmLeadService();
       },
     },
+    LeadData,
   ],
 })
 export class FsCrmLeadComponent implements OnInit, OnDestroy {

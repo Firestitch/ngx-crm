@@ -39,7 +39,7 @@ import { CrmVisit } from '../../../../interfaces';
     FsSkeletonModule,
     JsonPipe,
   ],
-  viewProviders: [
+  providers: [
     VisitData,
   ],
 })

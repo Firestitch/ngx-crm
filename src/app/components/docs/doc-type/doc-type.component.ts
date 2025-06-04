@@ -46,7 +46,7 @@ import { LeadDocumentTypeData } from '../../../data/lead-document-type.data';
     FsSkeletonModule,
     FsFormModule,
   ],
-  viewProviders: [
+  providers: [
     LeadDocumentTypeData,
   ],  
 })

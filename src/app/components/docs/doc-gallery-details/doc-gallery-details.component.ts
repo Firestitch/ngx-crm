@@ -30,7 +30,7 @@ import { LeadDocumentData } from '../../../data';
 
     FsAutocompleteChipsModule,
   ],
-  viewProviders: [
+  providers: [
     LeadDocumentData,
   ],
 })

@@ -62,7 +62,7 @@ import { ManageTypesComponent } from '../manage-types/manage-types.component';
     FsSkeletonModule,
     FsFormModule,
   ],
-  viewProviders: [
+  providers: [
     LeadDocumentTypeData,
     LeadDocumentData,
   ],

@@ -57,7 +57,7 @@ import { SettingsComponent } from './settings';
     LeadAssignedAccountComponent,
     LeadStatusComponent,
   ],
-  viewProviders: [
+  providers: [
     LeadData,
   ],
 })

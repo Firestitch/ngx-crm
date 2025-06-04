@@ -34,7 +34,7 @@ import { FormData, SettingData } from '../../../../data';
     FsSkeletonModule,
     FsFormModule,
   ],
-  viewProviders: [
+  providers: [
     SettingData,
   ],
 })

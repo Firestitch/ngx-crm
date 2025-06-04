@@ -43,7 +43,7 @@ import { LeadFileData } from '../../data/lead-file.data';
     FsHtmlRendererModule,
     FsGalleryModule,
   ],
-  viewProviders: [
+  providers: [
     LeadFileData,
   ],
 })
