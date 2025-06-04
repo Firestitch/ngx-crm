@@ -1,14 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  inject,
-  Inject,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -72,15 +63,13 @@ export class DocComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
   private _cdRef = inject(ChangeDetectorRef);
   private _dialogRef = inject(MatDialogRef);
+  private _data = inject(MAT_DIALOG_DATA);
   private _message = inject(FsMessage);
   private _documentRequestData = inject(DocumentRequestData);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private _data: {
-      documentRequestItem: any;
-      documentRequest: any;
-    },
-  ) {
+  constructor() {
+    const _data = this._data;
+
     this.documentRequest = _data.documentRequest;
   }
 

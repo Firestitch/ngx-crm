@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { DisplayApiError } from '@firestitch/api';
@@ -13,10 +13,9 @@ import { DocumentRequestData } from '../data';
 
 @Injectable()
 export class DocumentRequestResolve  {
+  
+  private _documentRequestData = inject(DocumentRequestData);
 
-  constructor(
-    private _documentRequestData: DocumentRequestData,
-  ) { }
 
   public resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const routeSubject = new RouteSubject();

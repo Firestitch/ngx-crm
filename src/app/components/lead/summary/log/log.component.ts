@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MatOptionModule } from '@angular/material/core';
@@ -53,22 +46,16 @@ import { CrmLog } from '../../../../interfaces';
   ],
 })
 export class LogComponent implements OnInit, OnDestroy {
+  private _data = inject(MAT_DIALOG_DATA);
+  private _message = inject(FsMessage);
+  private _leadLogData = inject(LeadLogData);
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   public crmLog: CrmLog;
   public types = CrmLogTypes;
 
   private _destroy$ = new Subject<void>();
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private _data: {
-      crmLog: CrmLog;
-      crmLeadId: number;
-    },
-    private _message: FsMessage,
-    private _leadLogData: LeadLogData,
-    private _cdRef: ChangeDetectorRef,
-  ) {
-  }
 
   public ngOnInit(): void {
     this._fetchData();

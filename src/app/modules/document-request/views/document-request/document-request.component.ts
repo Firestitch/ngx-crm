@@ -32,6 +32,9 @@ import { DocComponent } from '../../components/doc';
   ],
 })
 export class DocumentRequestComponent implements OnInit, OnDestroy {
+  private _route = inject(ActivatedRoute);
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   public documentRequest = null;
   public documentRequest$: RouteObserver;
@@ -39,10 +42,7 @@ export class DocumentRequestComponent implements OnInit, OnDestroy {
   private _dialog = inject(MatDialog);
   private _destroy$ = new Subject<void>();
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _cdRef: ChangeDetectorRef,
-  ) {
+  constructor() {
     this.documentRequest$ = new RouteObserver(this._route, 'documentRequest');
   }
 

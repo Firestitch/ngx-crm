@@ -36,6 +36,8 @@ import { DocTypeComponent } from '../doc-type/doc-type.component';
   ],
 })
 export class ManageTypesComponent implements OnInit, OnDestroy {
+  private _leadDocumentTypeData = inject(LeadDocumentTypeData);
+
 
   @ViewChild(FsListComponent)
   public list: FsListComponent;
@@ -44,11 +46,6 @@ export class ManageTypesComponent implements OnInit, OnDestroy {
 
   private _dialog = inject(FsDialog);
   private _destroy$ = new Subject<void>();
-
-  constructor(
-    private _leadDocumentTypeData: LeadDocumentTypeData,
-  ) {
-  }
 
   public openDocType(documentType: any): void {
     this._dialog.open(DocTypeComponent, {

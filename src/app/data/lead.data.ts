@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { FsApi, FsApiFile, RequestConfig, RequestMethod } from '@firestitch/api';
 
@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LeadData<T = any> {
+  private _api = inject(FsApi);
 
-  constructor(private _api: FsApi) {}
 
   public get(id: number, query: any = {}, config: RequestConfig = {}): Observable<T> {
     return this._api.get(

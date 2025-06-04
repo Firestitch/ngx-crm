@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { FsApi } from '@firestitch/api';
 
@@ -9,10 +9,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DocumentRequestData {
+  private _api = inject(FsApi);
 
-  constructor(
-    private _api: FsApi,
-  ) { }
 
   public get(guid: string, data = {}, options: any = {}): Observable<any> {
     return this._api

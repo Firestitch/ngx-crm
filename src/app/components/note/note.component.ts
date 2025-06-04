@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -44,24 +37,22 @@ import { CrmNote } from '../../interfaces';
     FsFormModule,
     FsHtmlEditorModule,
   ],
+  providers: [
+    LeadNoteData,
+  ],
 })
 export class NoteComponent implements OnInit, OnDestroy {
 
   public crmNote: CrmNote;
   public content: string;
 
-  private _destroy$ = new Subject<void>();
+  private _data = inject(MAT_DIALOG_DATA);
+  private _message = inject(FsMessage);
+  private _leadNoteData = inject(LeadNoteData);
+  private _cdRef = inject(ChangeDetectorRef);
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private _data: {
-      crmNote: CrmNote;
-      crmLeadId: number;
-    },
-    private _message: FsMessage,
-    private _leadNoteData: LeadNoteData,
-    private _cdRef: ChangeDetectorRef,
-  ) {
-  }
+
+  private _destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
     this._fetchData();
