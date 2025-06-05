@@ -44,17 +44,19 @@ import { CrmLog } from '../../../../interfaces';
     FsFormModule,
     FsHtmlEditorModule,
   ],
+  providers: [
+    LeadLogData,
+  ],
 })
 export class LogComponent implements OnInit, OnDestroy {
-  private _data = inject(MAT_DIALOG_DATA);
-  private _message = inject(FsMessage);
-  private _leadLogData = inject(LeadLogData);
-  private _cdRef = inject(ChangeDetectorRef);
-
 
   public crmLog: CrmLog;
   public types = CrmLogTypes;
 
+  private _data = inject(MAT_DIALOG_DATA);
+  private _message = inject(FsMessage);
+  private _leadLogData = inject(LeadLogData);
+  private _cdRef = inject(ChangeDetectorRef);
   private _destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
