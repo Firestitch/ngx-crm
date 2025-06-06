@@ -38,7 +38,7 @@
       </div>
     </div>
   </h2>
-  <fs-activities [config]="config">
+  <fs-activities [config]="activityConfig">
     <ng-template
         fsActivityPreview
         [activityType]="'crmLeadLog'"
@@ -69,5 +69,19 @@
         {{ data?.name }}
       </fs-chip>
     </ng-template>
+    @for (preview of activityTypePreviews; track preview) {
+      <ng-template
+          fsActivityPreview
+          [activityType]="preview.activityType"
+          let-data="data"
+          let-activity="activity">
+        <app-activity-type-preview
+          [componentClass]="preview.component"
+          [crmLead]="crmLead"
+          [data]="data"
+          [activity]="activity">
+        </app-activity-type-preview>
+      </ng-template>
+    }
   </fs-activities>
 }

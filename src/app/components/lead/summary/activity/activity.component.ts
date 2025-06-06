@@ -34,6 +34,7 @@ import { RequestComponent } from '../../../docs/request';
 import { NoteComponent } from '../../../note';
 
 import { LogComponent } from './../log';
+import { ActivityTypePreviewComponent } from './components';
 
 
 @Component({
@@ -53,6 +54,7 @@ import { LogComponent } from './../log';
     FsChipModule,
     FsActivitiesComponent,
     FsActivityPreviewDirective,
+    ActivityTypePreviewComponent,
   ],
   providers: [
     LeadFileData,
@@ -66,7 +68,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
   @Input()
   public crmLead: CrmLead;
 
-  public config: ActivityConfig;
+  public activityConfig: ActivityConfig;
   public menuActions: AddActivityMenuItem[];
   public CrmLogTypes = index(CrmLogTypes, 'value', 'name');
 
@@ -77,7 +79,7 @@ export class ActivityComponent implements OnInit, OnDestroy {
   private _crmLeadService = inject(CrmLeadService);
 
   public ngOnInit(): void {
-    this.config = {
+    this.activityConfig = {
       apiPath: ['crm', 'leads', this.crmLead.id, 'activities'],
     };
     this._initMenuActions();
@@ -85,6 +87,10 @@ export class ActivityComponent implements OnInit, OnDestroy {
 
   public get enabled(): boolean {
     return this._crmLeadService.config.activity?.enabled ?? true;
+  }
+
+  public get activityTypePreviews() {
+    return this._crmLeadService.config.activity?.typePreviews ?? [];
   }
 
   public loadNew(): void {

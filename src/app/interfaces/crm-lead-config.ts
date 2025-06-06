@@ -1,6 +1,7 @@
 import { Type } from '@angular/core';
 
 import { AddActivityMenuItem } from './add-actvity-menu-item';
+import { LeadActivityTypePreview } from './lead-activity-type-preview';
 import { LeadSecondaryContainer } from './lead-secondary-container';
 import { LeadTab } from './lead-tab';
 
@@ -31,6 +32,10 @@ export interface CrmLeadConfig {
   activity?: {
     enabled?: boolean;
     getAddMenuItems?: (addActivityMenuItems: AddActivityMenuItem[]) => AddActivityMenuItem[];
+    typePreviews?: {
+      activityType: string;
+      component: Type<LeadActivityTypePreview>;
+    }[];
   };
 }
 
