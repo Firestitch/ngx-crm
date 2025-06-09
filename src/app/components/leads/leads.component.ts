@@ -29,6 +29,7 @@ import { LeadData } from '../../data';
 import { FS_CRM_LEADS_CONFIG } from '../../injectors/crm-leads-config.injector';
 import { FS_CRM_LEADS_ROOT_CONFIG } from '../../injectors/crm-leads-root-config.injector';
 import { CrmLead, CrmLeadsConfig, LeadsColumn } from '../../interfaces';
+import { CrmLeadsService } from '../../services';
 import { CrmLeadService } from '../../services/crm-lead.service';
 import { FsCrmLeadComponent } from '../lead/lead.component';
 
@@ -80,20 +81,22 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _injector = inject(Injector);
   private _config = inject(FS_CRM_LEADS_CONFIG, { optional: true });
   private _rootConfig = inject(FS_CRM_LEADS_ROOT_CONFIG, { optional: true });
+  private _crmLeadsService = inject(CrmLeadsService);
 
   public get columns(): {
     title: string;
     component: Type<LeadsColumn>;
   }[] {
-    return this.config.columns || [];
+    return this._crmLeadsService.config.columns || [];
   }
 
   public ngOnInit(): void {
-    this.config = {
-      ...(this._rootConfig || {}),
-      ...(this._config || {}),
-      ...(this.config || {}),
-    };
+    this._crmLeadsService
+      .init(
+        this._rootConfig,
+        this._config,
+        this.config ,
+      );
     
     this._initList();
     this._initDialog();
@@ -129,7 +132,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
             .open(FsCrmLeadComponent, {
               data: {
                 crmLead,
-                config: this.config.crmLeadConfig || {},
+                config: this._crmLeadsService.crmLeadConfig,
               },
               injector: this._injector,
             })
@@ -210,7 +213,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
       fetch: (query) => {
         query = {
           ...query,
-          ...(this.config?.fetch?.query || {}),
+          ...this._crmLeadsService.fetchQuery(query),
           primaryEmailCrmChannels: true,
           primaryPhoneCrmChannels: true,
           leadsFields: true,

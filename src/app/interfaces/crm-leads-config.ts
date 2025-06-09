@@ -8,7 +8,7 @@ import { LeadsColumn } from './leads-column';
 
 export interface CrmLeadsConfig {
   fetch?: {
-    query?: any;
+    query?: (query: any) => { [key: string]: any };
   },
   create?: {
     show: boolean;
