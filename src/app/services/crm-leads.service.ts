@@ -31,9 +31,11 @@ export class CrmLeadsService {
   }
 
   public fetchQuery(query: any): { [key: string]: any } {
-    query = this._rootConfig?.fetch?.query?.(query) || query;
-    query = this._moduleConfig?.fetch?.query?.(query) || query;
-    query = this._componentConfig?.fetch?.query?.(query) || query;
+    query = {
+      ...(this._rootConfig?.fetch?.query?.(query) || {}),
+      ...(this._moduleConfig?.fetch?.query?.(query) || {}),
+      ...(this._componentConfig?.fetch?.query?.(query) || {}),
+    };
 
     return query;
   }
