@@ -3,7 +3,7 @@
 import { CrmLead } from './crm-lead';
 
 export interface LeadActivityTypePreview {
-  crmLead: CrmLead;
+  crmLead?: CrmLead;
   data: any;
   activity: any;
 }
