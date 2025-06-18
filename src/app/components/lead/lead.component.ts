@@ -23,7 +23,7 @@ import { FsTabsModule } from '@firestitch/tabs';
 import { FsTasksComponent } from '@firestitch/task';
 
 import { of, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data/lead.data';
 import { FS_CRM_LEAD_CONFIG } from '../../injectors/crm-lead-config.injector';
@@ -120,8 +120,16 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   }
 
   public submit$ = () => {
+    const id = this.crmLead.id;
     if(this.selected === 'profile') {
-      return this.profile.submit$();
+      return this.profile.submit$()
+        .pipe(
+          tap(() => {
+            if(!id) {
+              this.close(this.crmLead);
+            }
+          }),
+        );
     }
 
     return of(null);

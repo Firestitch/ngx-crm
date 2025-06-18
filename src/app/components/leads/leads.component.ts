@@ -115,7 +115,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
     of(null)
       .pipe(
         switchMap(() => {
-          if (this.leadRouterLink) {
+          if (crmLead.id && this.leadRouterLink) {
             this._fsDialog
               .navigate([crmLead.id], {
                 relativeTo: this._route,

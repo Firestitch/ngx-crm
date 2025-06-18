@@ -145,10 +145,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
               .parseUrl(`${window.location.pathname}/${crmLead.id}${window.location.search}`);
             this._location.replaceState(url.toString());
           }
+
           this.crmLead = {
             ...this.crmLead,
             ...crmLead,
           };
+          
           this.crmLeadChange.emit(this.crmLead);
         }),
         switchMap(() => this._leadData
