@@ -103,11 +103,6 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
       ...(this._data?.config || {}),
     };
 
-    this.crmLead = {
-      id: this._route.snapshot.params.id,
-      ...(this._data?.crmLead || {}),
-    };
-
     this._crmLeadService.init(config);
     this._fetchData();
   }
@@ -157,15 +152,20 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
     of(null)
       .pipe(
         switchMap(() => {
-          if(!this.crmLead.id) {
+          const crmLead = {
+            id: this._route.snapshot.params.id,
+            ...(this._data?.crmLead || {}),
+          };
+
+          if(!crmLead.id) {
             return this._leadData.save({
-              ...this.crmLead,
+              ...crmLead,
               state: CrmLeadState.Draft,
             });
           }
 
           return this._leadData
-            .get(this.crmLead.id, {
+            .get(crmLead.id, {
               ...(this.crmLeadService.config.fetch?.query || {}),
             });
         }),
@@ -173,7 +173,6 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
       )
       .subscribe((crmLead) => {
         this.crmLead = crmLead;
-
         this._cdRef.markForCheck();
       });
   }
