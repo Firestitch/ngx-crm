@@ -4,96 +4,110 @@
     [confirm]="selected === 'profile'">
   <ng-container *fsSkeletonForm="crmLead">
     <fs-dialog [mode]="'stretch'">
-      <fs-dialog-title [close]="true">
-        <ng-template fsDialogSupertitle>
-          Lead
-        </ng-template>
-        {{ crmLead.name || 'Unnamed' }}
+      <fs-dialog-title [close]="!!crmLead.id">
+        @if (crmLead.id) {
+          <ng-template fsDialogSupertitle>
+            Lead
+          </ng-template>
+          {{ crmLead.name || 'Unnamed' }}
+        } @else {
+          Create Lead
+        }
       </fs-dialog-title>
       <mat-dialog-content>
-        <mat-tab-group
-            fsTabs
-            [dynamicHeight]="true"
-            [(selected)]="selected">
-          <mat-tab
-              label="Summary"
-              name="summary">
-            <ng-template matTabContent>
-              <app-crm-lead-summary [crmLead]="crmLead"></app-crm-lead-summary>
-            </ng-template>
-          </mat-tab>
-          <mat-tab
-              label="Profile"
-              name="profile">
-            <ng-template matTabContent>
-              <app-crm-lead-profile
-                [crmLead]="crmLead"
-                (crmLeadChange)="profileChange($event)">
-              </app-crm-lead-profile>
-            </ng-template>
-          </mat-tab>
-          @if (crmLeadService.task.enabled) {
+        @if (crmLead.id) {
+          <mat-tab-group
+              fsTabs
+              [dynamicHeight]="true"
+              [(selected)]="selected">
             <mat-tab
-                label="Tasks"
-                name="tasks">
+                label="Summary"
+                name="summary">
               <ng-template matTabContent>
-                <fs-tasks
-                  [apiPath]="['crm/leads', crmLead.id, 'tasks']"
-                  [config]="{ showCreate: true }">
-                </fs-tasks>
+                <app-crm-lead-summary [crmLead]="crmLead"></app-crm-lead-summary>
               </ng-template>
             </mat-tab>
-          }
-          @if (crmLeadService.file.enabled) {
             <mat-tab
-                label="Files"
-                name="files">
+                label="Profile"
+                name="profile">
               <ng-template matTabContent>
-                <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
-              </ng-template>
-            </mat-tab>
-          }
-          @if (crmLeadService.doc.enabled) {
-            <mat-tab
-                label="Docs"
-                name="docs">
-              <ng-template matTabContent>
-                <fs-crm-docs [objectId]="crmLead.id"></fs-crm-docs>
-              </ng-template>
-            </mat-tab>
-          }
-          @if (crmLeadService.visit.enabled) {
-            <mat-tab
-                label="Visits"
-                name="visits">
-              <ng-template matTabContent>
-                <fs-crm-visits [crmLeadId]="crmLead.id"></fs-crm-visits>
-              </ng-template>
-            </mat-tab>
-          }
-          @for (tab of crmLeadService.tabs; track tab.label) {
-            <mat-tab [label]="tab.label">
-              <ng-template matTabContent>
-                <app-tab
-                  [componentClass]="tab.component"
+                <app-crm-lead-profile
                   [crmLead]="crmLead"
-                  [label]="tab.label">
-                </app-tab>
+                  (crmLeadChange)="profileChange($event)">
+                </app-crm-lead-profile>
               </ng-template>
             </mat-tab>
-          }
-          <mat-tab
-              label="Audits"
-              name="audits">
-            <ng-template matTabContent>
-              <fs-audits [apiPath]="['crm/leads', crmLead.id, 'audits']"></fs-audits>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
+            @if (crmLeadService.task.enabled) {
+              <mat-tab
+                  label="Tasks"
+                  name="tasks">
+                <ng-template matTabContent>
+                  <fs-tasks
+                    [apiPath]="['crm/leads', crmLead.id, 'tasks']"
+                    [config]="{ showCreate: true }">
+                  </fs-tasks>
+                </ng-template>
+              </mat-tab>
+            }
+            @if (crmLeadService.file.enabled) {
+              <mat-tab
+                  label="Files"
+                  name="files">
+                <ng-template matTabContent>
+                  <fs-crm-files [objectId]="crmLead.id"></fs-crm-files>
+                </ng-template>
+              </mat-tab>
+            }
+            @if (crmLeadService.doc.enabled) {
+              <mat-tab
+                  label="Docs"
+                  name="docs">
+                <ng-template matTabContent>
+                  <fs-crm-docs [objectId]="crmLead.id"></fs-crm-docs>
+                </ng-template>
+              </mat-tab>
+            }
+            @if (crmLeadService.visit.enabled) {
+              <mat-tab
+                  label="Visits"
+                  name="visits">
+                <ng-template matTabContent>
+                  <fs-crm-visits [crmLeadId]="crmLead.id"></fs-crm-visits>
+                </ng-template>
+              </mat-tab>
+            }
+            @for (tab of crmLeadService.tabs; track tab.label) {
+              <mat-tab [label]="tab.label">
+                <ng-template matTabContent>
+                  <app-tab
+                    [componentClass]="tab.component"
+                    [crmLead]="crmLead"
+                    [label]="tab.label">
+                  </app-tab>
+                </ng-template>
+              </mat-tab>
+            }
+            <mat-tab
+                label="Audits"
+                name="audits">
+              <ng-template matTabContent>
+                <fs-audits [apiPath]="['crm/leads', crmLead.id, 'audits']"></fs-audits>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+        } @else {
+          <app-crm-lead-profile
+            [crmLead]="crmLead"
+            (crmLeadChange)="profileChange($event)">
+          </app-crm-lead-profile>
+        }
       </mat-dialog-content>
       @if (selected === 'profile') {
         <mat-dialog-actions>
-          <fs-form-dialog-actions [save]="true"></fs-form-dialog-actions>
+          <fs-form-dialog-actions
+            [save]="!!crmLead.id"
+            [create]="!crmLead.id">
+          </fs-form-dialog-actions>
         </mat-dialog-actions>
       }
     </fs-dialog>

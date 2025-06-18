@@ -34,7 +34,7 @@ import { FsLabelModule } from '@firestitch/label';
 import { FsMessage } from '@firestitch/message';
 import { FsSkeletonModule } from '@firestitch/skeleton';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../../data';
@@ -169,16 +169,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   private _fetchData(): void {
-    this._leadData
-      .get(this._crmLead.id, {
-        emailCrmChannels: true,
-        phoneCrmChannels: true,
-        urlCrmChannels: true,
-        statusAttributes: true,
-        assignedAccounts: true,
-        sourceAttributes: true,
-      })
+    of(null)
       .pipe(
+        switchMap(() => {
+          if(!this._crmLead.id) {
+            return of({});
+          }
+
+          return this._leadData
+            .get(this._crmLead.id, {
+              emailCrmChannels: true,
+              phoneCrmChannels: true,
+              urlCrmChannels: true,
+              statusAttributes: true,
+              assignedAccounts: true,
+              sourceAttributes: true,
+            });
+        }),
         tap((crmLead) => {
           this.crmLead = {
             ...crmLead,

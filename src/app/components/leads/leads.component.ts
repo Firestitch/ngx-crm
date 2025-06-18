@@ -111,15 +111,10 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
     this.list.reload();
   }
 
-  public openDialog(openCrmLead: CrmLead): void {
+  public openDialog(crmLead: CrmLead): void {
     of(null)
       .pipe(
         switchMap(() => {
-          return openCrmLead.id ?
-            of(openCrmLead) :
-            this._leadData.save(openCrmLead);
-        }),
-        switchMap((crmLead) => {
           if (this.leadRouterLink) {
             this._fsDialog
               .navigate([crmLead.id], {
