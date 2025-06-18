@@ -4,18 +4,23 @@
     [confirm]="selected === 'profile'">
   <ng-container *fsSkeletonForm="crmLead">
     <fs-dialog [mode]="'stretch'">
-      <fs-dialog-title [close]="!!crmLead.id">
-        @if (crmLead.id) {
+      <fs-dialog-title [close]="!stateDraft">
+        @if (stateDraft) {
+          Create Lead
+        } @else {
           <ng-template fsDialogSupertitle>
             Lead
           </ng-template>
           {{ crmLead.name || 'Unnamed' }}
-        } @else {
-          Create Lead
         }
       </fs-dialog-title>
       <mat-dialog-content>
-        @if (crmLead.id) {
+        @if (stateDraft) {
+          <app-crm-lead-profile
+            [crmLead]="crmLead"
+            (crmLeadChange)="profileChange($event)">
+          </app-crm-lead-profile>
+        } @else {
           <mat-tab-group
               fsTabs
               [dynamicHeight]="true"
@@ -95,18 +100,13 @@
               </ng-template>
             </mat-tab>
           </mat-tab-group>
-        } @else {
-          <app-crm-lead-profile
-            [crmLead]="crmLead"
-            (crmLeadChange)="profileChange($event)">
-          </app-crm-lead-profile>
         }
       </mat-dialog-content>
       @if (selected === 'profile') {
         <mat-dialog-actions>
           <fs-form-dialog-actions
-            [save]="!!crmLead.id"
-            [create]="!crmLead.id">
+            [save]="!stateDraft"
+            [create]="stateDraft">
           </fs-form-dialog-actions>
         </mat-dialog-actions>
       }

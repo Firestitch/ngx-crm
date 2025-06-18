@@ -26,6 +26,7 @@ import { of, Subject } from 'rxjs';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data/lead.data';
+import { CrmLeadState } from '../../enums';
 import { FS_CRM_LEAD_CONFIG } from '../../injectors/crm-lead-config.injector';
 import { FS_CRM_LEAD_ROOT_CONFIG } from '../../injectors/crm-lead-root-config.injector';
 import { CrmLeadConfig } from '../../interfaces';
@@ -101,9 +102,18 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
       ...(this._config || {}),
       ...(this._data?.config || {}),
     };
-    
+
+    this.crmLead = {
+      id: this._route.snapshot.params.id,
+      ...(this._data?.crmLead || {}),
+    };
+
     this._crmLeadService.init(config);
     this._fetchData();
+  }
+
+  public get stateDraft(): boolean {
+    return this.crmLead.state === CrmLeadState.Draft;
   }
 
   public ngOnDestroy(): void {
@@ -120,8 +130,9 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   }
 
   public submit$ = () => {
-    const id = this.crmLead.id;
     if(this.selected === 'profile') {
+      const id = this.crmLead.id;
+
       return this.profile.submit$()
         .pipe(
           tap(() => {
@@ -143,24 +154,25 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   }
 
   private _fetchData(): void {
-    const leadId = this._route.snapshot.params.id || this._data.crmLead.id;
-
     of(null)
       .pipe(
         switchMap(() => {
-          return leadId ? 
-            this._leadData.get(leadId, {
+          if(!this.crmLead.id) {
+            return this._leadData.save({
+              ...this.crmLead,
+              state: CrmLeadState.Draft,
+            });
+          }
+
+          return this._leadData
+            .get(this.crmLead.id, {
               ...(this.crmLeadService.config.fetch?.query || {}),
-            }) : 
-            of({});
+            });
         }),
         takeUntil(this._destroy$),
       )
       .subscribe((crmLead) => {
-        this.selected = leadId ? 'summary' : 'profile';
-        this.crmLead = { 
-          ...crmLead, 
-        };
+        this.crmLead = crmLead;
 
         this._cdRef.markForCheck();
       });

@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -12,7 +11,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlContainer, FormsModule, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -38,6 +36,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../../data';
+import { CrmLeadState } from '../../../enums';
 import { CrmLead } from '../../../interfaces';
 import { ChannelsComponent } from '../../channels';
 import { LeadAssignedAccountComponent } from '../../lead-assigned-account';
@@ -92,8 +91,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private _message = inject(FsMessage);
   private _form = inject(FsFormDirective);
   private _cdRef = inject(ChangeDetectorRef);
-  private _router = inject(Router);
-  private _location = inject(Location);
   private _leadData = inject(LeadData);
   private _dialog = inject(MatDialog);
   private _api = inject(FsApi);
@@ -132,25 +129,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  public get stateDraft(): boolean {
+    return this.crmLead.state === CrmLeadState.Draft;
+  }
+
   public save$(data) {
     return this._leadData
       .save({
         id: this.crmLead.id,
+        state: this.stateDraft ? CrmLeadState.Active : this.crmLead.state,
         ...data,
       })
       .pipe(
         tap((crmLead) => {
-          if (this.crmLead.state === 'draft') {
-            const url = this._router
-              .parseUrl(`${window.location.pathname}/${crmLead.id}${window.location.search}`);
-            this._location.replaceState(url.toString());
-          }
-
           this.crmLead = {
             ...this.crmLead,
             ...crmLead,
           };
-          
+
           this.crmLeadChange.emit(this.crmLead);
         }),
         switchMap(() => this._leadData
