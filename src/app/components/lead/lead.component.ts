@@ -85,7 +85,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
   public crmLead: CrmLead;
   public htmlEditorConfig: FsHtmlEditorConfig;
-  public selected = 'summary';
+  public selected: 'summary' | 'profile' = 'summary';
 
   private _cdRef = inject(ChangeDetectorRef);
   private _route = inject(ActivatedRoute);
@@ -173,6 +173,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
       )
       .subscribe((crmLead) => {
         this.crmLead = crmLead;
+        this.selected = this.stateDraft ? 'profile' :  this.selected;
         this._cdRef.markForCheck();
       });
   }
