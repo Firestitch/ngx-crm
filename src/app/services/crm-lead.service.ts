@@ -1,6 +1,9 @@
 import { Injectable, Type } from '@angular/core';
 
-import { CrmLeadConfig, LeadSecondaryContainer, LeadTab } from '../interfaces';
+import { Observable, of } from 'rxjs';
+
+import { CrmLead, CrmLeadConfig, LeadSecondaryContainer, LeadTab } from '../interfaces';
+
 
 @Injectable()
 export class CrmLeadService {
@@ -44,5 +47,13 @@ export class CrmLeadService {
 
   public get config(): CrmLeadConfig {
     return this._config;
+  }
+
+  public beforeProfileSaved(crmLead: CrmLead): Observable<CrmLead> {
+    return this._config.beforeProfileSaved?.(crmLead) || of(crmLead);
+  }
+
+  public afterProfileSaved(crmLead: CrmLead): Observable<CrmLead> {
+    return this._config.afterProfileSaved?.(crmLead) || of(crmLead);
   }
 }

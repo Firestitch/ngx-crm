@@ -130,7 +130,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   public get stateDraft(): boolean {
-    return this.crmLead.state === CrmLeadState.Draft;
+    return this.crmLead.state === String(CrmLeadState.Draft);
   }
 
   public save$(data) {

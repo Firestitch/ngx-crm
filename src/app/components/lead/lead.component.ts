@@ -23,7 +23,7 @@ import { FsTabsModule } from '@firestitch/tabs';
 import { FsTasksComponent } from '@firestitch/task';
 
 import { of, Subject } from 'rxjs';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { LeadData } from '../../data/lead.data';
 import { CrmLeadState } from '../../enums';
@@ -92,7 +92,10 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   private _leadData = inject(LeadData);
   private _config = inject(FS_CRM_LEAD_CONFIG, { optional: true });
   private _rootConfig = inject(FS_CRM_LEAD_ROOT_CONFIG, { optional: true });
-  private _data = inject<{ crmLead: any, config: CrmLeadConfig }>(MAT_DIALOG_DATA, { optional: true });
+  private _data = inject<{ 
+    crmLead: any, 
+    config: CrmLeadConfig, 
+      }>(MAT_DIALOG_DATA, { optional: true });
   private _crmLeadService = inject(CrmLeadService);
   private _destroy$ = new Subject<void>();
 
@@ -108,7 +111,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   }
 
   public get stateDraft(): boolean {
-    return this.crmLead.state === CrmLeadState.Draft;
+    return this.crmLead.state === String(CrmLeadState.Draft);
   }
 
   public ngOnDestroy(): void {
@@ -126,15 +129,11 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
   public submit$ = () => {
     if(this.selected === 'profile') {
-      const id = this.crmLead.id;
-
-      return this.profile.submit$()
+      return of(null)
         .pipe(
-          tap(() => {
-            if(!id) {
-              this.close(this.crmLead);
-            }
-          }),
+          switchMap(() => this.crmLeadService.beforeProfileSaved(this.crmLead)),
+          switchMap(() => this.profile.submit$()),
+          switchMap(() => this.crmLeadService.afterProfileSaved(this.crmLead)),
         );
     }
 
