@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   inject,
   Input,
+  Output,
 } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -39,14 +41,20 @@ import { SummaryProfileComponent } from './profile';
     CrmNotesComponent,
   ],
 })
-export class SummaryComponent{
+export class SummaryComponent {
 
   @Input() public crmLead: CrmLead;
+
+  @Output() public crmLeadChange = new EventEmitter<CrmLead>();
 
   private _crmLeadService = inject(CrmLeadService);
 
   public get crmLeadService(): CrmLeadService {
     return this._crmLeadService;
+  }
+
+  public crmLeadChanged(crmLead: CrmLead): void {
+    this.crmLeadChange.emit(crmLead);
   }
 
 }

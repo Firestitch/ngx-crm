@@ -147,6 +147,13 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
     };
   }
 
+  public crmLeadChange(crmLead: CrmLead): void {
+    this.crmLead = {
+      ...this.crmLead,
+      ...crmLead,
+    };
+  }
+
   private _fetchData(): void {
     of(null)
       .pipe(

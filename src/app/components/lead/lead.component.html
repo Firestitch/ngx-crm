@@ -29,7 +29,10 @@
                 label="Summary"
                 name="summary">
               <ng-template matTabContent>
-                <app-crm-lead-summary [crmLead]="crmLead"></app-crm-lead-summary>
+                <app-crm-lead-summary
+                  [crmLead]="crmLead"
+                  (crmLeadChange)="crmLeadChange($event)">
+                </app-crm-lead-summary>
               </ng-template>
             </mat-tab>
             <mat-tab

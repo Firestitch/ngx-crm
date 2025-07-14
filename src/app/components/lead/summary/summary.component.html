@@ -21,7 +21,8 @@
             [componentClass]="crmLeadService.secondaryContainer.component"
             [crmLead]="crmLead"
             [notesTemplate]="notesTemplate"
-            [taskTemplate]="taskTemplate">
+            [taskTemplate]="taskTemplate"
+            (crmLeadChange)="crmLeadChanged($event)">
           </app-secondary-container>
         } @else {
           <ng-container *ngTemplateOutlet="taskTemplate"></ng-container>
