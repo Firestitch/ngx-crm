@@ -50,6 +50,9 @@ export class FsCrmVisitsComponent implements OnInit {
   @Input()
   public crmLeadId: number;
 
+  @Input()
+  public query: any = {};
+
   public listConfig: FsListConfig;
 
   private readonly _visitData = inject(VisitData);
@@ -89,6 +92,7 @@ export class FsCrmVisitsComponent implements OnInit {
       ],
       fetch: (query) => {
         query = {
+          ...this.query,
           ...query,
           devices: true,  
           ips: true,
