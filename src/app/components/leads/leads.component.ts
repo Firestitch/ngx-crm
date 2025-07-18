@@ -164,7 +164,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
           type: ItemType.Keyword,
           label: 'Search',
         },
-        ...(this.config.filters || []),
+        ...(this._crmLeadsService.config.filters || []),
       ],
       actions: [
         {
