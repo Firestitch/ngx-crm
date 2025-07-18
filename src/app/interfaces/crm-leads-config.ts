@@ -1,5 +1,8 @@
 import { Type } from '@angular/core';
 
+
+import { IFilterConfigItem } from '@firestitch/filter';
+
 import { Observable } from 'rxjs';
 
 import { CrmLead } from './crm-lead';
@@ -19,4 +22,5 @@ export interface CrmLeadsConfig {
     title: string;
     component: Type<LeadsColumn>;
   }[];
+  filters?: IFilterConfigItem[];
 }
