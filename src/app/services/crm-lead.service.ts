@@ -1,7 +1,8 @@
-import { Injectable, Type } from '@angular/core';
+import { inject, Injectable, Type } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
+import { FS_CRM_CONFIG, FS_CRM_LEAD_CONFIG, FS_CRM_LEAD_ROOT_CONFIG } from '../injectors';
 import { CrmLead, CrmLeadConfig, LeadSecondaryContainer, LeadTab } from '../interfaces';
 
 
@@ -30,9 +31,17 @@ export class CrmLeadService {
   }[] = [];
 
   private _config: CrmLeadConfig;
+  private _moduleConfig = inject(FS_CRM_CONFIG, { optional: true });
+  private _moduleLeadconfig = inject(FS_CRM_LEAD_CONFIG, { optional: true });
+  private _rootLeadConfig = inject(FS_CRM_LEAD_ROOT_CONFIG, { optional: true });
 
   public init(config: CrmLeadConfig): void {
-    this._config = config || {};
+    this._config = {
+      ...this._moduleConfig?.crmLeadConfig || {},
+      ...this._rootLeadConfig || {},
+      ...this._moduleLeadconfig || {},
+      ...config,
+    };
 
     this.task.enabled = this._config.task?.enabled ?? true;
     this.file.enabled = this._config.file?.enabled ?? true;

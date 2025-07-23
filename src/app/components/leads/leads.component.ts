@@ -26,8 +26,6 @@ import { of, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
-import { FS_CRM_LEADS_CONFIG } from '../../injectors/crm-leads-config.injector';
-import { FS_CRM_LEADS_ROOT_CONFIG } from '../../injectors/crm-leads-root-config.injector';
 import { CrmLead, CrmLeadsConfig, LeadsColumn } from '../../interfaces';
 import { CrmLeadsService } from '../../services';
 import { CrmLeadService } from '../../services/crm-lead.service';
@@ -80,8 +78,6 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);
   private _cdRef = inject(ChangeDetectorRef); 
   private _injector = inject(Injector);
-  private _config = inject(FS_CRM_LEADS_CONFIG, { optional: true });
-  private _rootConfig = inject(FS_CRM_LEADS_ROOT_CONFIG, { optional: true });
   private _crmLeadsService = inject(CrmLeadsService);
 
   public get columns(): {
@@ -92,16 +88,11 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this._crmLeadsService
-      .init(
-        this._rootConfig,
-        this._config,
-        this.config ,
-      );
-    
+    this._crmLeadsService.init(this.config);    
     this._initList();
     this._initDialog();
   }
+  
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();

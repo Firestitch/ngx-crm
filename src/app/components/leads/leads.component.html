@@ -1,9 +1,8 @@
 <fs-list [config]="listConfig">
-  <fs-list-column>
+  <fs-list-column title="Name">
     <ng-template
         fs-list-cell
-        let-row="row"
-        title="Name">
+        let-row="row">
       @if (row.state === 'deleted') {
         {{ row.name }}
       } @else if (leadRouterLink) {

@@ -1,27 +1,27 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
+import { FS_CRM_CONFIG, FS_CRM_LEADS_CONFIG, FS_CRM_LEADS_ROOT_CONFIG } from '../injectors';
 import { CrmLeadConfig, CrmLeadsConfig } from '../interfaces';
 
 @Injectable()
 export class CrmLeadsService {
 
   private _config: CrmLeadsConfig;
-  private _rootConfig: CrmLeadsConfig;
-  private _moduleConfig: CrmLeadsConfig;
   private _componentConfig: CrmLeadsConfig;
 
+  private _moduleConfig = inject(FS_CRM_CONFIG, { optional: true });
+  private _moduleLeadsConfig = inject(FS_CRM_LEADS_CONFIG, { optional: true });
+  private _rootLeadsConfig = inject(FS_CRM_LEADS_ROOT_CONFIG, { optional: true });
+  
   public init(
-    rootConfig: CrmLeadsConfig, 
-    moduleConfig: CrmLeadsConfig, 
     componentConfig: CrmLeadsConfig,
   ): void {
-    this._rootConfig = rootConfig;
-    this._moduleConfig = moduleConfig;
     this._componentConfig = componentConfig;
 
     this._config = {
-      ...rootConfig,
-      ...moduleConfig,
+      ...this._moduleConfig?.crmLeadsConfig || {},
+      ...this._rootLeadsConfig || {},
+      ...this._moduleLeadsConfig || {},
       ...componentConfig,
     };
   }
@@ -32,8 +32,8 @@ export class CrmLeadsService {
 
   public fetchQuery(query: any): { [key: string]: any } {
     query = {
-      ...(this._rootConfig?.fetch?.query?.(query) || {}),
-      ...(this._moduleConfig?.fetch?.query?.(query) || {}),
+      ...(this._rootLeadsConfig?.fetch?.query?.(query) || {}),
+      ...(this._moduleLeadsConfig?.fetch?.query?.(query) || {}),
       ...(this._componentConfig?.fetch?.query?.(query) || {}),
     };
 

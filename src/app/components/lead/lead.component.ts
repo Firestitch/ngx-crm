@@ -27,8 +27,6 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { LeadData } from '../../data/lead.data';
 import { CrmLeadState } from '../../enums';
-import { FS_CRM_LEAD_CONFIG } from '../../injectors/crm-lead-config.injector';
-import { FS_CRM_LEAD_ROOT_CONFIG } from '../../injectors/crm-lead-root-config.injector';
 import { CrmLeadConfig } from '../../interfaces';
 import { CrmLead } from '../../interfaces/crm-lead';
 import { CrmLeadService } from '../../services/crm-lead.service';
@@ -90,8 +88,6 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
   private _cdRef = inject(ChangeDetectorRef);
   private _route = inject(ActivatedRoute);
   private _leadData = inject(LeadData);
-  private _config = inject(FS_CRM_LEAD_CONFIG, { optional: true });
-  private _rootConfig = inject(FS_CRM_LEAD_ROOT_CONFIG, { optional: true });
   private _data = inject<{ 
     crmLead: any, 
     config: CrmLeadConfig, 
@@ -101,8 +97,6 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     const config = {
-      ...(this._rootConfig || {}),
-      ...(this._config || {}),
       ...(this._data?.config || {}),
     };
 
