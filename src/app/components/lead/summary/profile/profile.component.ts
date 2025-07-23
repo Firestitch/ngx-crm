@@ -15,7 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/attribute';
+import { FsApi, RequestMethod } from '@firestitch/api';
+import { AttributeColor, AttributeConfig, FsAttributeConfig, FsAttributeModule } from '@firestitch/attribute';
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
 import { Field, FieldFile, FsFieldViewerModule, RendererAction } from '@firestitch/field-editor';
 import { FsLabelModule } from '@firestitch/label';
@@ -24,7 +25,7 @@ import { FsPhoneModule } from '@firestitch/phone';
 import { FsSkeletonModule } from '@firestitch/skeleton';
 
 import { Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 
 import { LeadData } from '../../../../data';
@@ -68,23 +69,53 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
 
   public crmLead: CrmLead;
   public fields: Field[];
-  public tagAttributeConfig: AttributeConfig;
+  public attributeConfig: AttributeConfig;
+  public fsAttributeConfig: FsAttributeConfig;
 
   private _cdRef = inject(ChangeDetectorRef);
   private _leadData = inject(LeadData);
   private _destroy$ = new Subject<void>();
   private _message = inject(FsMessage);
   private _dialog = inject(MatDialog);
+  private _api = inject(FsApi);
   
   public ngOnInit(): void {
     this._fetchProfile$()
       .subscribe();
 
-    this.tagAttributeConfig = {
+    this.attributeConfig = {
       name: 'Tag',
       class: 'crmLeadTag', 
       pluralName: 'Tags',
       backgroundColor: AttributeColor.Enabled,
+    };
+
+    this.fsAttributeConfig = {
+      attribute: {
+        save: ({ attribute }) => {
+          const method = attribute.id ? RequestMethod.Put : RequestMethod.Post;
+
+          return this._api.request(method, 'crm/leads/tags', attribute, { key: null });
+        },
+        delete: (data) => {
+          return this._api.delete(`crm/leads/tags/${data.id}`, data, { key: null });
+        },
+      },
+      attributes: {
+        fetch: (query) => {
+          return this._api
+            .get('crm/leads/tags',
+              {
+                data: query,
+                key: null,
+              })
+            .pipe(
+              map((response) => {
+                return { data: response.attributes, paging: response.paging };
+              }),
+            );
+        },
+      },
     };
   }
 

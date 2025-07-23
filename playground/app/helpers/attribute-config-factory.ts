@@ -71,9 +71,6 @@ export function attributeConfigFactory(): FsAttributeConfig {
     compareAttributes: (o1, o2) => {
       return o1 && o2 && o1.id === o2.id;
     },
-    deleteConfirmation: (event) => {
-      return of(null);
-    },
   };
 
   return config;

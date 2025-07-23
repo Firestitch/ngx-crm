@@ -52,7 +52,7 @@
                 <ng-template matTabContent>
                   <fs-tasks
                     [apiPath]="['crm/leads', crmLead.id, 'tasks']"
-                    [config]="{ showCreate: true }">
+                    [config]="{ create: { show: true } }">
                   </fs-tasks>
                 </ng-template>
               </mat-tab>
