@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { FsApi, RequestMethod } from '@firestitch/api';
 import { AttributeColor, AttributeConfig, FsAttributeConfig, FsAttributeModule } from '@firestitch/attribute';
 import { FsAutocompleteChipsModule } from '@firestitch/autocomplete-chips';
 import { Field, FieldFile, FsFieldViewerModule, RendererAction } from '@firestitch/field-editor';
@@ -25,11 +24,12 @@ import { FsPhoneModule } from '@firestitch/phone';
 import { FsSkeletonModule } from '@firestitch/skeleton';
 
 import { Observable, Subject } from 'rxjs';
-import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 
 import { LeadData } from '../../../../data';
 import { CrmLead } from '../../../../interfaces/crm-lead';
+import { CrmLeadService } from '../../../../services';
 import { LeadAssignedAccountComponent } from '../../../lead-assigned-account';
 import { LeadStatusComponent } from '../../../lead-status';
 
@@ -77,7 +77,7 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
   private _destroy$ = new Subject<void>();
   private _message = inject(FsMessage);
   private _dialog = inject(MatDialog);
-  private _api = inject(FsApi);
+  private _crmLeadService = inject(CrmLeadService);
   
   public ngOnInit(): void {
     this._fetchProfile$()
@@ -90,33 +90,8 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       backgroundColor: AttributeColor.Enabled,
     };
 
-    this.fsAttributeConfig = {
-      attribute: {
-        save: ({ attribute }) => {
-          const method = attribute.id ? RequestMethod.Put : RequestMethod.Post;
-
-          return this._api.request(method, 'crm/leads/tags', attribute, { key: null });
-        },
-        delete: (data) => {
-          return this._api.delete(`crm/leads/tags/${data.id}`, data, { key: null });
-        },
-      },
-      attributes: {
-        fetch: (query) => {
-          return this._api
-            .get('crm/leads/tags',
-              {
-                data: query,
-                key: null,
-              })
-            .pipe(
-              map((response) => {
-                return { data: response.attributes, paging: response.paging };
-              }),
-            );
-        },
-      },
-    };
+    this.fsAttributeConfig = this._crmLeadService
+      .getAttributeConfig('crm/leads/tags');
   }
 
   public filePreviewDownload = (field: Field, fieldFile: FieldFile) => {

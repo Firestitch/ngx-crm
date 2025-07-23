@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   OnInit,
 } from '@angular/core';
@@ -9,7 +10,9 @@ import {
   ControlContainer, ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgForm,
 } from '@angular/forms';
 
-import { AttributeColor, AttributeConfig, FsAttributeModule } from '@firestitch/attribute';
+import { AttributeColor, AttributeConfig, FsAttributeConfig, FsAttributeModule } from '@firestitch/attribute';
+
+import { CrmLeadService } from '../../services';
 
 
 @Component({
@@ -41,10 +44,15 @@ export class LeadStatusComponent implements ControlValueAccessor, OnInit {
   
   public onChange: (value) => void;
 
-  public statusAttributeConfig: AttributeConfig;
+  public attributeConfig: AttributeConfig;
+  public fsAttributeConfig: FsAttributeConfig;
+
+  private _crmLeadService = inject(CrmLeadService);
 
   public ngOnInit(): void {
-    this.statusAttributeConfig = {
+    this.fsAttributeConfig = this._crmLeadService
+      .getAttributeConfig('crm/leads/statuses');
+    this.attributeConfig = {
       name: 'Status',
       class: 'crmLeadStatus', 
       pluralName: 'Statuses',

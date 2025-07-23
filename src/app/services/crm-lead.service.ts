@@ -1,6 +1,9 @@
 import { inject, Injectable, Type } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { FsApi, RequestMethod } from '@firestitch/api';
+import { FsAttributeConfig } from '@firestitch/attribute';
+
+import { map, Observable, of } from 'rxjs';
 
 import { FS_CRM_CONFIG, FS_CRM_LEAD_CONFIG, FS_CRM_LEAD_ROOT_CONFIG } from '../injectors';
 import { CrmLead, CrmLeadConfig, LeadSecondaryContainer, LeadTab } from '../interfaces';
@@ -34,6 +37,7 @@ export class CrmLeadService {
   private _moduleConfig = inject(FS_CRM_CONFIG, { optional: true });
   private _moduleLeadconfig = inject(FS_CRM_LEAD_CONFIG, { optional: true });
   private _rootLeadConfig = inject(FS_CRM_LEAD_ROOT_CONFIG, { optional: true });
+  private _api = inject(FsApi);
 
   public init(config: CrmLeadConfig): void {
     this._config = {
@@ -64,5 +68,35 @@ export class CrmLeadService {
 
   public afterProfileSaved(crmLead: CrmLead): Observable<CrmLead> {
     return this._config.afterProfileSaved?.(crmLead) || of(crmLead);
+  }
+
+  public getAttributeConfig(apiPath: string): FsAttributeConfig {
+    return {
+      attribute: {
+        save: ({ attribute }) => {
+          const method = attribute.id ? RequestMethod.Put : RequestMethod.Post;
+
+          return this._api.request(method, apiPath, attribute, { key: null });
+        },
+        delete: (data) => {
+          return this._api.delete(`${apiPath}/${data.id}`, data, { key: null });
+        },
+      },
+      attributes: {
+        fetch: (query) => {
+          return this._api
+            .get(apiPath,
+              {
+                data: query,
+                key: null,
+              })
+            .pipe(
+              map((response) => {
+                return { data: response.attributes, paging: response.paging };
+              }),
+            );
+        },
+      },
+    };
   }
 }
