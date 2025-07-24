@@ -3,7 +3,8 @@
       [(ngModel)]="selectedFields"
       name="fields"
       (ngModelChange)="selectedFieldsChange($event)"
-      [sortable]="true">
+      [sortable]="true"
+      [selectable]="true">
     @for (field of fields; track field) {
       <fs-chip
           [value]="field"
