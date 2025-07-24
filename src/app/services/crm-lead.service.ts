@@ -85,11 +85,7 @@ export class CrmLeadService {
       attributes: {
         fetch: (query) => {
           return this._api
-            .get(apiPath,
-              {
-                data: query,
-                key: null,
-              })
+            .get(apiPath, query, { key: null })
             .pipe(
               map((response) => {
                 return { data: response.attributes, paging: response.paging };
