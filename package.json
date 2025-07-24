@@ -1,7 +1,7 @@
 {
   "name": "@firestitch/crm",
   "title": "CRM",
-  "version": "18.0.175",
+  "version": "18.0.176",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-crm"
@@ -44,7 +44,7 @@
     "@firestitch/activity": "^18.0.40",
     "@firestitch/address": "^18.0.8",
     "@firestitch/api": "^18.0.14",
-    "@firestitch/attribute": "^18.0.38",
+    "@firestitch/attribute": "^18.0.39",
     "@firestitch/audit": "^18.0.5",
     "@firestitch/autocomplete": "^18.0.5",
     "@firestitch/chip": "^18.0.35",
