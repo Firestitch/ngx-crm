@@ -103,6 +103,10 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       });
   };
 
+  public get assignAccountEnabled(): boolean {
+    return this._crmLeadService.assignAccount?.enabled;
+  }
+
   public summaryProfileSettings(): void {
     this._dialog.open(SettingsComponent)
       .afterClosed()

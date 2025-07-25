@@ -28,6 +28,10 @@ export class CrmLeadService {
     enabled: true,
   };
 
+  public assignAccount = {
+    enabled: true,
+  };
+
   public tabs: {
     label: string;
     component: Type<LeadTab>;
@@ -48,6 +52,7 @@ export class CrmLeadService {
     };
 
     this.task.enabled = this._config.task?.enabled ?? true;
+    this.assignAccount.enabled = this._config.assignAccount?.enabled ?? true;
     this.file.enabled = this._config.file?.enabled ?? true;
     this.doc.enabled = this._config.doc?.enabled ?? true;
     this.visit.enabled = this._config.visit?.enabled ?? true;

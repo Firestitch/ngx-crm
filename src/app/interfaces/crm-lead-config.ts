@@ -22,6 +22,9 @@ export interface CrmLeadConfig {
   file?: {
     enabled?: boolean;
   };
+  assignAccount?: {
+    enabled?: boolean;
+  };
   tabs?: {
     label: string;
     component: Type<LeadTab>;

@@ -35,13 +35,15 @@
       (ngModelChange)="statusAttributeChanged($event)"
       [initOnClick]="true">
     </app-lead-status>
-    <app-lead-assigned-account
-      [padless]="true"
-      [(ngModel)]="crmLead.assignedAccount"
-      (ngModelChange)="assignedAccountChanged($event)"
-      name="assignedAccount"
-      [initOnClick]="true">
-    </app-lead-assigned-account>
+    @if (assignAccountEnabled) {
+      <app-lead-assigned-account
+        [padless]="true"
+        [(ngModel)]="crmLead.assignedAccount"
+        (ngModelChange)="assignedAccountChanged($event)"
+        name="assignedAccount"
+        [initOnClick]="true">
+      </app-lead-assigned-account>
+    }
     <fs-attribute-autocomplete-chips
       name="attributeTags"
       [padless]="true"
