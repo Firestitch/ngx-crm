@@ -38,6 +38,7 @@ import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { LeadData } from '../../../data';
 import { CrmLeadState } from '../../../enums';
 import { CrmLead } from '../../../interfaces';
+import { CrmLeadService } from '../../../services';
 import { ChannelsComponent } from '../../channels';
 import { LeadAssignedAccountComponent } from '../../lead-assigned-account';
 import { LeadSourceComponent } from '../../lead-source';
@@ -93,12 +94,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private _cdRef = inject(ChangeDetectorRef);
   private _leadData = inject(LeadData);
   private _dialog = inject(MatDialog);
+  private _crmLeadService = inject(CrmLeadService);
   private _api = inject(FsApi);
   private _destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
     this._form.pristine();
     this._fetchData();
+  }
+
+  public get assignAccountEnabled(): boolean {
+    return this._crmLeadService.assignAccount?.enabled;
   }
 
   public formDirty(): void {

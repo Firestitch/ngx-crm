@@ -91,11 +91,13 @@
           (ngModelChange)="crmLead.statusAttributeId = $event?.id || null"
           name="statusAttribute">
         </app-lead-status>
-        <app-lead-assigned-account
-          [(ngModel)]="crmLead.assignedAccount"
-          (ngModelChange)="crmLead.assignedAccountId = $event?.id || null"
-          name="assignedAccount">
-        </app-lead-assigned-account>
+        @if (assignAccountEnabled) {
+          <app-lead-assigned-account
+            [(ngModel)]="crmLead.assignedAccount"
+            (ngModelChange)="crmLead.assignedAccountId = $event?.id || null"
+            name="assignedAccount">
+          </app-lead-assigned-account>
+        }
         <app-lead-source
           [(ngModel)]="crmLead.sourceAttribute"
           (ngModelChange)="crmLead.sourceAttributeId = $event?.id || null"
