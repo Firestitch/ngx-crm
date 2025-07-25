@@ -75,9 +75,9 @@ export class CrmLeadService {
       attribute: {
         save: ({ attribute }) => {
           const method = attribute.id ? RequestMethod.Put : RequestMethod.Post;
-          apiPath = attribute.id ? `${apiPath}/${attribute.id}` : apiPath;
+          const saveApiPath = attribute.id ? `${apiPath}/${attribute.id}` : apiPath;
 
-          return this._api.request(method, apiPath, attribute, { key: null });
+          return this._api.request(method, saveApiPath, attribute, { key: null });
         },
         delete: (data) => {
           return this._api.delete(`${apiPath}/${data.id}`, data, { key: null });
