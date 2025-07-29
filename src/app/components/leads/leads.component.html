@@ -59,7 +59,9 @@
     </fs-list-column>
   }
   @for (column of columns; track column.title) {
-    <fs-list-column [title]="column.title">
+    <fs-list-column
+        [title]="column.title"
+        [align]="column.align">
       <ng-template
           fs-list-cell
           let-row="row">
