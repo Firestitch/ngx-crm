@@ -81,8 +81,8 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _crmLeadsService = inject(CrmLeadsService);
 
   public get columns(): {
-    title: string;
-    align: 'left' | 'right' | 'center';
+    title?: string;
+    align?: 'left' | 'right' | 'center';
     component: Type<LeadsColumn>;
   }[] {
     return this._crmLeadsService.config.columns || [];

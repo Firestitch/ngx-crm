@@ -19,8 +19,8 @@ export interface CrmLeadsConfig {
   },
   crmLeadConfig?: CrmLeadConfig;
   columns?: {
-    title: string;
-    align: 'left' | 'right' | 'center';
+    title?: string;
+    align?: 'left' | 'right' | 'center';
     component: Type<LeadsColumn>;
   }[];
   filters?: IFilterConfigItem[];
