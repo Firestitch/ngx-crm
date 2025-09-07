@@ -159,6 +159,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
         ...(this._crmLeadsService.config.filters || []),
       ],
       actions: [
+        ...(this._crmLeadsService.config.actions || []),
         {
           label: 'Create',
           click: () => {
