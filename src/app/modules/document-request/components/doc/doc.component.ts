@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -31,21 +31,18 @@ import { DocumentRequestData } from '../../data';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
-
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
     MatDialogModule,
-
     FsDialogModule,
     FsLabelModule,
     FsAutocompleteChipsModule,
     FsFieldRendererModule,
     FsSkeletonModule,
-    FsFormModule,
-  ],
+    FsFormModule
+],
   providers: [
     DocumentRequestData,
   ],

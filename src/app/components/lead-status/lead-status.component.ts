@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -31,10 +31,8 @@ import { CrmLeadService } from '../../services';
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule,
-    
-    FsAttributeModule,
-  ],
+    FsAttributeModule
+],
 })
 export class LeadStatusComponent implements ControlValueAccessor, OnInit {
 

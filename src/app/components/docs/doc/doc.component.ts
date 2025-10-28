@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -46,22 +46,19 @@ import { ManageTypesComponent } from '../manage-types/manage-types.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatDialogModule,
-
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
     MatButtonModule,
-
     FsDialogModule,
     FsLabelModule,
     FsAutocompleteChipsModule,
     FsFieldRendererModule,
     FsSkeletonModule,
-    FsFormModule,
-  ],
+    FsFormModule
+],
   providers: [
     LeadDocumentTypeData,
     LeadDocumentData,

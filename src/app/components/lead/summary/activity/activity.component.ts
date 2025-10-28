@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -44,18 +44,15 @@ import { ActivityTypePreviewComponent } from './components';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
-
     MatIconModule,
     MatButtonModule,
-
     FsMenuModule,
     FsHtmlRendererModule,
     FsChipModule,
     FsActivitiesComponent,
     FsActivityPreviewDirective,
-    ActivityTypePreviewComponent,
-  ],
+    ActivityTypePreviewComponent
+],
   providers: [
     LeadFileData,
   ],

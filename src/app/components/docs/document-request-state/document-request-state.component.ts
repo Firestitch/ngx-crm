@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,10 +18,8 @@ import { DocumentRequestStates } from '../../../consts';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
-
-    FsChipModule,
-  ],
+    FsChipModule
+],
 })
 export class DocumentRequestStateComponent {
 

@@ -1,37 +1,38 @@
 <div
-    cdkDropList
-    [cdkDropListOrientation]="'vertical'"
-    [cdkDropListLockAxis]="'y'"
-    (cdkDropListDropped)="drop($event)">
-  <ng-container *ngFor="let channel of channels; let index = index;">
+  cdkDropList
+  [cdkDropListOrientation]="'vertical'"
+  [cdkDropListLockAxis]="'y'"
+  (cdkDropListDropped)="drop($event)">
+  @for (channel of channels; track channel; let index = $index) {
     <div
-        class="fs-row channel"
-        cdkDrag>
+      class="fs-row channel"
+      cdkDrag>
       <div class="fs-row">
         <a
-            mat-icon-button
-            (click)="removeChannel(index)">
+          mat-icon-button
+          (click)="removeChannel(index)">
           <mat-icon>
             remove_circle_outline
           </mat-icon>
         </a>
         <mat-form-field class="form-field-padless field-label">
           <mat-select
-              required
-              [(ngModel)]="channel.label"
-              (ngModelChange)="channelsChanged()"
-              [name]="'label-' + channel.guid">
-            <mat-option
-                *ngFor="let label of labels"
+            required
+            [(ngModel)]="channel.label"
+            (ngModelChange)="channelsChanged()"
+            [name]="'label-' + channel.guid">
+            @for (label of labels; track label) {
+              <mat-option
                 [value]="label">
-              {{ label }}
-            </mat-option>
+                {{ label }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </div>
       <div class="container-value">
-        <ng-container [ngSwitch]="type">
-          <ng-container *ngSwitchCase="'email'">
+        @switch (type) {
+          @case ('email') {
             <mat-form-field class="field-value">
               <input
                 matInput
@@ -42,8 +43,8 @@
                 [(ngModel)]="channel.value"
                 [name]="'value-' + channel.guid">
             </mat-form-field>
-          </ng-container>
-          <ng-container *ngSwitchCase="'phone'">
+          }
+          @case ('phone') {
             <mat-form-field class="field-value">
               <input
                 matInput
@@ -54,8 +55,8 @@
                 [(ngModel)]="channel.value"
                 [name]="'value-' + channel.guid">
             </mat-form-field>
-          </ng-container>
-          <ng-container *ngSwitchCase="'url'">
+          }
+          @case ('url') {
             <mat-form-field class="field-value">
               <input
                 matInput
@@ -65,24 +66,24 @@
                 [(ngModel)]="channel.value"
                 [name]="'value-' + channel.guid">
             </mat-form-field>
-          </ng-container>
-        </ng-container>
+          }
+        }
       </div>
       <div>
         <div
-            cdkDragHandle
-            class="drag-handle">
+          cdkDragHandle
+          class="drag-handle">
           <mat-icon>
             drag_indicator
           </mat-icon>
         </div>
       </div>
     </div>
-  </ng-container>
+  }
   <div class="actions">
     <a
-        mat-icon-button
-        (click)="addChannel()">
+      mat-icon-button
+      (click)="addChannel()">
       <mat-icon>
         add_circle_outline
       </mat-icon>

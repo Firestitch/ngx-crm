@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -33,10 +33,8 @@ import { LeadData } from '../../data';
   ],
   imports: [
     FormsModule,
-    CommonModule,
-    
-    FsAutocompleteChipsModule,
-  ],
+    FsAutocompleteChipsModule
+],
 })
 export class LeadAssignedAccountComponent implements ControlValueAccessor {
 
