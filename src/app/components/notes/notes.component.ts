@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -32,15 +32,12 @@ import { NoteComponent } from '../note';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
-
     FsListModule,
     FsDateModule,
     FsHtmlRendererModule,
-
-    FsActivityObjectTypeComponent,
-  ],
+    FsActivityObjectTypeComponent
+],
   providers: [
     LeadNoteData,
   ],

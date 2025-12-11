@@ -1,8 +1,8 @@
 <form
-    fsForm
-    [submit]="save"
-    *fsSkeletonForm="crmLog"
-    [dirtySubmitButton]="false">
+  fsForm
+  [submit]="save"
+  *fsSkeletonForm="crmLog"
+  [dirtySubmitButton]="false">
   <fs-dialog>
     <div mat-dialog-title>
       {{ crmLog.id ? 'Log' : 'Create log' }}
@@ -14,13 +14,14 @@
             Type
           </mat-label>
           <mat-select
-              [(ngModel)]="crmLog.type"
-              name="type">
-            <mat-option
-                *ngFor="let item of types"
+            [(ngModel)]="crmLog.type"
+            name="type">
+            @for (item of types; track item) {
+              <mat-option
                 [value]="item.value">
-              {{ item.name }}
-            </mat-option>
+                {{ item.name }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <fs-html-editor

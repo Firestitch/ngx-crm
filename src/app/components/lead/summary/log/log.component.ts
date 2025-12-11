@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -31,19 +31,16 @@ import { CrmLog } from '../../../../interfaces';
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule,
     MatDialogModule,
-
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-
     FsDialogModule,
     FsSkeletonModule,
     FsFormModule,
-    FsHtmlEditorModule,
-  ],
+    FsHtmlEditorModule
+],
   providers: [
     LeadLogData,
   ],

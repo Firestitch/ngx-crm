@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -26,13 +26,10 @@ import { FormData, SettingData } from '../../../../../../data';
   standalone: true, 
   imports: [
     FormsModule,
-    CommonModule,
-
     FsChipModule,
-
     FsSkeletonModule,
-    FsFormModule,
-  ],
+    FsFormModule
+],
   viewProviders: [
     SettingData,
   ],

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,12 +17,9 @@ import { FsListModule } from '@firestitch/list';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
-
     MatIconModule,
-    
-    FsListModule,
-  ],
+    FsListModule
+],
 })
 export class TasksComponent  {
 

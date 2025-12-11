@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -35,14 +35,12 @@ import { LeadFileData } from '../../data/lead-file.data';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
-
     FsListModule,
     FsDateModule,
     FsHtmlRendererModule,
-    FsGalleryModule,
-  ],
+    FsGalleryModule
+],
   providers: [
     LeadFileData,
   ],

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit,
 } from '@angular/core';
@@ -23,13 +23,10 @@ import { DocComponent } from '../../components/doc';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
-
     MatCardModule,
-
-    FsSkeletonModule,
-  ],
+    FsSkeletonModule
+],
 })
 export class DocumentRequestComponent implements OnInit, OnDestroy {
   private _route = inject(ActivatedRoute);

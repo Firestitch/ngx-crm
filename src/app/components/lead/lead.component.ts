@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -44,9 +44,7 @@ import { TabComponent } from './tab';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
-    
     MatTabsModule,
     MatDialogModule,
     FsSkeletonModule,
@@ -55,14 +53,13 @@ import { TabComponent } from './tab';
     FsTasksComponent,
     FsAuditsModule,
     FsFormModule,
-
     CrmFilesComponent,
     ProfileComponent,
     SummaryComponent,
-    CrmDocsComponent, 
+    CrmDocsComponent,
     TabComponent,
-    FsCrmVisitsComponent,
-  ],
+    FsCrmVisitsComponent
+],
   providers: [
     { 
       provide: CrmLeadService, 

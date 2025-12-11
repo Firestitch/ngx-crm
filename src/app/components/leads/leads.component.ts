@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -43,14 +43,13 @@ import { SettingsComponent } from './settings/settings.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     ColumnComponent,
     FsListModule,
     FsPhoneModule,
     FsFieldViewerModule,
-    FsDateModule,
-  ],
+    FsDateModule
+],
   providers: [
     CrmLeadService,
     CrmLeadsService,

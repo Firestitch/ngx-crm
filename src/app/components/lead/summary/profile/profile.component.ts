@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -44,20 +44,16 @@ import { SettingsComponent } from './settings';
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule,
-
     MatIconModule,
-    
     FsSkeletonModule,
     FsPhoneModule,
     FsAutocompleteChipsModule,
     FsLabelModule,
     FsAttributeModule,
     FsFieldViewerModule,
-
     LeadAssignedAccountComponent,
-    LeadStatusComponent,
-  ],
+    LeadStatusComponent
+],
   providers: [
     LeadData,
   ],

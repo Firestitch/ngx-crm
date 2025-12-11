@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -35,18 +35,15 @@ import { CrmChannel } from '../../interfaces';
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule,
     DragDropModule,
-
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-
     FsPhoneModule,
-    FsFormModule,
-  ],
+    FsFormModule
+],
 })
 export class ChannelsComponent implements OnInit, OnDestroy {
 
