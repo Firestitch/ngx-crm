@@ -28,6 +28,8 @@ export class CrmLeadService {
     enabled: true,
   };
 
+  public naming: { lead?: { singular: string; plural: string; } } = {};
+
   public assignAccount = {
     enabled: true,
   };
@@ -51,6 +53,11 @@ export class CrmLeadService {
       ...config,
     };
 
+    this.naming = this._config.naming || {};
+    this.naming.lead = this._config.naming?.lead || {
+      singular: 'Lead',
+      plural: 'Leads',
+    };
     this.task.enabled = this._config.task?.enabled ?? true;
     this.assignAccount.enabled = this._config.assignAccount?.enabled ?? true;
     this.file.enabled = this._config.file?.enabled ?? true;

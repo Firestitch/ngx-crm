@@ -35,6 +35,12 @@ export interface CrmLeadConfig {
   fetch?: {
     query?: any;
   };
+  naming?: {
+    lead?: { 
+      singular: string;
+      plural: string;
+    }
+  },
   activity?: {
     enabled?: boolean;
     getAddMenuItems?: (addActivityMenuItems: AddActivityMenuItem[]) => AddActivityMenuItem[];

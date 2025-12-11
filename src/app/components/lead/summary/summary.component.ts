@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,6 +40,7 @@ import { SummaryProfileComponent } from './profile';
     SecondaryContainerComponent,
     ActivityComponent,    
     CrmNotesComponent,
+    NgTemplateOutlet,
   ],
 })
 export class SummaryComponent {

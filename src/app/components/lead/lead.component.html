@@ -6,10 +6,10 @@
     <fs-dialog [mode]="'stretch'">
       <fs-dialog-title [close]="!stateDraft">
         @if (stateDraft) {
-          Create lead
+          Create {{ crmLeadService.naming.lead.singular }}
         } @else {
           <ng-template fsDialogSupertitle>
-            Lead
+            {{ crmLeadService.naming.lead.singular }}
           </ng-template>
           {{ crmLead.name || 'Unnamed' }}
         }
