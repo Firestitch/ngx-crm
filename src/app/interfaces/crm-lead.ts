@@ -1,5 +1,6 @@
 import { Account } from './account';
 import { CrmChannel } from './crm-channel';
+import { CrmGroup } from './crm-group';
 
 export interface CrmLead {
   name?: string;
@@ -28,4 +29,5 @@ export interface CrmLead {
   sourceAttributeId?: number;
   sourceAttribute?: any;
   companyName?: string;
+  crmGroups?: CrmGroup[];
 }

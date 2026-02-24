@@ -13,6 +13,7 @@ import { FsTabsModule } from '@firestitch/tabs';
 
 import { ManageFieldsComponent } from '../../manage-fields';
 
+import { GroupsComponent } from './groups';
 import { ShowFieldsComponent } from './show-fields';
 
 
@@ -31,12 +32,13 @@ import { ShowFieldsComponent } from './show-fields';
     FsFormModule,
     FsDialogModule,
 
+    GroupsComponent,
     ManageFieldsComponent,
     ShowFieldsComponent,
   ],
 })
 export class SettingsComponent {
 
-  public selectedTab = 'show-fields';
+  public selectedTab: 'show-fields' | 'customize-fields' | 'groups' = 'show-fields';
 
 }

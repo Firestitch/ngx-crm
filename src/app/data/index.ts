@@ -1,5 +1,6 @@
 export * from './accounts.data';
 export * from './form.data';
+export * from './group.data';
 export * from './lead-document-request.data';
 export * from './lead-document-type.data';
 export * from './lead-document.data';

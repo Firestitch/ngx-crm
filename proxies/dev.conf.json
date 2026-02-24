@@ -1,0 +1,13 @@
+{
+  "/api/": {
+    "target": "https://specify.firestitch.dev",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/ws": {
+    "target": "https://specify.firestitch.dev/ws",
+    "secure": false,
+    "changeOrigin": true,
+    "ws": true
+  }
+}

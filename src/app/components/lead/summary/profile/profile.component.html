@@ -60,6 +60,13 @@
       [saveOnChange]="false"
       label="Tags">
     </fs-attribute-autocomplete-chips>
+    <app-lead-groups
+      [padless]="true"
+      [(ngModel)]="crmLead.crmGroups"
+      (ngModelChange)="crmGroupsChanged($event)"
+      name="crmGroups"
+      [initOnClick]="true">
+    </app-lead-groups>
     @for (field of fields; track field) {
       <fs-label-field>
         <fs-label>

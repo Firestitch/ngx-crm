@@ -15,6 +15,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
+import { FsChipModule } from '@firestitch/chip';
 import { FsDateModule } from '@firestitch/date';
 import { FsDialog } from '@firestitch/dialog';
 import { Field, FsFieldViewerModule } from '@firestitch/field-editor';
@@ -45,11 +46,12 @@ import { SettingsComponent } from './settings/settings.component';
   imports: [
     RouterModule,
     ColumnComponent,
+    FsChipModule,
     FsListModule,
     FsPhoneModule,
     FsFieldViewerModule,
-    FsDateModule
-],
+    FsDateModule,
+  ],
   providers: [
     CrmLeadService,
     CrmLeadsService,
@@ -206,6 +208,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
           primaryEmailCrmChannels: true,
           primaryPhoneCrmChannels: true,
           leadsFields: true,
+          crmGroups: true,
         };
 
         return this._leadData.gets(query, { key: null })

@@ -1,7 +1,7 @@
 {
   "name": "@firestitch/crm",
   "title": "CRM",
-  "version": "18.0.188",
+  "version": "18.0.189",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-crm"
@@ -24,7 +24,7 @@
     "package:test": "cd node_modules/@firestitch/component-tools && npm run cli:package:test",
     "package:publish": "cd node_modules/@firestitch/component-tools && npm run cli:package:publish",
     "demo:build": "cd node_modules/@firestitch/component-tools && npm run cli:demo",
-    "serve": "cd node_modules/@firestitch/component-tools && npm run cli:serve",
+    "serve": "ng serve --host=0.0.0.0 --disable-host-check --proxy-config=proxies/local.conf.json",
     "npm-update": "npx npm-check-updates -u \"/@firestitch/\" --target semver"
   },
   "devDependencies": {

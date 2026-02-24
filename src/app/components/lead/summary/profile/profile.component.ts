@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -28,9 +29,10 @@ import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 
 import { LeadData } from '../../../../data';
-import { CrmLead } from '../../../../interfaces/crm-lead';
+import { CrmGroup, CrmLead } from '../../../../interfaces';
 import { CrmLeadService } from '../../../../services';
 import { LeadAssignedAccountComponent } from '../../../lead-assigned-account';
+import { LeadGroupsComponent } from '../../../lead-groups';
 import { LeadStatusComponent } from '../../../lead-status';
 
 import { SettingsComponent } from './settings';
@@ -44,6 +46,7 @@ import { SettingsComponent } from './settings';
   standalone: true,
   imports: [
     FormsModule,
+    MatButtonModule,
     MatIconModule,
     FsSkeletonModule,
     FsPhoneModule,
@@ -52,8 +55,9 @@ import { SettingsComponent } from './settings';
     FsAttributeModule,
     FsFieldViewerModule,
     LeadAssignedAccountComponent,
-    LeadStatusComponent
-],
+    LeadGroupsComponent,
+    LeadStatusComponent,
+  ],
   providers: [
     LeadData,
   ],
@@ -157,6 +161,17 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
       });
   }
 
+  public crmGroupsChanged(crmGroups: CrmGroup[]): void {
+    this._leadData.save({
+      id: this.crmLead.id,
+      crmGroups,
+    })
+      .subscribe(() => {
+        this.crmLeadChange.emit(this.crmLead);
+        this._message.success();
+      });
+  }
+
   private _fetchProfile$(): Observable<CrmLead> {
     return this._leadData
       .get(this._crmLead.id, {
@@ -166,14 +181,15 @@ export class SummaryProfileComponent implements OnInit, OnDestroy {
         assignedAccounts: true,
         tagAttributes: true,
         summaryProfileFields: true,
+        crmGroups: true,
       }, { key: null })
       .pipe(
         tap(({ crmLead, fields }) => {
           this.fields = fields;
-          this.crmLead = { 
-            ...crmLead, 
+          this.crmLead = {
+            ...crmLead,
+            crmGroups: crmLead?.crmGroups ?? [],
           };
-          
           this._cdRef.markForCheck();
         }),
         takeUntil(this._destroy$),

@@ -1,0 +1,19 @@
+<fs-autocomplete-chips
+    [(ngModel)]="crmGroups"
+    (ngModelChange)="change($event)"
+    [fetch]="fetchGroups"
+    [padless]="padless"
+    [floatLabel]="'always'"
+    [label]="'Groups'"
+    [size]="'small'"
+    [chipBackground]="'color'"
+    [multiple]="true"
+    [placeholder]="'N/A'"
+    [initOnClick]="initOnClick"
+    name="crmGroups">
+  <ng-template
+      fsAutocompleteObject
+      let-object="object">
+    {{ object.name }}
+  </ng-template>
+</fs-autocomplete-chips>

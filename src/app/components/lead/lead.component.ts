@@ -164,6 +164,7 @@ export class FsCrmLeadComponent implements OnInit, OnDestroy {
           return this._leadData
             .get(crmLead.id, {
               ...(this.crmLeadService.config.fetch?.query || {}),
+              crmGroups: true,
             });
         }),
         takeUntil(this._destroy$),

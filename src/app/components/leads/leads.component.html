@@ -44,6 +44,23 @@
       {{ row.companyName }}
     </ng-template>
   </fs-list-column>
+  <fs-list-column [title]="'Groups'">
+    <ng-template
+        fs-list-cell
+        let-row="row">
+      @if (row.crmGroups?.length) {
+        <fs-chips [selectable]="false">
+          @for (group of row.crmGroups; track group.id) {
+            <fs-chip
+                [size]="'small'"
+                [backgroundColor]="group.color">
+              {{ group.name }}
+            </fs-chip>
+          }
+        </fs-chips>
+      }
+    </ng-template>
+  </fs-list-column>
   @for (field of fields; track field.guid) {
     <fs-list-column [title]="field.label">
       <ng-template

@@ -1,6 +1,7 @@
 export * from './account';
 export * from './add-actvity-menu-item';
 export * from './crm-channel';
+export * from './crm-group';
 export * from './crm-config';
 export * from './crm-lead-config';
 export * from './crm-lead';
