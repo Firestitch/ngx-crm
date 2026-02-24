@@ -1,0 +1,29 @@
+<form
+    fsForm
+    [submit]="submit$">
+  <fs-dialog>
+    <fs-dialog-title>
+      Add to group
+    </fs-dialog-title>
+    <mat-dialog-content>
+      <div>
+        <app-lead-groups
+          [(ngModel)]="crmGroups"
+          name="crmGroups">
+        </app-lead-groups>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <fs-form-dialog-actions
+          [save]="false"
+          [create]="false">
+        <button
+            mat-flat-button
+            color="primary"
+            type="submit">
+          Add
+        </button>
+      </fs-form-dialog-actions>
+    </mat-dialog-actions>
+  </fs-dialog>
+</form>

@@ -20,11 +20,14 @@ import { FsDateModule } from '@firestitch/date';
 import { FsDialog } from '@firestitch/dialog';
 import { Field, FsFieldViewerModule } from '@firestitch/field-editor';
 import { ItemType } from '@firestitch/filter';
-import { FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
+import { FsListActionSelected, FsListComponent, FsListConfig, FsListModule } from '@firestitch/list';
+import { FsMessage } from '@firestitch/message';
 import { FsPhoneModule } from '@firestitch/phone';
+import { FsPrompt } from '@firestitch/prompt';
+import { SelectionActionType } from '@firestitch/selection';
 
 import { of, Subject } from 'rxjs';
-import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
 import { CrmLead, CrmLeadsConfig, LeadsColumn } from '../../interfaces';
@@ -32,6 +35,7 @@ import { CrmLeadsService } from '../../services';
 import { CrmLeadService } from '../../services/crm-lead.service';
 import { FsCrmLeadComponent } from '../lead/lead.component';
 
+import { AddToGroupComponent } from './add-to-group';
 import { LeadFormComponent } from './lead-form';
 import { ColumnComponent } from './leads-column';
 import { SettingsComponent } from './settings/settings.component';
@@ -80,6 +84,8 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
   private _cdRef = inject(ChangeDetectorRef); 
   private _injector = inject(Injector);
   private _crmLeadsService = inject(CrmLeadsService);
+  private _message = inject(FsMessage);
+  private _prompt = inject(FsPrompt);
 
   public get columns(): {
     title?: string;
@@ -189,6 +195,58 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
           },
         },
       ],
+      selection: {
+        selectAll: false,
+        actions: [
+          {
+            name: 'addToGroup',
+            label: 'Add to group',
+            type: SelectionActionType.Action,
+          },
+          {
+            name: 'delete',
+            label: 'Delete',
+            type: SelectionActionType.Action,
+          },
+        ],
+        actionSelected: (event: FsListActionSelected) => {
+          const crmLeadIds = event.selected.map((lead) => lead.id);
+          if (event.action.name === 'addToGroup') {
+            return this._dialog
+              .open(AddToGroupComponent)
+              .afterClosed()
+              .pipe(
+                filter((crmGroups) => !!crmGroups?.length),
+                switchMap((crmGroups) => {
+                  const crmGroupIds = crmGroups.map((group) => group.id);
+
+                  return this._leadData.bulkPost(crmLeadIds, crmGroupIds);
+                }),
+                tap(() => {
+                  this._message.success();
+                  this.reload();
+                }),
+              );
+          }
+
+          if (event.action.name === 'delete') {
+            return this._prompt
+              .confirm({
+                title: 'Delete leads',
+                template: 'Are you sure you would like to delete the selected leads?',
+              })
+              .pipe(
+                switchMap(() => this._leadData.bulkDelete(crmLeadIds)),
+                tap(() => {
+                  this._message.success();
+                  this.reload();
+                }),
+              );
+          }
+
+          return of(null);
+        },
+      },
       rowActions: [
         {
           click: (data) => {

@@ -120,6 +120,22 @@ export class LeadData<T = any> {
     );
   }
 
+  public bulkPost(crmLeadIds: number[], crmGroupIds: number[], config: RequestConfig = {}): Observable<T> {
+    return this._api.post(
+      'crm/leads/bulk',
+      { crmLeadIds, crmGroupIds },
+      config,
+    );
+  }
+
+  public bulkDelete(crmLeadIds: number[], config: RequestConfig = {}): Observable<T> {
+    return this._api.delete(
+      'crm/leads/bulk',
+      { crmLeadIds },
+      config,
+    );
+  }
+
   public save(data: any): Observable<T> {
     return (data.id)
       ? this.put(data)
