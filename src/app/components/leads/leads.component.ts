@@ -275,8 +275,8 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
               this.fields = fields;
               this._cdRef.markForCheck();
             }),
-            map(({ leads, paging }) => {
-              const data = leads
+            map(({ crmLeads, paging }) => {
+              const data = crmLeads
                 .map((lead) => {
                   const leadRouterLink = this.leadRouterLink ?
                     [...this.leadRouterLink, lead.id] :
