@@ -30,7 +30,7 @@ import { of, Subject } from 'rxjs';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { LeadData } from '../../data';
-import { CrmLead, CrmLeadsConfig, LeadsColumn } from '../../interfaces';
+import { CrmGroup, CrmLead, CrmLeadsConfig, LeadsColumn } from '../../interfaces';
 import { CrmLeadsService } from '../../services';
 import { CrmLeadService } from '../../services/crm-lead.service';
 import { FsCrmLeadComponent } from '../lead/lead.component';
@@ -93,6 +93,10 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
     component: Type<LeadsColumn>;
   }[] {
     return this._crmLeadsService.config.columns || [];
+  }
+
+  public groupChipLabel(group: CrmGroup): string {
+    return this._crmLeadsService.config.groupChipLabel?.(group) ?? group.name;
   }
 
   public ngOnInit(): void {

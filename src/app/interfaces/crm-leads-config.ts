@@ -6,6 +6,7 @@ import { FsListAction } from '@firestitch/list';
 
 import { Observable } from 'rxjs';
 
+import { CrmGroup } from './crm-group';
 import { CrmLead } from './crm-lead';
 import { CrmLeadConfig } from './crm-lead-config';
 import { LeadsColumn } from './leads-column';
@@ -31,4 +32,5 @@ export interface CrmLeadsConfig {
       enabled?: boolean;
     };
   };
+  groupChipLabel?: (group: CrmGroup) => string;
 }
