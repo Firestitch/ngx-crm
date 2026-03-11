@@ -177,7 +177,13 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
           menu: true,
           label: 'Settings',
           click: () => {
-            this._dialog.open(SettingsComponent)
+            this._dialog.open(SettingsComponent, {
+              data: {
+                groups: {
+                  enabled: this._crmLeadsService.config.settings?.groups?.enabled ?? true,
+                },
+              },
+            })
               .afterClosed()
               .pipe(
                 takeUntil(this._destroy$),

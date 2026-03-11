@@ -1,10 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { FsDialogModule } from '@firestitch/dialog';
@@ -40,5 +41,9 @@ import { ShowFieldsComponent } from './show-fields';
 export class SettingsComponent {
 
   public selectedTab: 'show-fields' | 'customize-fields' | 'groups' = 'show-fields';
+
+  private _data = inject(MAT_DIALOG_DATA, { optional: true });
+
+  public groupsEnabled: boolean = this._data?.groups?.enabled ?? true;
 
 }

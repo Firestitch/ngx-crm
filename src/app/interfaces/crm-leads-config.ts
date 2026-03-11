@@ -26,4 +26,9 @@ export interface CrmLeadsConfig {
   }[];
   filters?: IFilterConfigItem[];
   actions?: FsListAction[];
+  settings?: {
+    groups?: {
+      enabled?: boolean;
+    };
+  };
 }
