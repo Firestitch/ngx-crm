@@ -2,7 +2,8 @@ import { Type } from '@angular/core';
 
 
 import { IFilterConfigItem } from '@firestitch/filter';
-import { FsListAction } from '@firestitch/list';
+import { FsListAction, FsListActionSelected } from '@firestitch/list';
+import { FsSelectionDialogConfigAction } from '@firestitch/selection';
 
 import { Observable } from 'rxjs';
 
@@ -33,4 +34,8 @@ export interface CrmLeadsConfig {
     };
   };
   groupChipLabel?: (group: CrmGroup) => string;
+  selectionActions?: {
+    actions: FsSelectionDialogConfigAction[];
+    actionSelected: (event: FsListActionSelected) => Observable<any>;
+  };
 }

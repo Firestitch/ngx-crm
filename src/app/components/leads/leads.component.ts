@@ -218,6 +218,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
             label: 'Delete',
             type: SelectionActionType.Action,
           },
+          ...(this._crmLeadsService.config.selectionActions?.actions ?? []),
         ],
         actionSelected: (event: FsListActionSelected) => {
           const crmLeadIds = event.selected.map((lead) => lead.id);
@@ -254,7 +255,7 @@ export class FsCrmLeadsComponent implements OnInit, OnDestroy {
               );
           }
 
-          return of(null);
+          return this._crmLeadsService.config.selectionActions?.actionSelected(event) ?? of(null);
         },
       },
       rowActions: [
